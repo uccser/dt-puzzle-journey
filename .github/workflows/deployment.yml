@@ -24,5 +24,6 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@3.5.9
       with:
         ACCESS_TOKEN: ${{ secrets.PAGES_DEPLOY_TOKEN }}
+        REPOSITORY_NAME: uccser/ktam-puzzling-journey
         BRANCH: gh-pages
         FOLDER: dist

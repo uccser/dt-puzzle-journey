@@ -1,0 +1,28 @@
+name: Deployment
+
+on:
+  push:
+    branches: 
+     - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+          persist-credentials: false
+
+    - name: Install NPM dependencies
+      uses: bahmutov/npm-install@v1.1.0
+
+    - name: Parcel Production Deployemtn
+      run: npm run build
+
+    - name: Deploy 
+      uses: JamesIves/github-pages-deploy-action@3.5.9
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: dist

@@ -2,7 +2,7 @@ name: Deployment
 
 on:
   push:
-    branches: 
+    branches:
      - master
 
 jobs:
@@ -17,10 +17,10 @@ jobs:
     - name: Install NPM dependencies
       uses: bahmutov/npm-install@v1.1.0
 
-    - name: Parcel Production Deployemtn
+    - name: Production build
       run: npm run build
 
-    - name: Deploy 
+    - name: Deploy to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.5.9
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

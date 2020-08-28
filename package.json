@@ -1,12 +1,12 @@
 {
-    "name": "ktam-puzzling-journey",
+    "name": "dt-puzzle-journey",
     "version": "0.0.1",
     "description": "",
     "keywords": "",
     "license": "",
     "author": "UCCSER",
     "scripts": {
-        "build": "parcel build src/index.njk --public-url /ktam-puzzling-journey/",
+        "build": "parcel build src/index.njk --public-url /dt-puzzle-journey/",
         "dev": "parcel ./src/index.njk",
         "start": "npm run build && npm run dev",
         "test": "echo \"Error: no test specified\" && exit 1"

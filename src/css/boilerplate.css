@@ -28,7 +28,8 @@ html {
  */
 
 ::-moz-selection {
-  background: #b3d4fc;
+  background: #b3d4fc;margin: 0;
+    padding: 0;
   text-shadow: none;
 }
 

@@ -1,0 +1,29 @@
+{% extends "src/_base.njk" %}
+
+{% block content %}
+    <div class="text-center">
+        <h1>A DT Puzzle Journey</h1>
+    </div>
+    <div>
+        <div id="animation-container">
+            <div id="animation-blindfold"></div>
+            <div id="stage-1" class="hidden">
+                <object id="landscape-view" type="image/svg+xml" data="img/landscape-view.svg"></object>
+                <div id="landscape-ui-1">
+                    <p class="narrative-text">
+                        It is time to return home to my whānau
+                    </p>
+                </div>
+                <div id="landscape-ui-2" class="text-center">
+                    <p class="narrative-text">
+                        Not far to go now...
+                    </p>
+                    <div id='landscape-stage-end' class="button">Step into the forest</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center credits">
+
+    </div>
+{% endblock %}

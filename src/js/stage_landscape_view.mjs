@@ -121,9 +121,4 @@ function display_landscape_ui_2() {
     });
 }
 
-export {
-    start,
-    animate_landscape_view,
-    display_landscape_ui_1,
-    display_landscape_ui_2
-};
+export { start };

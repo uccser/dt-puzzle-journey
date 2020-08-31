@@ -13,6 +13,7 @@ import queryString from 'query-string';
 // Import modules
 import { DEBUG } from './constants.mjs';
 import { start as stage_landscape_view_start } from './stage_landscape_view.mjs';
+import { start as stage_fern_start } from './stage_fern.mjs';
 
 console.log('DEBUG is set to ' + DEBUG);
 
@@ -21,10 +22,10 @@ const STAGES = [
         name: 'Opening landscape',
         intial_function: stage_landscape_view_start,
     },
-    // {
-    //     name: 'Fern interactive',
-    //     intial_function: stage_2,
-    // },
+    {
+        name: 'Fern interactive',
+        intial_function: stage_fern_start,
+    },
 ]
 var current_level = 0;  // Start at first level
 

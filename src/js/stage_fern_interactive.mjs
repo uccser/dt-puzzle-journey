@@ -1,22 +1,19 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { get_svg, get_svg_height } from './utilties.mjs';
+import { get_svg } from './utilities.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
 function start() {
     $('#stage-fern').removeClass('hidden');
-    var landscape_svg = document.getElementById('fern-svg');
-    landscape_svg.addEventListener('load', function () {
-        if (DEBUG) {
-            console.log('Fern loaded.');
-        }
-        var svg = get_svg('fern-svg');
-        animate_ants(svg);
-        setupEvents();
-        $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
-    });
+    if (DEBUG) {
+        console.log('Fern interactive loaded.');
+    }
+    var svg = get_svg('fern-svg');
+    animate_ants(svg);
+    setupEvents();
+    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
 }
 
 

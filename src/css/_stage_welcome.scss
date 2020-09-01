@@ -13,6 +13,7 @@
         left: 0;
         right: 0;
         padding: 1rem;
+        z-index: 900;
 
         .header {
             grid-area: header;
@@ -30,6 +31,26 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        #setup-status-checks {
+            display: flex;
+            justify-content: center;
+
+            .status-checkbox {
+                $checkbox-size: 1rem;
+                border: 1px solid white;
+                background-color: #333;
+                width: $checkbox-size;
+                height: $checkbox-size;
+                margin: 0 $checkbox-size/4;
+                transition: background-color .3s;
+                border-radius: $checkbox-size/3;
+
+                &.success {
+                    background-color: #31ad00;
+                }
+            }
         }
     }
 }

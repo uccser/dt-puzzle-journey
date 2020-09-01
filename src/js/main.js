@@ -12,11 +12,21 @@ import queryString from 'query-string';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
+import { mark_asset_as_ready } from './utilities.mjs';
 import { start as stage_welcome_start } from './stage_welcome.mjs';
 import { start as stage_landscape_view_start } from './stage_landscape_view.mjs';
 import { start as stage_fern_start } from './stage_fern_interactive.mjs';
 
-console.log('DEBUG is set to ' + DEBUG);
+console.log('DEBUG is set to ' + DEBUG + '.');
+
+// Create global variable to track ready assets
+window.ready_assets = new Set();
+$('object.svg').each(function () {
+    this.addEventListener('load', function () {
+        mark_asset_as_ready(this.id);
+    });
+});
+
 
 const STAGES = [
     {
@@ -48,14 +58,6 @@ $(document).ready(function () {
             current_stage = 0;
         }
     }
-    // while (current_stage < STAGES.length ){
-    //     if (DEBUG) {
-    //         console.log('Starting level ' + current_stage);
-    //     }
-
-    //     STAGES[current_stage].initial_function();
-    //     current_stage++;
-    // }
 
     var animation_container = document.getElementById('animation-container');
     animation_container.addEventListener('journey:advance_stage', run_stage);
@@ -65,7 +67,7 @@ $(document).ready(function () {
 
 function run_stage(event) {
     if (DEBUG) {
-        console.log('Starting level ' + current_stage);
+        console.log('Starting level ' + current_stage + '.');
     }
     STAGES[current_stage].initial_function();
     current_stage++;

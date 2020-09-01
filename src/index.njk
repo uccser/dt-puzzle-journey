@@ -4,24 +4,24 @@
     <div>
         <div id="animation-container">
             <div id="animation-blindfold"></div>
-            <div id="stage-welcome-ui" class="hidden">
+            <div id="stage-welcome-ui" class="">
                 <div class="grid-item header">
                     <h1>A DT Puzzle Journey</h1>
                 </div>
                 <div class="grid-item item-1">Notice #1</div>
                 <div class="grid-item item-2">Notice #2</div>
                 <div class="grid-item footer">
-                    <div id="browser-check" class="text-center">
-                        {# <div class="spinner"></div> #}
-                        <p>Checking your browser is good to go...</p>
+                    <div id="setup-status" class="text-center">
+                        <p>Getting everything setup...</p>
+                        <div id="setup-status-checks"></div>
                     </div>
                     <div id="welcome-end" class="button d-none">
                         Start the journey
                     </div>
                 </div>
             </div>
-            <div id="stage-landscape-view" class="hidden">
-                <object id="landscape-view" type="image/svg+xml" data="img/landscape-view.svg"></object>
+            <div id="stage-landscape-view" class="stage">
+                <object id="landscape-view" type="image/svg+xml" data="img/landscape-view.svg" class="svg"></object>
                 <div id="landscape-ui-1">
                     <p class="narrative-text">
                         It is time to return home to my whānau
@@ -34,8 +34,8 @@
                     <div id='landscape-stage-end' class="button">Step into the forest</div>
                 </div>
             </div>
-            <div id="stage-fern" class="hidden">
-                <object id="fern-svg" type="image/svg+xml" data="img/fern-interactive.svg"></object>
+            <div id="stage-fern" class="stage">
+                <object id="fern-svg" type="image/svg+xml" data="img/fern-interactive.svg" class="svg"></object>
                 <div id="fern-container">
                     <div id="fern-leaf-16" class="fern-leaf">
                         <div id="fern-leaf-16-front" class="fern-leaf-side fern-leaf-front"></div>

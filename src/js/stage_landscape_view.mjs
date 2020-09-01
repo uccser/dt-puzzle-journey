@@ -1,24 +1,21 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { get_svg, get_svg_height } from './utilties.mjs';
+import { get_svg, get_svg_height } from './utilities.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
 function start() {
-    var landscape_svg = document.getElementById('landscape-view');
-    landscape_svg.addEventListener('load', function () {
-        if (DEBUG) {
-            console.log('Landscape view loaded.');
-        }
-        animate_landscape_view();
-    });
     $('#stage-landscape-view').removeClass('hidden');
+    animate_landscape_view();
 }
 
 function animate_landscape_view() {
+    if (DEBUG) {
+        console.log('Landscape view loaded.');
+    }
+    var svg_container = document.getElementById('landscape-view');
     var svg = get_svg('landscape-view');
-    var svg_height = get_svg_height(svg);
     var container_height = $('#animation-container').height();
     var plains = svg.querySelector('#plains');
     var river = svg.querySelector('#river');
@@ -45,7 +42,6 @@ function animate_landscape_view() {
     var text_duration = 4000;
     var delay_duration = (BLINDFOLD_FADE_DURATION + text_duration) * .9;
     var animation_duration = 30000;
-    var translate_amount = (svg_height - container_height) * -1;
     var parallax_animation_duration = 0.4 * animation_duration;
 
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
@@ -59,8 +55,8 @@ function animate_landscape_view() {
         delay: delay_duration,
     });
     landscape_timeline.add({
-        targets: svg,
-        translateY: translate_amount,
+        targets: svg_container,
+        translateY: '-82.3%',
         duration: animation_duration,
         easing: 'easeInOutSine',
         complete: display_landscape_ui_2

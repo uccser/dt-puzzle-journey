@@ -12,39 +12,61 @@ import queryString from 'query-string';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
+import { start as stage_welcome_start } from './stage_welcome.mjs';
 import { start as stage_landscape_view_start } from './stage_landscape_view.mjs';
-import { start as stage_fern_start } from './stage_fern.mjs';
+import { start as stage_fern_start } from './stage_fern_interactive.mjs';
 
 console.log('DEBUG is set to ' + DEBUG);
 
 const STAGES = [
     {
+        name: 'Welcome',
+        initial_function: stage_welcome_start,
+    },
+    {
         name: 'Opening landscape',
-        intial_function: stage_landscape_view_start,
+        initial_function: stage_landscape_view_start,
     },
     {
         name: 'Fern interactive',
-        intial_function: stage_fern_start,
+        initial_function: stage_fern_start,
     },
 ]
-var current_level = 0;  // Start at first level
+var current_stage = 0;  // Start at welcome
 
 
 $(document).ready(function () {
     const parameters = queryString.parse(location.search);
     if ('stage' in parameters) {
         var stage_value = parameters.stage;
-        current_level = parseInt(stage_value);
-        if (isNaN(current_level)) {
+        current_stage = parseInt(stage_value);
+        if (isNaN(current_stage)) {
             console.log('Given stage value is not a number, reverting to 0.')
-            current_level = 0;
-        } else if (current_level >= STAGES.length) {
+            current_stage = 0;
+        } else if (current_stage >= STAGES.length) {
             console.log('Given stage value is not within range, reverting to 0.')
-            current_level = 0;
+            current_stage = 0;
         }
     }
-    if (DEBUG) {
-        console.log('Starting at level ' + current_level);
-    }
-    STAGES[current_level].intial_function();
+    // while (current_stage < STAGES.length ){
+    //     if (DEBUG) {
+    //         console.log('Starting level ' + current_stage);
+    //     }
+
+    //     STAGES[current_stage].initial_function();
+    //     current_stage++;
+    // }
+
+    var animation_container = document.getElementById('animation-container');
+    animation_container.addEventListener('journey:advance_stage', run_stage);
+    var advance_event = new Event('journey:advance_stage');
+    animation_container.dispatchEvent(advance_event);
 });
+
+function run_stage(event) {
+    if (DEBUG) {
+        console.log('Starting level ' + current_stage);
+    }
+    STAGES[current_stage].initial_function();
+    current_stage++;
+};

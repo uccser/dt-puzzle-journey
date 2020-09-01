@@ -1,0 +1,79 @@
+@import '_constants';
+
+#animation-container {
+    #fern-container {
+        position: absolute;
+        top: 60%;
+        bottom: 1%;
+        left: 1%;
+        right: 34%;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+
+        .fern-leaf {
+            flex: 1;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(25rem);
+            transition: transform 0.6s;
+            @supports (-moz-appearance: none) {
+                backface-visibility: hidden;
+            }
+            cursor: pointer;
+            &.flipped {
+                transform: rotateY(180deg);
+            }
+
+            .fern-leaf-side {
+                backface-visibility: hidden;
+                position: absolute;
+                left: 0;
+                top: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                background-repeat: no-repeat;
+            }
+            .fern-leaf-front {
+                z-index: 2;
+            }
+            .fern-leaf-back {
+                transform: rotateY(180deg) perspective(25rem);
+            }
+        }
+
+
+        #fern-leaf-16-front {
+            background-image: url('../img/leaf-16-front.svg');
+        }
+        #fern-leaf-16-back {
+            background-image: url('../img/leaf-16-back.svg');
+        }
+        #fern-leaf-8-front {
+            background-image: url('../img/leaf-8-front.svg');
+        }
+        #fern-leaf-8-back {
+            background-image: url('../img/leaf-8-back.svg');
+        }
+        #fern-leaf-4-front {
+            background-image: url('../img/leaf-4-front.svg');
+        }
+        #fern-leaf-4-back {
+            background-image: url('../img/leaf-4-back.svg');
+        }
+        #fern-leaf-2-front {
+            background-image: url('../img/leaf-2-front.svg');
+        }
+        #fern-leaf-2-back {
+            background-image: url('../img/leaf-2-back.svg');
+        }
+        #fern-leaf-1-front {
+            background-image: url('../img/leaf-1-front.svg');
+        }
+        #fern-leaf-1-back {
+            background-image: url('../img/leaf-1-back.svg');
+        }
+    }
+}

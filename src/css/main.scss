@@ -1,13 +1,15 @@
 @import 'boilerplate';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
+@import '_constants';
+@import 'stage_welcome';
+@import 'stage_landscape_view';
+@import 'stage_fern_interactive';
 
 html, body {
     margin: 0;
     height: 100%;
     font-family: 'Noto Sans', sans-serif;
 }
-
-$background-color: #444;
 
 body {
     background-color: $background-color;
@@ -20,19 +22,18 @@ body {
 #animation-container {
     cursor: default;
     user-select: none;
-    $container-size: 95;  // % of lower screen dimension
+    $container-size: 97;  // % of lower screen dimension
     $container-ratio: 16 / 9;
     width: $container-size * 1vw;
     height: $container-size * 1vw / $container-ratio;
     max-height: $container-size * 1vh;
     max-width: $container-ratio * $container-size * 1vh;
-    margin: auto;
+    margin: 1rem auto;
     overflow: hidden;
     position: relative;
     background: #222;
     border: 2px solid #222;
     box-sizing: border-box;
-    margin-bottom: 3rem;
 
     #animation-blindfold {
         position: absolute;
@@ -41,49 +42,12 @@ body {
         left: 0;
         right: 0;
         background-color: $background-color;
-    }
-
-    #landscape-ui-1 {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 1rem;
-
-        // Hide direct descendants
-        & > * {
-            visibility: hidden;
-            opacity: 0;
-        }
-    }
-
-    #landscape-ui-2 {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 1rem;
-
-        // Hide direct descendants
-        & > * {
-            visibility: hidden;
-            opacity: 0;
-        }
+        z-index: 999;
     }
 }
 
 .narrative-text {
-    background-color: #00000065;
+    background-color: #00000096;
     display: inline-block;
     padding: 0.5rem 1rem;
     margin: 0.5rem;
@@ -107,4 +71,13 @@ body {
 
 .text-center {
     text-align: center;
+}
+
+.credits {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.d-none {
+    display: none;
 }

@@ -1,0 +1,39 @@
+#animation-container {
+    #landscape-ui-1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+
+        // Hide direct descendants
+        & > * {
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+
+    #landscape-ui-2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+
+        // Hide direct descendants
+        & > * {
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+}

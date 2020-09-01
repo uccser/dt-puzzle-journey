@@ -1,12 +1,11 @@
 // Import modules
-import { DEBUG } from './constants.mjs';
+import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { get_svg, get_svg_height } from './utilties.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
 function start() {
-    $('#stage-landscape-view').removeClass('hidden');
     var landscape_svg = document.getElementById('landscape-view');
     landscape_svg.addEventListener('load', function () {
         if (DEBUG) {
@@ -14,6 +13,7 @@ function start() {
         }
         animate_landscape_view();
     });
+    $('#stage-landscape-view').removeClass('hidden');
 }
 
 function animate_landscape_view() {
@@ -42,16 +42,15 @@ function animate_landscape_view() {
         duration: 0
     });
 
-    var fade_out_duration = 3000;
     var text_duration = 4000;
-    var delay_duration = (fade_out_duration + text_duration) * .9;
+    var delay_duration = (BLINDFOLD_FADE_DURATION + text_duration) * .9;
     var animation_duration = 30000;
     var translate_amount = (svg_height - container_height) * -1;
     var parallax_animation_duration = 0.4 * animation_duration;
 
-    $('#animation-blindfold').fadeOut(fade_out_duration);
+    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
     //Show UI elements
-    display_landscape_ui_1(fade_out_duration, text_duration);
+    display_landscape_ui_1(BLINDFOLD_FADE_DURATION, text_duration);
 
     // Animate whole SVG upwards, with parallax effect on layers.
     var landscape_timeline = anime.timeline({
@@ -119,6 +118,17 @@ function display_landscape_ui_2() {
         delay: anime.stagger(750),
         easing: 'linear'
     });
+    $('#landscape-stage-end').on('click', function () {
+        $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, end);
+    });
+}
+
+
+function end() {
+    $('#stage-landscape-view').addClass('hidden');
+    var animation_container = document.getElementById('animation-container');
+    var advance_event = new Event('journey:advance_stage');
+    animation_container.dispatchEvent(advance_event);
 }
 
 export { start };

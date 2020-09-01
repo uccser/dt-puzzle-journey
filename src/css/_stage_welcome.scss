@@ -1,0 +1,35 @@
+@import '_constants';
+
+#animation-container {
+    #stage-welcome-ui {
+        background-color: $background-color;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: "header header" "item-1 item-2" "footer footer";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+
+        .header {
+            grid-area: header;
+            h1 {
+                font-size: 3rem;
+            }
+        }
+        .item-1 { grid-area: item-1; }
+        .item-2 { grid-area: item-2; }
+        .footer {
+            grid-area: footer;
+        }
+
+        .grid-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

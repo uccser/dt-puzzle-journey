@@ -25,6 +25,7 @@
         .item-2 { grid-area: item-2; }
         .footer {
             grid-area: footer;
+            flex-direction: column;
         }
 
         .grid-item {
@@ -51,6 +52,13 @@
                     background-color: #31ad00;
                 }
             }
+        }
+
+        #load-error {
+            background: white;
+            border-radius: .3rem;
+            color: red;
+            padding: 0 1rem;
         }
     }
 }

@@ -7,7 +7,11 @@
     Browser must support:
         - JS
             - CustomEvent()
+            - Default parameters
+            - Template literals (Template strings)
         - CSS
+            - Flexbox
+            - Grid
             - Backface visibility
 */
 

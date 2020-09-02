@@ -48,12 +48,13 @@ var default_stage = 'landscape-view';
 
 
 $(document).ready(function () {
+    var stage_value = default_stage;
     const parameters = queryString.parse(location.search);
     if ('stage' in parameters) {
-        var stage_value = parameters.stage;
-        if (!(stage_value in STAGES)) {
-            console.log("Given stage value '" + stage_value + "' is not known, reverting to first stage.")
-            stage_value = default_stage;
+        if (parameters.stage in STAGES) {
+            stage_value = parameters.stage;
+        } else {
+            console.log("Given stage value '" + parameters.stage + "' is not known, reverting to first stage.")
         }
     }
 

@@ -1,21 +1,21 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { get_svg, change_stage } from './utilities.mjs';
+import { getSvg, changeStage } from './utilities.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
 function start() {
     $('#stage-landscape-view').removeClass('hidden');
-    animate_landscape_view();
+    animateLandscapeView();
 }
 
-function animate_landscape_view() {
+function animateLandscapeView() {
     if (DEBUG) {
         console.log('Landscape view loaded.');
     }
     var svg_container = document.getElementById('landscape-view');
-    var svg = get_svg('landscape-view');
+    var svg = getSvg('landscape-view');
     var container_height = $('#animation-container').height();
     var plains = svg.querySelector('#plains');
     var river = svg.querySelector('#river');
@@ -46,7 +46,7 @@ function animate_landscape_view() {
 
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
     //Show UI elements
-    display_landscape_ui_1(BLINDFOLD_FADE_DURATION, text_duration);
+    displayLandscapeUi1(BLINDFOLD_FADE_DURATION, text_duration);
 
     // Animate whole SVG upwards, with parallax effect on layers.
     var landscape_timeline = anime.timeline({
@@ -59,7 +59,7 @@ function animate_landscape_view() {
         translateY: '-82.3%',
         duration: animation_duration,
         easing: 'easeInOutSine',
-        complete: display_landscape_ui_2
+        complete: displayLandscapeUi2
     })
     .add({
         targets: plains,
@@ -80,7 +80,7 @@ function animate_landscape_view() {
 }
 
 
-function display_landscape_ui_1(fade_out_duration, text_duration) {
+function displayLandscapeUi1(fade_out_duration, text_duration) {
     console.log('Displaying Landscape View UI - 1.');
     var ui_elements = document.getElementById('landscape-ui-1').children;
     $(ui_elements).css('visibility', 'visible');
@@ -103,7 +103,7 @@ function display_landscape_ui_1(fade_out_duration, text_duration) {
     }, '+=' + text_duration);
 }
 
-function display_landscape_ui_2() {
+function displayLandscapeUi2() {
     console.log('Displaying Landscape View UI - 2.');
     var ui_elements = document.getElementById('landscape-ui-2').children;
     $(ui_elements).css('visibility', 'visible');
@@ -122,7 +122,7 @@ function display_landscape_ui_2() {
 
 function end() {
     $('#stage-landscape-view').addClass('hidden');
-    change_stage('fern-interactive');
+    changeStage('fern-interactive');
 }
 
 export { start };

@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { change_stage } from './utilities.mjs';
+import { changeStage } from './utilities.mjs';
 
 
 function start(next_level_id, stage_data) {
@@ -29,13 +29,13 @@ function start(next_level_id, stage_data) {
         checkbox.className = 'status-checkbox';
         check_container.appendChild(checkbox);
     }
-    run_status_checks();
+    runStatusChecks();
 }
 
 const CHECK_CYCLE_DURATION = 200;
 const CHECK_DURATION_TIMEOUT = 2000 / CHECK_CYCLE_DURATION;
 
-function run_status_checks(iteration = 1) {
+function runStatusChecks(iteration = 1) {
     // Run status checks every 250ms until valid.
     // TODO: - Add backup checks for SVGs.
     //       - Add browser checks.
@@ -44,30 +44,30 @@ function run_status_checks(iteration = 1) {
     }
 
     if (iteration >= CHECK_DURATION_TIMEOUT) {
-        display_load_error();
-    } else if(check_assets_are_ready()) {
+        displayLoadError();
+    } else if(checkAssetsAreReady()) {
         if (DEBUG) {
             console.log('All status checks passed.');
         }
-        display_start_button();
+        displayStartButton();
     } else {
-        setTimeout( function () {run_status_checks(iteration + 1);}, CHECK_CYCLE_DURATION);
+        setTimeout(function () { runStatusChecks(iteration + 1);}, CHECK_CYCLE_DURATION);
     }
 }
 
 
-function display_start_button() {
+function displayStartButton() {
     $('#setup-status').fadeOut(400, function () { $('#welcome-end').fadeIn(); });
 }
 
 
-function display_load_error() {
+function displayLoadError() {
     $('#setup-status').fadeOut(400, function () { $('#load-error').fadeIn(); });
 }
 
 
 
-function check_assets_are_ready() {
+function checkAssetsAreReady() {
     let ready = true;
     let svg_elements = document.querySelectorAll('object.svg');
     for (let i = 0; i < svg_elements.length; i++) {
@@ -85,7 +85,7 @@ function check_assets_are_ready() {
 
 function end(next_level_id) {
     $('#stage-welcome-ui').addClass('hidden');
-    change_stage(next_level_id);
+    changeStage(next_level_id);
 }
 
 

@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { get_svg } from './utilities.mjs';
+import { getSvg } from './utilities.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -10,8 +10,8 @@ function start() {
     if (DEBUG) {
         console.log('Fern interactive loaded.');
     }
-    var svg = get_svg('fern-svg');
-    animate_ants(svg);
+    var svg = getSvg('fern-svg');
+    animateAnts(svg);
     setupEvents();
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
 }
@@ -26,7 +26,7 @@ function setupEvents() {
 }
 
 
-function animate_ants(svg) {
+function animateAnts(svg) {
     var ants_1 = svg.querySelector('#ants-1');
     var ants_2 = svg.querySelector('#ants-2');
     anime({

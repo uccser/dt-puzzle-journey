@@ -22,10 +22,10 @@ import queryString from 'query-string';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
-import { mark_asset_as_ready } from './utilities.mjs';
-import { start as welcome_start } from './welcome.mjs';
-import { start as stage_landscape_view_start } from './stage_landscape_view.mjs';
-import { start as stage_fern_start } from './stage_fern_interactive.mjs';
+import { markAssetAsReady } from './utilities.mjs';
+import { start as welcomeStart } from './welcome.mjs';
+import { start as stageLandscapeViewStart } from './stage_landscape_view.mjs';
+import { start as stageFernStart } from './stage_fern_interactive.mjs';
 
 console.log('DEBUG is set to ' + DEBUG + '.');
 
@@ -33,7 +33,7 @@ console.log('DEBUG is set to ' + DEBUG + '.');
 window.ready_assets = new Set();
 $('object.svg').each(function () {
     this.addEventListener('load', function () {
-        mark_asset_as_ready(this.id);
+        markAssetAsReady(this.id);
     });
 });
 
@@ -41,11 +41,11 @@ $('object.svg').each(function () {
 const STAGES = {
     'landscape-view': {
         button_text: 'Start the journey',
-        initial_function: stage_landscape_view_start,
+        initial_function: stageLandscapeViewStart,
     },
     'fern-interactive': {
         button_text: 'Start at the fern leaves',
-        initial_function: stage_fern_start,
+        initial_function: stageFernStart,
     },
 };
 var default_stage = 'landscape-view';
@@ -64,7 +64,7 @@ $(document).ready(function () {
 
     var animation_container = document.getElementById('animation-container');
     animation_container.addEventListener('journey:change_stage', run_stage);
-    welcome_start(stage_value, STAGES);
+    welcomeStart(stage_value, STAGES);
 });
 
 

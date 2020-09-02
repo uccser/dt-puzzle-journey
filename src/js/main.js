@@ -3,6 +3,12 @@
 
     Notes:
         - All times are in milliseconds.
+
+    Browser must support:
+        - JS
+            - CustomEvent()
+        - CSS
+            - Backface visibility
 */
 
 // Import third party libraries
@@ -13,7 +19,7 @@ import queryString from 'query-string';
 // Import modules
 import { DEBUG } from './constants.mjs';
 import { mark_asset_as_ready } from './utilities.mjs';
-import { start as stage_welcome_start } from './stage_welcome.mjs';
+import { start as welcome_start } from './welcome.mjs';
 import { start as stage_landscape_view_start } from './stage_landscape_view.mjs';
 import { start as stage_fern_start } from './stage_fern_interactive.mjs';
 
@@ -28,47 +34,39 @@ $('object.svg').each(function () {
 });
 
 
-const STAGES = [
-    {
-        name: 'Welcome',
-        initial_function: stage_welcome_start,
-    },
-    {
-        name: 'Opening landscape',
+const STAGES = {
+    'landscape-view': {
+        button_text: 'Start the journey',
         initial_function: stage_landscape_view_start,
     },
-    {
-        name: 'Fern interactive',
+    'fern-interactive': {
+        button_text: 'Start at the fern leaves',
         initial_function: stage_fern_start,
     },
-]
-var current_stage = 0;  // Start at welcome
+};
+var default_stage = 'landscape-view';
 
 
 $(document).ready(function () {
     const parameters = queryString.parse(location.search);
     if ('stage' in parameters) {
         var stage_value = parameters.stage;
-        current_stage = parseInt(stage_value);
-        if (isNaN(current_stage)) {
-            console.log('Given stage value is not a number, reverting to 0.')
-            current_stage = 0;
-        } else if (current_stage >= STAGES.length) {
-            console.log('Given stage value is not within range, reverting to 0.')
-            current_stage = 0;
+        if (!(stage_value in STAGES)) {
+            console.log("Given stage value '" + stage_value + "' is not known, reverting to first stage.")
+            stage_value = default_stage;
         }
     }
 
     var animation_container = document.getElementById('animation-container');
-    animation_container.addEventListener('journey:advance_stage', run_stage);
-    var advance_event = new Event('journey:advance_stage');
-    animation_container.dispatchEvent(advance_event);
+    animation_container.addEventListener('journey:change_stage', run_stage);
+    welcome_start(stage_value, STAGES);
 });
 
+
 function run_stage(event) {
+    let stage_data = STAGES[event.detail];
     if (DEBUG) {
-        console.log('Starting level ' + current_stage + '.');
+        console.log("Starting level '" + event.detail + "'.");
     }
-    STAGES[current_stage].initial_function();
-    current_stage++;
+    stage_data.initial_function();
 };

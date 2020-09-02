@@ -1,9 +1,9 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { equal_sets } from './utilities.mjs';
+import { change_stage } from './utilities.mjs';
 
 
-function start() {
+function start(next_level_id, stage_data) {
     if (DEBUG) {
         console.log('Displaying Welcome UI.');
     }
@@ -13,8 +13,12 @@ function start() {
     $('#welcome-end').on('click', function () {
         // Stages are not hidden until required to allow SVGs to load
         $('.stage').addClass('hidden');
-        $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, end);
+        $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, function () { end(next_level_id);});
     });
+
+    // Setup button
+    let button_text = stage_data[next_level_id].button_text;
+    document.querySelector('#welcome-end').textContent = button_text;
 
     // Implement browser checks
     let svg_elements = document.querySelectorAll('object.svg');
@@ -30,10 +34,19 @@ function start() {
 
 
 function run_status_checks() {
-    console.log("Checking");
+    // Run status checks every 250ms until valid.
+    // TODO: - Add max iteration timeout (30 seconds).
+    //       - Add backup checks for SVGs.
+    //       - Add browser checks.
+    if (DEBUG) {
+        console.log('Running status checks.');
+    }
     setTimeout(
         function () {
             if (check_assets_are_ready()) {
+                if (DEBUG) {
+                    console.log('All status checks passed.');
+                }
                 display_start_button();
             } else {
                 run_status_checks();
@@ -65,11 +78,9 @@ function check_assets_are_ready() {
 }
 
 
-function end() {
+function end(next_level_id) {
     $('#stage-welcome-ui').addClass('hidden');
-    var animation_container = document.getElementById('animation-container');
-    var advance_event = new Event('journey:advance_stage');
-    animation_container.dispatchEvent(advance_event);
+    change_stage(next_level_id);
 }
 
 

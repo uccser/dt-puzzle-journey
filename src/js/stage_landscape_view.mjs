@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { get_svg, get_svg_height } from './utilities.mjs';
+import { get_svg, change_stage } from './utilities.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -122,9 +122,7 @@ function display_landscape_ui_2() {
 
 function end() {
     $('#stage-landscape-view').addClass('hidden');
-    var animation_container = document.getElementById('animation-container');
-    var advance_event = new Event('journey:advance_stage');
-    animation_container.dispatchEvent(advance_event);
+    change_stage('fern-interactive');
 }
 
 export { start };

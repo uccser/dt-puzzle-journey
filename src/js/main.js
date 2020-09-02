@@ -9,6 +9,7 @@
             - CustomEvent()
             - Default parameters
             - Template literals (Template strings)
+            - ClassList
         - CSS
             - Flexbox
             - Grid
@@ -25,7 +26,8 @@ import { DEBUG } from './constants.mjs';
 import { markAssetAsReady } from './utilities.mjs';
 import { start as welcomeStart } from './welcome.mjs';
 import { start as stageLandscapeViewStart } from './stage_landscape_view.mjs';
-import { start as stageFernStart } from './stage_fern_interactive.mjs';
+import { start as stageFernInteractiveStart } from './stage_fern_interactive.mjs';
+import { start as stageFernMessageStart } from './stage_fern_message.mjs';
 
 console.log('DEBUG is set to ' + DEBUG + '.');
 
@@ -45,7 +47,11 @@ const STAGES = {
     },
     'fern-interactive': {
         button_text: 'Start at the fern leaves',
-        initial_function: stageFernStart,
+        initial_function: stageFernInteractiveStart,
+    },
+    'fern-message': {
+        button_text: 'Start at message in ferns leaves',
+        initial_function: stageFernMessageStart,
     },
 };
 var default_stage = 'landscape-view';

@@ -7,6 +7,11 @@ import anime from 'animejs/lib/anime.es.js';
 
 function start() {
     $('#stage-landscape-view').removeClass('hidden');
+
+    $('#landscape-stage-end').on('click', function () {
+        $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, end);
+    });
+
     animateLandscapeView();
 }
 
@@ -103,6 +108,7 @@ function displayLandscapeUi1(fade_out_duration, text_duration) {
     }, '+=' + text_duration);
 }
 
+
 function displayLandscapeUi2() {
     console.log('Displaying Landscape View UI - 2.');
     var ui_elements = document.getElementById('landscape-ui-2').children;
@@ -113,9 +119,6 @@ function displayLandscapeUi2() {
         duration: 1000,
         delay: anime.stagger(750),
         easing: 'linear'
-    });
-    $('#landscape-stage-end').on('click', function () {
-        $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, end);
     });
 }
 

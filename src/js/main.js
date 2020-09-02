@@ -61,10 +61,10 @@ $(document).ready(function () {
             console.log("Given stage value '" + parameters.stage + "' is not known, reverting to first stage.")
         }
     }
-
+    var autostart = 'autostart' in parameters;
     var animation_container = document.getElementById('animation-container');
     animation_container.addEventListener('journey:change_stage', run_stage);
-    welcomeStart(stage_value, STAGES);
+    welcomeStart(stage_value, STAGES, autostart);
 });
 
 

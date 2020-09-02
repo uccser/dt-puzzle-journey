@@ -3,18 +3,14 @@ import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { changeStage } from './utilities.mjs';
 
 
-function start(next_level_id, stage_data) {
+function start(next_level_id, stage_data, autostart=false) {
     if (DEBUG) {
         console.log('Displaying Welcome UI.');
     }
     $('#stage-welcome-ui').removeClass('hidden');
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
 
-    $('#welcome-end').on('click', function () {
-        // Stages are not hidden until required to allow SVGs to load.
-        $('.stage').addClass('hidden');
-        $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, function () { end(next_level_id);});
-    });
+    $('#welcome-end').on('click', function () { end(next_level_id); });
 
     // Setup button
     let button_text = stage_data[next_level_id].button_text;
@@ -29,13 +25,13 @@ function start(next_level_id, stage_data) {
         checkbox.className = 'status-checkbox';
         check_container.appendChild(checkbox);
     }
-    runStatusChecks();
+    runStatusChecks(autostart, next_level_id);
 }
 
 const CHECK_CYCLE_DURATION = 200;
 const CHECK_DURATION_TIMEOUT = 2000 / CHECK_CYCLE_DURATION;
 
-function runStatusChecks(iteration = 1) {
+function runStatusChecks(autostart, next_level_id, iteration = 1) {
     // Run status checks every 250ms until valid.
     // TODO: - Add backup checks for SVGs.
     //       - Add browser checks.
@@ -49,9 +45,13 @@ function runStatusChecks(iteration = 1) {
         if (DEBUG) {
             console.log('All status checks passed.');
         }
-        displayStartButton();
+        if (autostart) {
+            end(next_level_id);
+        } else {
+            displayStartButton();
+        }
     } else {
-        setTimeout(function () { runStatusChecks(iteration + 1);}, CHECK_CYCLE_DURATION);
+        setTimeout(function () { runStatusChecks(autostart, next_level_id, iteration + 1);}, CHECK_CYCLE_DURATION);
     }
 }
 
@@ -84,8 +84,11 @@ function checkAssetsAreReady() {
 
 
 function end(next_level_id) {
-    $('#stage-welcome-ui').addClass('hidden');
-    changeStage(next_level_id);
+    $('.stage').addClass('hidden');
+    $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, function () {
+        $('#stage-welcome-ui').addClass('hidden');
+        changeStage(next_level_id);
+    });
 }
 
 

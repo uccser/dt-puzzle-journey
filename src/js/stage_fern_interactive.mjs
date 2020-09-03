@@ -5,7 +5,8 @@ import { getSvg, changeStage } from './utilities.mjs';
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
-var next_button_hidden = true;
+var show_next =
+    window.sessionStorage.getItem('fern-interactive-show-next') || false;
 var card_interactions = 0;
 const REQUIRED_CARD_INTERACTIONS = 5;
 
@@ -17,6 +18,9 @@ function start() {
     var svg = getSvg('fern-svg');
     animateAnts(svg);
     setupEvents();
+    if (show_next) {
+        show_next_stage_button();
+    }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
 }
 
@@ -26,12 +30,18 @@ function setupEvents() {
         $(this).toggleClass('flipped');
         card_interactions++;
         updateDotCount();
-        if (next_button_hidden && card_interactions >= REQUIRED_CARD_INTERACTIONS) {
-            $('#stage-fern-interactive #fern-next-stage').fadeIn();
-            next_button_hidden = false;
+        if (!show_next && card_interactions >= REQUIRED_CARD_INTERACTIONS) {
+            show_next_stage_button();
         }
     });
     $('#fern-next-stage').on('click', end);
+}
+
+
+function show_next_stage_button() {
+    $('#stage-fern-interactive #fern-next-stage').fadeIn();
+    show_next = true;
+    window.sessionStorage.setItem('fern-interactive-show-next', true);
 }
 
 

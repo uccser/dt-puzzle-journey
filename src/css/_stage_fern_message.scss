@@ -4,13 +4,26 @@
     #fern-message-container {
         position: absolute;
         top: 1%;
-        bottom: 37%;
-        left: 34%;
-        right: 26%;
+        bottom: 35%;
+        left: 36%;
+        right: 28%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: stretch;
+
+        .letter-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: stretch;
+
+            .digit-element {
+                flex: 1;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
     }
 
     #fern-message-previous-stage {

@@ -37,3 +37,25 @@ export function changeStage(level_id) {
     var change_event = new CustomEvent('journey:change_stage', { detail: level_id });
     animation_container.dispatchEvent(change_event);
 }
+
+
+export function setSvgElementAnchor(svgs) {
+    if (!Array.isArray(svgs)) {
+        svgs = [svgs];
+    }
+    svgs.forEach(function (item) {
+        item.style.transformBox = 'fill-box';
+    });
+}
+
+
+export function addStylesToSvg(svg) {
+    var styles = `
+    .interactable {
+        cursor: pointer;
+    }`;
+    var style_element = document.createElement('style');
+    svg.appendChild(style_element);
+    var style_sheet = style_element.sheet;
+    style_sheet.insertRule(styles);
+}

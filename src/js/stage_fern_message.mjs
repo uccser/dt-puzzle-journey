@@ -75,6 +75,7 @@ function start() {
 function setup() {
     $('#fern-message-previous-stage').on('click', { level_id: 'fern-interactive' }, end);
     $('#fern-message-next-stage').on('click', { level_id: 'unknown' }, end);
+    $('#fern-message-check').on('click', check_values);
 
     // Get SVG
     var svg = getSvg('fern-message-svg');
@@ -108,7 +109,8 @@ function displayUi() {
     if (DEBUG) {
         console.log('Displaying Fern Message UI.');
     }
-    var ui_elements = document.querySelector('#fern-message-value-container').children;
+    var ui_elements = Array.from(document.querySelector('#fern-message-value-container').children);
+    ui_elements.push(document.querySelector('#fern-message-check'));
     $(ui_elements).css('visibility', 'visible');
     anime({
         targets: ui_elements,
@@ -152,6 +154,11 @@ function createWordWithBranches(word) {
         }
         value_container.appendChild(letter_select);
     }
+}
+
+
+function check_values() {
+    console.log(message_word);
 }
 
 

@@ -34,12 +34,11 @@
         top: 1%;
         bottom: 35%;
         left: 74%;
-        right: 10%;
+        right: 18%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         align-items: flex-start;
-
         select {
             padding: 0.3vw;
             font-size: 1.5vw;
@@ -50,6 +49,22 @@
             box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 46%);
             border-radius: 0.5vw;
             background: #deded1;
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+    #fern-message-feedback-container {
+        position: absolute;
+        top: 1%;
+        bottom: 35%;
+        left: 82%;
+        right: 1%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        // Hide direct descendants
+        & > * {
             visibility: hidden;
             opacity: 0;
         }

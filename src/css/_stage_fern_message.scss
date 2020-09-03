@@ -17,6 +17,10 @@
             display: flex;
             justify-content: center;
             align-items: stretch;
+            background-image: url('../img/flax-rope-asset.svg');
+            background-size: 3%;
+            background-repeat: repeat-x;
+            background-position: 0% 2%;
 
             .digit-element {
                 flex: 1;

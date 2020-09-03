@@ -6,13 +6,21 @@ import { getSvg, changeStage, setSvgElementAnchor, addStylesToSvg } from './util
 import anime from 'animejs/lib/anime.es.js';
 
 // Leaf paths
-import leaf_back_1 from '../img/leaf-1-back-no-dots.svg';
+import leaf_back_a from '../img/leaf-back-a.svg';
+import leaf_back_b from '../img/leaf-back-b.svg';
+import leaf_back_c from '../img/leaf-back-c.svg';
 const LEAF_BACKS = [
-    leaf_back_1,
+    leaf_back_a,
+    leaf_back_b,
+    leaf_back_c,
 ]
-import leaf_front_1 from '../img/leaf-1-front.svg';
+import leaf_front_a from '../img/leaf-front-a.svg';
+import leaf_front_b from '../img/leaf-front-b.svg';
+import leaf_front_c from '../img/leaf-front-c.svg';
 const LEAF_FRONTS = [
-    leaf_front_1,
+    leaf_front_a,
+    leaf_front_b,
+    leaf_front_c,
 ]
 
 const POSSIBLE_WORDS = [
@@ -74,7 +82,7 @@ function setup() {
     addStylesToSvg(svg);
 
     // Setup moss
-    var moss = [svg.querySelector('#moss-1'), svg.querySelector('#moss-2')];
+    var moss = Array.from(svg.querySelector('#moss').children);
     moss.forEach(function (moss_element) {
         moss_element.classList.add('interactable');
         setSvgElementAnchor(moss_element);

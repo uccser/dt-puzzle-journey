@@ -35,29 +35,28 @@ const POSSIBLE_WORDS = [
     // 'iwa',
 ];
 
-const DECIMAL_DICTIONARY = {
-    ' ': 0,
-    'a': 1,
-    'ā': 2,
-    'e': 3,
-    'ē': 4,
-    'h': 5,
-    'i': 6,
-    'ī': 7,
-    'k': 8,
-    'm': 9,
-    'n': 10,
-    'ng': 11,
-    'o': 12,
-    'ō': 13,
-    'p': 14,
-    'r': 15,
-    't': 16,
-    'u': 17,
-    'ū': 18,
-    'w': 19,
-    'wh': 20,
-}
+const DECIMAL_DICTIONARY = [
+    'a',
+    'ā',
+    'e',
+    'ē',
+    'h',
+    'i',
+    'ī',
+    'k',
+    'm',
+    'n',
+    'ng',
+    'o',
+    'ō',
+    'p',
+    'r',
+    't',
+    'u',
+    'ū',
+    'w',
+    'wh',
+]
 
 var message_word = window.sessionStorage.getItem('fern-message-word');
 
@@ -100,19 +99,38 @@ function setup() {
     if (!message_word) {
         message_word = POSSIBLE_WORDS[Math.floor(Math.random() * POSSIBLE_WORDS.length)];
         createWordWithBranches(message_word);
+        displayUi();
     }
+}
+
+
+function displayUi() {
+    if (DEBUG) {
+        console.log('Displaying Fern Message UI.');
+    }
+    var ui_elements = document.querySelector('#fern-message-value-container').children;
+    $(ui_elements).css('visibility', 'visible');
+    anime({
+        targets: ui_elements,
+        opacity: 1,
+        duration: 1000,
+        delay: anime.stagger(500),
+        easing: 'linear'
+    });
 }
 
 
 function createWordWithBranches(word) {
     console.log(word);
-    var word_container = document.querySelector('#fern-message-container');
+    var word_container = document.querySelector('#fern-message-word-container');
+    var value_container = document.querySelector('#fern-message-value-container');
     for (let i = 0; i < word.length; i++) {
+        // Create fern leaves for letter
         var letter_container = document.createElement('div');
         letter_container.classList.add('letter-container');
         word_container.appendChild(letter_container);
         let letter = word.charAt(i);
-        let letter_value = DECIMAL_DICTIONARY[letter];
+        let letter_value = DECIMAL_DICTIONARY.indexOf(letter) + 1;
         let binary_string = letter_value.toString(2).padStart(5, '0');
         for (let j = 0; j < binary_string.length; j++) {
             if (binary_string[j] == '0') {
@@ -125,6 +143,14 @@ function createWordWithBranches(word) {
             digit_element.style.backgroundImage = 'url(' + image_path + ')';
             letter_container.appendChild(digit_element);
         }
+        // Create dropdown for letter
+        var letter_select = document.createElement('select');
+        for (let k = 0; k < DECIMAL_DICTIONARY.length; k++) {
+            let letter_option = document.createElement('option');
+            letter_option.text = letter_option.value = DECIMAL_DICTIONARY[k];
+            letter_select.add(letter_option)
+        }
+        value_container.appendChild(letter_select);
     }
 }
 

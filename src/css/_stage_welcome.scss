@@ -5,9 +5,10 @@
         background-color: $background-color;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-template-areas: "header header" "item-1 item-2" "footer footer";
+        grid-template-rows: auto 2fr auto 1fr;
+        grid-template-areas: "header header" "notice-1-icon notice-2-icon" "notice-1 notice-2" "footer footer";
         position: absolute;
+        grid-gap: 1vw;
         top: 0;
         bottom: 0;
         left: 0;
@@ -15,25 +16,59 @@
         padding: 1rem;
         z-index: 900;
 
-        .header {
+        #header {
             grid-area: header;
             h1 {
-                font-size: 3rem;
+                font-size: 5vw;
+                margin: 1vw;
+            }
+            #alpha-label {
+                background: #ffee00;
+                color: #222;
+                padding: 0.4vw 1vw;
+                font-size: 1.5vw;
+                font-weight: bold;
+                border-radius: 2vw;
             }
         }
-        .item-1 { grid-area: item-1; }
-        .item-2 { grid-area: item-2; }
-        .footer {
+        .notice-icon {
+            height: 100%;
+            width: 100%;
+        }
+        #notice-1-icon {
+            grid-area: notice-1-icon;
+            display: flex;
+            justify-content: center;
+        }
+        #notice-2-icon {
+            grid-area: notice-2-icon;
+        }
+        .notice {
+            h2 {
+                text-align: center;
+                margin: .5vw;
+                font-size: 2.5vw;
+            }
+            p {
+                margin: 0;
+            }
+        }
+        #notice-1 {
+            grid-area: notice-1;
+        }
+        #notice-2 {
+            grid-area: notice-2;
+        }
+        #footer {
             grid-area: footer;
             flex-direction: column;
         }
-
         .grid-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-
         #setup-status-checks {
             display: flex;
             justify-content: center;

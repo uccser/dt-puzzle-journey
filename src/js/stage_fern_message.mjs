@@ -8,6 +8,7 @@ function start() {
     if (DEBUG) {
         console.log('Fern message loaded.');
     }
+    window.sessionStorage.setItem('fern-interactive-show-next', true);
     $('#fern-message-previous-stage').on('click', { level_id: 'fern-interactive' }, end);
     $('#fern-message-next-stage').on('click', { level_id: 'unknown' }, end);
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);

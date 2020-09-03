@@ -44,19 +44,20 @@ function animateLandscapeView() {
         duration: 0
     });
 
+    var initial_delay = BLINDFOLD_FADE_DURATION * 6;
     var text_duration = 4000;
-    var delay_duration = (BLINDFOLD_FADE_DURATION + text_duration) * .9;
+    var delay_duration = (initial_delay + text_duration) * .9;
     var animation_duration = 30000;
     var parallax_animation_duration = 0.4 * animation_duration;
 
-    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    $('#animation-blindfold').fadeOut(initial_delay);
     //Show UI elements
-    displayLandscapeUi1(BLINDFOLD_FADE_DURATION, text_duration);
+    displayLandscapeUi1(initial_delay, text_duration);
 
     // Animate whole SVG upwards, with parallax effect on layers.
     var landscape_timeline = anime.timeline({
         duration: parallax_animation_duration,
-        easing: 'easeOutQuad',
+        easing: 'easeOutSine',
         delay: delay_duration,
     });
     landscape_timeline.add({

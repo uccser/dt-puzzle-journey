@@ -77,6 +77,23 @@
         }
     }
 
+    #fern-interactive-ui {
+        position: absolute;
+        top: 1%;
+        bottom: 35%;
+        left: 1%;
+        right: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        // Hide direct descendants
+        & > * {
+            visibility: hidden;
+            opacity: 0;
+        }
+    }
+
     #fern-next-stage {
         position: absolute;
         bottom: 0;

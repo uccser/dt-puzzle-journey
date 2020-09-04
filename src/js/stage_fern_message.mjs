@@ -116,8 +116,8 @@ function displayUi() {
         targets: ui_elements,
         opacity: 1,
         duration: 1000,
-        delay: anime.stagger(500),
-        easing: 'linear'
+        delay: anime.stagger(500, {start: BLINDFOLD_FADE_DURATION}),
+        easing: 'linear',
     });
 }
 

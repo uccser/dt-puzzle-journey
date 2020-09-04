@@ -32,7 +32,7 @@ p {
     height: $container-size * 1vw / $container-ratio;
     max-height: $container-size * 1vh;
     max-width: $container-ratio * $container-size * 1vh;
-    margin: 1rem auto;
+    margin: max(1vw, 1vh) auto;
     overflow: hidden;
     position: relative;
     background: #222;
@@ -51,7 +51,7 @@ p {
 }
 
 .narrative-text {
-    background-color: #00000096;
+    background-color: #000000c7;
     display: inline-block;
     padding: 0.5rem 1rem;
     margin: 0.5rem;

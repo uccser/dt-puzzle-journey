@@ -59,7 +59,7 @@ const DECIMAL_DICTIONARY = [
 ]
 
 var message_word = window.sessionStorage.getItem('fern-message-word');
-
+var require_setup = true;
 
 function start() {
     $('#stage-fern-message').removeClass('hidden');
@@ -67,7 +67,10 @@ function start() {
         console.log('Fern message loaded.');
     }
     window.sessionStorage.setItem('fern-interactive-show-next', true);
-    setup();
+    if (require_setup) {
+        setup();
+        require_setup = false;
+    }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
 }
 

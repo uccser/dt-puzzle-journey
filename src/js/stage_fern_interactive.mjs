@@ -8,37 +8,32 @@ import anime from 'animejs/lib/anime.es.js';
 var show_next =
     window.sessionStorage.getItem('fern-interactive-show-next') || false;
 var card_interactions = 0;
+var require_setup = true;
+var first_digit_ants_element, second_digit_ants_element;
 const REQUIRED_CARD_INTERACTIONS = 5;
-
-
-// Created with https://yqnn.github.io/svg-path-editor/
-// Maximum 40 wide and 50 height
+const DIGIT_ANT_SPEED = 20000;
+const DIGIT_ANT_TRANSITION = 5000;
 const DIGIT_POSITIONS = {
-    10: [1600, 600],  // Position for 10's place
-    1: [1750, 600],  // Position for 1's place
+    10: [1640, 620],  // Position for 10's place
+    1: [1740, 620],  // Position for 1's place
+    'blank': [1690, 800],  // Position for empty space
 }
-// Doesn't include M node as this is set dynamically, all other nodes are relative
+// Created with https://yqnn.github.io/svg-path-editor/
+// Maximum 40 wide and 50 height.
+// Doesn't include M node as this is set dynamically, all other nodes are relative.
+// Start point should be at top center.
 const DIGIT_PATHS = {
-    'blank': 'M 3.8 56 c 0 -0.6 0 -2 0 -2.8 c 0 -0.6 0 -1.6 0.2 -2.4 c 0.2 -1.2 0.2 0 0.2 0 c 0 1 -0.2 1.4 -0.2 2.6 c 0 0.4 0 0.6 0.2 4 c 0 3 -0.4 2.2 -0.4 -0.8 z',
-    0: 'M 2 25 c 0 -5 2 -14 4 -17 c 3 -4 8 -6 12 -6 c 10 0 13 7 15 16 c 2 8 0 15 -2 21 c -2 3 -6 11 -15 11 c -9 0 -13 -13 -14 -24 z',
-    1: 'M 19 30 c 0 -3 0 -10 0 -14 c 0 -3 0 -8 1 -12 c 1 -6 1 0 1 0 c 0 5 -1 7 -1 13 c 0 2 0 3 1 20 c 0 15 -2 11 -2 -4 z',
-    2: 'M 22 24 c 13.5 -16.5 9 -28.5 -10.5 -15 c -15 9 -7.5 1.5 0 -1.5 c 24 -13.5 19.5 1.5 18 6 c -13.5 28.5 -43.5 36 -7.5 34.5 c 10.5 0 24 1.5 -1.5 1.5 c -19.5 -1.5 -27 6 0 -24 z',
-    3: 'M 16 27 c 18 -1.8 27 -26 0 -21.9 c -7 2 -7 0 0 -1 c 24 -5.4 28 21.6 -1 24.9 c 26 1.8 32 23.4 0 25.2 c 0 0 -14 1.8 0 -1.8 c 50 -18 -20 -19.8 1 -25.4 z',
-    4: 'M 21 31 c 2 -40 0 -32 -15 -14 c -10 10 -4 10 15 10 c 26 -1 20 1 0 1 c -24 0 -25 -1 -11 -17 c 13 -15 12 -17 12 20 c -1 27 -2 22 -1 2 z',
-    7: 'm 26 21 c 0 -1 2 -8 3 -11 c 1 -2 -1 -6 -20 -1 c -9 3 -4 -2 17 -4 c 6 -1 7 0 4 6 c -1 2 -3 2 -5 27 c -1 11 -4 9 1 -17 z',
-    8: 'M 19 25 c 25 -19 11 -23 2 -23 c -9 0 -19 6 -11 15 c 6 6 19 11 20 18 c 1 9 -1 14 -9 15 c -7 1 -12 -3 -13 -7 c -2 -6 4 -12 10 -17 z',
-    9: 'm 26 25 c 0 -20 3 -25 -11 -23 c -13 0 -17 19 -1 19 c 7 -1 10 -4 11 1 c 0 6 0 12 0 19 c 0 3 1 5 1 -1 c 0 1 0 -9 0 -14 z',
-
-    5: 'M 21 31 c 2 -40 0 -32 -15 -14 c -10 10 -4 10 15 10 c 26 -1 20 1 0 1 c -24 0 -25 -1 -11 -17 c 13 -15 12 -17 12 20 c -1 27 -2 22 -1 2 z',
-    6: 'm 6 23 c 3 -6 7 -13 12 -17 c 5 -3 7 -1 1 1 c -4 1 -16 20 -11 20 c 23 -5 19 8 13 14 c -5 5 -11 3 -15 1 c -7 -4 -4 -10 -2 -15 z',
-}
-
-
-function getDigitPath(digit, place) {
-    let digit_path = DIGIT_PATHS[digit];
-    let x_coord, y_coord;
-    [x_coord, y_coord] = DIGIT_POSITIONS[place];
-    return `M ${x_coord} ${y_coord} ${digit_path}`;
+    'blank': 'c -2 0 -3 0 -5 0 c -2 0 -6 0 -8 0 c -3 0 -1 -1 1 -1 c 2 0 3 0 7 0 c 4 0 9 0 15 0 c 7 0 6 1 -3 1 z',
+    0: 'c 19 1 27 13 35 25 c 9 15 9 67 4 87 c -3 14 -13 35 -42 35 c -29 0 -42 -47 -41 -73 c -1 -39 13 -74 42 -74 z',
+    1: 'c 4 -2 3 6 3 15 c -1 50 0 60 0 73 c 0 14 -1 33 -1 46 c 0 10 -6 4 -5 -1 c 0 -12 0 -27 -1 -60 c -1 -37 1 -75 4 -73 z',
+    2: 'c 10 -1 49 -3 1 61 c -80 75 -41 61 -1 62 c 61 -2 30 9 -25 7 c -58 0 -25 -25 22 -71 c 51 -49 2 -72 -42 -42 c -18 11 -5 -15 44 -17 z',
+    3: 'c 22 -2 54 1 52 36 c -1 26 -24 34 -49 33 c -14 -1 -15 8 1 7 c 61 3 85 65 -5 69 c -33 -1 47 37 52 -70 c 11 -109 -95 -74 -51 -75 z',
+    4: 'c 27 -1 10 117 10 123 c 0 20 -4 12 -4 -4 c -3 -27 32 -172 -36 -91 c -19 24 -12 39 24 40 c 93 3 44 8 0 5 c -50 -1 -53 -39 5 -73 z',
+    5: 'c -13 0 -20 70 -3 68 c 53 -6 126 49 4 64 c -15 3 -13 7 2 5 c 105 -13 71 -77 -3 -73 c -14 0 -8 -62 1 -61 c 75 2 68 -4 29 -3 z',
+    6: 'c 3 -6 6 -3 -16 39 c -24 37 -13 37 -7 31 c 12 -11 45 -1 54 10 c 9 12 17 57 -33 60 c -32 0 -50 -14 -38 -60 c 14 -41 36 -75 40 -80 z',
+    7: 'c 14 0 23 0 38 1 c 29 -1 -38 101 -49 122 c -12 25 -28 24 -13 1 c 15 -27 31 -56 36 -68 c 25 -54 35 -47 -22 -47 c -49 0 -67 -11 3 -9 z',
+    8: 'c 20 -1 32 6 33 25 c 3 69 -68 27 -68 85 c 0 19 5 36 35 37 c 19 0 41 -8 38 -39 c -6 -46 -74 -21 -78 -77 c 0 -28 32 -31 38 -31 z',
+    9: 'c -3 0 -26 -1 -26 28 c 2 24 3 38 53 30 c 2 25 -3 60 -6 74 c -1 10 2 14 5 0 c 6 -28 9 -75 9 -102 c 0 -18 -6 -30 -34 -30 z',
 }
 
 
@@ -47,9 +42,10 @@ function start() {
     if (DEBUG) {
         console.log('Fern interactive loaded.');
     }
-    var svg = getSvg('fern-svg');
-    animateAnts(svg);
-    setup();
+    if (require_setup) {
+        setup();
+        require_setup = false;
+    }
     if (show_next) {
         show_next_stage_button();
     }
@@ -58,6 +54,16 @@ function start() {
 
 
 function setup() {
+    // Setup ants
+    var svg = getSvg('fern-svg');
+    first_digit_ants_element = svg.querySelector('#ants-10-digit');
+    second_digit_ants_element = svg.querySelector('#ants-1-digit');
+    var blank_path = getDigitPath('blank', 'blank');
+    first_digit_ants_element.setAttribute('d', blank_path);
+    second_digit_ants_element.setAttribute('d', blank_path);
+    animateAnts(svg);
+
+    // Other elements
     $('#fern-container').on('click', '.fern-leaf', function () {
         $(this).toggleClass('flipped');
         card_interactions++;
@@ -95,16 +101,43 @@ function show_next_stage_button() {
 
 
 function updateDotCount() {
-    var dot_count = 0;
-    var cards = document.querySelectorAll('#stage-fern-interactive .fern-leaf');
+    let dot_count = 0;
+    let cards = document.querySelectorAll('#stage-fern-interactive .fern-leaf');
     for (var i = 0; i < cards.length; i++) {
         var card = cards[i];
         if (card.classList.contains('flipped')) {
             dot_count += parseInt(card.dataset.value);
         }
     }
-    console.log(dot_count);
+    let count_text = dot_count.toString().padStart(2, '0');
+    let tens_digit_path = getDigitPath(count_text[0], 10);
+    let ones_digit_path = getDigitPath(count_text[1], 1);
+    anime({
+        targets: first_digit_ants_element,
+        d: [ { value: tens_digit_path } ],
+        easing: 'easeInOutSine',
+        duration: DIGIT_ANT_TRANSITION,
+    });
+    anime({
+        targets: second_digit_ants_element,
+        d: [{ value: ones_digit_path } ],
+        easing: 'easeInOutSine',
+        duration: DIGIT_ANT_TRANSITION,
+    });
 };
+
+
+function getDigitPath(digit, place) {
+    let digit_path, x_coord, y_coord;
+    if (place == 10 && digit == 0) {
+        digit_path = DIGIT_PATHS['blank'];
+        [x_coord, y_coord] = DIGIT_POSITIONS['blank'];
+    } else {
+        digit_path = DIGIT_PATHS[digit];
+        [x_coord, y_coord] = DIGIT_POSITIONS[place];
+    }
+    return `M ${x_coord} ${y_coord} ${digit_path}`;
+}
 
 
 function animateAnts(svg) {
@@ -122,6 +155,20 @@ function animateAnts(svg) {
         strokeDashoffset: [0, ants_2.getTotalLength()],
         easing: 'linear',
         duration: 30000,
+        loop: true
+    });
+    anime({
+        targets: first_digit_ants_element,
+        strokeDashoffset: [0, -first_digit_ants_element.getTotalLength() * 10],
+        easing: 'linear',
+        duration: DIGIT_ANT_SPEED,
+        loop: true
+    });
+    anime({
+        targets: second_digit_ants_element,
+        strokeDashoffset: [0, second_digit_ants_element.getTotalLength() * 10],
+        easing: 'linear',
+        duration: DIGIT_ANT_SPEED,
         loop: true
     });
 }

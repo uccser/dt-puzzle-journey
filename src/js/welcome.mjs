@@ -29,7 +29,8 @@ function start(next_level_id, stage_data, autostart=false) {
 }
 
 const CHECK_CYCLE_DURATION = 200;
-const CHECK_DURATION_TIMEOUT = 2000 / CHECK_CYCLE_DURATION;
+const MAX_CHECK_DURATION = 60000;
+const CHECK_DURATION_TIMEOUT = MAX_CHECK_DURATION / CHECK_CYCLE_DURATION;
 
 function runStatusChecks(autostart, next_level_id, iteration = 1) {
     // Run status checks every 250ms until valid.

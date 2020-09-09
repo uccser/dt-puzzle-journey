@@ -24,11 +24,11 @@ const LEAF_FRONTS = [
 ]
 
 const POSSIBLE_WORDS = [
-    'toru',
-    'rima',
+    // 'toru',
+    // 'rima',
     'whitu',
-    'waru',
-    'tekau',
+    // 'waru',
+    // 'tekau',
     // Current program doesn't support words with 'ng' or 'wh'.
     // 'whā',
     // Possibly too easy
@@ -55,6 +55,11 @@ const DECIMAL_DICTIONARY = [
     'u',
     'ū',
     'w',
+    'wh',
+]
+// Letters that use two characters
+const DOUBLE_LETTER_DICTIONARY = [
+    'ng',
     'wh',
 ]
 
@@ -134,7 +139,13 @@ function createWordWithBranches(word) {
         var letter_container = document.createElement('div');
         letter_container.classList.add('letter-container');
         word_container.appendChild(letter_container);
-        let letter = word.charAt(i);
+        var letter;
+        if (DOUBLE_LETTER_DICTIONARY.includes(word.substring(i, i + 2))) {
+            letter = word.substring(i, i + 2);
+            i++;
+        } else {
+            letter = word.charAt(i);
+        }
         let letter_value = DECIMAL_DICTIONARY.indexOf(letter) + 1;
         let binary_string = letter_value.toString(2).padStart(5, '0');
         for (let j = 0; j < binary_string.length; j++) {

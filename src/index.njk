@@ -26,7 +26,7 @@
                         <p>Getting everything setup...</p>
                         <div id="setup-status-checks"></div>
                     </div>
-                    <div id="welcome-end" class="button d-none"></div>
+                    <button id="welcome-end" class="button d-none"></button>
                     <div id="load-error" class="text-center d-none">
                         <p><strong>Sorry, but we've encountered a problem.</strong></p>
                         <p>Try using a browser such as Google Chrome or Firefox that is up to date.</p>
@@ -44,7 +44,7 @@
                     <p class="narrative-text">
                         Not far to go now...
                     </p>
-                    <div id='landscape-stage-end' class="button">Step into the forest</div>
+                    <button id='landscape-stage-end' class="button">Step into the forest</button>
                 </div>
             </div>
             <div id="stage-fern-interactive" class="stage">
@@ -60,9 +60,9 @@
                         I should understand what is special about these leaves before continuing.
                     </p>
                 </div>
-                <div id='fern-next-stage' class="button d-none">
+                <button id='fern-next-stage' class="button d-none">
                     Continue down the path
-                </div>
+                </button>
                 <div id="fern-container">
                     <div id="fern-leaf-16" data-value="16" class="fern-leaf">
                         <div id="fern-leaf-16-front" class="fern-leaf-side fern-leaf-front"></div>
@@ -88,17 +88,27 @@
             </div>
             <div id="stage-fern-message" class="stage">
                 <object id="fern-message-svg" type="image/svg+xml" data="img/fern-message.svg" class="svg"></object>
-                <div id="fern-message-previous-stage" class="button">
+                <button id="fern-message-previous-stage" class="button">
                     Go back up the path
-                </div>
-                <div id='fern-message-next-stage' class="button d-none">
+                </button>
+                <button id='fern-message-next-stage' class="button d-none">
                     Continue down the path
+                </button>
+                <div id="fern-message-continue-narrative-text" class="narrative-text">
+                    The message is clear now. I need to head down the valley towards the river once I pass <span id="fern-message-word-sentence"></span> Rimu trees.
                 </div>
                 <div id="fern-message-word-container"></div>
                 <div id="fern-message-value-container"></div>
                 <div id="fern-message-feedback-container">
-                    <div id='fern-message-check' class="button">
+                    <button id="fern-message-check" class="button">
                         Check
+                    </button>
+                    <div id="fern-message-feedback-error-text" class="narrative-text">
+                        Something doesn't seem right. I need to try again.
+                    </div>
+                    <div id="fern-message-feedback-success-text" class="narrative-text">
+                        <div id="fern-message-word"></div>
+                        <div id="fern-message-word-translation"></div>
                     </div>
                 </div>
             </div>

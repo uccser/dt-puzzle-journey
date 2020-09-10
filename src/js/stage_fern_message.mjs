@@ -24,16 +24,24 @@ const LEAF_FRONTS = [
 ]
 
 const POSSIBLE_WORDS = [
-    // 'toru',
-    // 'rima',
+    'toru',
+    'rima',
     'whitu',
-    // 'waru',
-    // 'tekau',
+    'waru',
+    'tekau',
     // Current program doesn't support words with 'ng' or 'wh'.
     // 'whā',
     // Possibly too easy
     // 'iwa',
 ];
+
+const WORD_TRANSLATIONS = {
+    'toru': 'three',
+    'rima': 'five',
+    'whitu': 'seven',
+    'waru': 'eight',
+    'tekau': 'ten',
+}
 
 const DECIMAL_DICTIONARY = [
     'a',
@@ -64,6 +72,7 @@ const DOUBLE_LETTER_DICTIONARY = [
 ]
 
 var message_word = window.sessionStorage.getItem('fern-message-word');
+var message_values = [];
 var require_setup = true;
 
 function start() {
@@ -82,8 +91,8 @@ function start() {
 
 function setup() {
     $('#fern-message-previous-stage').on('click', { level_id: 'fern-interactive' }, end);
-    $('#fern-message-next-stage').on('click', { level_id: 'unknown' }, end);
-    $('#fern-message-check').on('click', check_values);
+    $('#fern-message-next-stage').on('click', { level_id: 'river-interactive' }, end);
+    $('#fern-message-check:not(:disabled)').on('click', checkValues);
 
     // Get SVG
     var svg = getSvg('fern-message-svg');
@@ -107,9 +116,10 @@ function setup() {
     // Create word
     if (!message_word) {
         message_word = POSSIBLE_WORDS[Math.floor(Math.random() * POSSIBLE_WORDS.length)];
-        createWordWithBranches(message_word);
-        displayUi();
+        window.sessionStorage.setItem('fern-message-word', message_word);
     }
+    createWordWithBranches(message_word);
+    displayUi();
 }
 
 
@@ -118,20 +128,20 @@ function displayUi() {
         console.log('Displaying Fern Message UI.');
     }
     var ui_elements = Array.from(document.querySelector('#fern-message-value-container').children);
+    document.querySelector('#fern-message-word').textContent = message_word;
+    document.querySelector('#fern-message-word-translation').textContent = WORD_TRANSLATIONS[message_word];
     ui_elements.push(document.querySelector('#fern-message-check'));
-    $(ui_elements).css('visibility', 'visible');
     anime({
         targets: ui_elements,
         opacity: 1,
         duration: 1000,
-        delay: anime.stagger(500, {start: BLINDFOLD_FADE_DURATION}),
+        delay: anime.stagger(300, {start: BLINDFOLD_FADE_DURATION}),
         easing: 'linear',
     });
 }
 
 
 function createWordWithBranches(word) {
-    console.log(word);
     var word_container = document.querySelector('#fern-message-word-container');
     var value_container = document.querySelector('#fern-message-value-container');
     for (let i = 0; i < word.length; i++) {
@@ -147,6 +157,7 @@ function createWordWithBranches(word) {
             letter = word.charAt(i);
         }
         let letter_value = DECIMAL_DICTIONARY.indexOf(letter) + 1;
+        message_values.push(letter_value);
         let binary_string = letter_value.toString(2).padStart(5, '0');
         for (let j = 0; j < binary_string.length; j++) {
             if (binary_string[j] == '0') {
@@ -163,7 +174,8 @@ function createWordWithBranches(word) {
         var letter_select = document.createElement('select');
         for (let k = 0; k < DECIMAL_DICTIONARY.length; k++) {
             let letter_option = document.createElement('option');
-            letter_option.text = letter_option.value = DECIMAL_DICTIONARY[k];
+            letter_option.text = DECIMAL_DICTIONARY[k];
+            letter_option.value = k + 1;
             letter_select.add(letter_option)
         }
         value_container.appendChild(letter_select);
@@ -171,9 +183,88 @@ function createWordWithBranches(word) {
 }
 
 
-function check_values() {
-    console.log(message_word);
+function checkValues() {
+    if (DEBUG) {
+        console.log(`Message is '${message_word}' which is ${message_values}.`);
+    }
+    let check_button = document.querySelector('#fern-message-check');
+    check_button.setAttribute('disabled', 'disabled');
+    let select_elements = document.querySelectorAll('#fern-message-value-container select');
+    var values_correct = true;
+    for (let i = 0; i < select_elements.length; i++) {
+        let select = select_elements[i];
+        let submitted_letter_value = select.options[select.selectedIndex].value;
+        let correct_letter_value = message_values[i];
+        if (submitted_letter_value == correct_letter_value) {
+            select.dataset.valid = 'true';
+        } else {
+            select.dataset.valid = 'false';
+            values_correct = false;
+        }
+    }
+    anime({
+        targets: select_elements,
+        duration: 200,
+        delay: anime.stagger(250),
+        endDelay: 1000,
+        direction: 'alternate',
+        easing: 'linear',
+        background: function (element) {
+            if (element.dataset.valid == 'true') {
+                return '#acd890';
+            } else {
+                return '#e28686'
+            }
+        },
+        borderColor: function (element) {
+            if (element.dataset.valid == 'true') {
+                return '#4ba512';
+            } else {
+                return '#ce1919'
+            }
+        },
+        begin: function() {
+            var success_text = document.querySelector('#fern-message-feedback-success-text');
+            var error_text = document.querySelector('#fern-message-feedback-error-text');
+            if (values_correct) {
+                // TODO: Use timeline to stagger these, including words in success text
+                anime({
+                    targets: success_text,
+                    opacity: 1,
+                    duration: 500,
+                    easing: 'linear',
+                });
+                anime({
+                    targets: error_text,
+                    opacity: 0,
+                    duration: 500,
+                    easing: 'linear',
+                });
+            } else {
+                anime({
+                    targets: error_text,
+                    opacity: 1,
+                    duration: 500,
+                    easing: 'linear',
+                });
+            }
+        },
+        complete: function () {
+            if (values_correct) {
+                displayContinueUi();
+            } else {
+                check_button.removeAttribute('disabled');
+            }
+        }
+    });
 }
+
+
+function displayContinueUi() {
+    // TODO: Display narrative text, then reveal button.
+    $('#stage-fern-message #fern-message-next-stage').fadeIn();
+}
+
 
 
 function end(event) {

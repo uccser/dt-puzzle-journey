@@ -45,12 +45,12 @@
             line-height: 1.3;
             box-sizing: border-box;
             margin: 0;
-            border: 1px solid #aaa;
+            border: 2px solid #aaa;
             box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 46%);
             border-radius: 0.5vw;
             background: #deded1;
-            visibility: hidden;
             opacity: 0;
+            animation: 0.5s;
         }
     }
     #fern-message-feedback-container {
@@ -65,8 +65,25 @@
 
         // Hide direct descendants
         & > * {
-            visibility: hidden;
             opacity: 0;
+        }
+
+        #fern-message-check:disabled {
+            background-color: #444;
+            border-color: #333;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+        select:disabled {
+            background: #ccc;
+        }
+        #fern-message-feedback-error-text {
+            font-size: 1vw;
+        }
+        #fern-message-feedback-success-text {
+            text-align: center;
+            font-size: 1.5vw;
+            line-height: 2vw;
         }
     }
 

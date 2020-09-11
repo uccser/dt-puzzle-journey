@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "animejs": "^3.2.0",
+        "dragula": "^3.7.2",
         "jquery": "3.5.1",
         "query-string": "^6.13.1"
     },

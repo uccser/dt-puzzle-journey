@@ -1,10 +1,12 @@
 @import 'boilerplate';
+@import './node_modules/dragula/dist/dragula';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 @import '_constants';
 @import 'stage_welcome';
 @import 'stage_landscape_view';
 @import 'stage_fern_interactive';
 @import 'stage_fern_message';
+@import 'stage_river_crossing';
 
 html, body {
     margin: 0;

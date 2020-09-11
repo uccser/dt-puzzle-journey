@@ -57,7 +57,7 @@ function animateLandscapeView() {
     // Animate whole SVG upwards, with parallax effect on layers.
     var landscape_timeline = anime.timeline({
         duration: parallax_animation_duration,
-        easing: 'easeOutSine',
+        easing: 'easeOutCirc',
         delay: delay_duration,
     });
     landscape_timeline.add({
@@ -70,11 +70,11 @@ function animateLandscapeView() {
     .add({
         targets: plains,
         translateY: 0,
-    }, animation_duration * 0.04)
+    }, animation_duration * 0.07)
     .add({
         targets: river,
         translateY: 0,
-    }, animation_duration * 0.25)
+    }, animation_duration * 0.26)
     .add({
         targets: forest_layer_far,
         translateY: 0,

@@ -6,6 +6,7 @@
         left: 1%;
         right: 75%;
         padding: 1%;
+        flex-wrap: wrap;
         .rope {
             margin-right: 10%;
             margin-bottom: 6%;
@@ -80,10 +81,10 @@
         border: 0.13rem dashed #6e4e2fde;
         border-radius: 1vw;
         display: flex;
-        flex-wrap: wrap;
         align-content: flex-start;
     }
     .rope {
+        flex-shrink: 0;
         background-color: #cc9966;
         height: 100%;
         cursor: grab;

@@ -35,7 +35,7 @@ function setup() {
         direction: 'horizontal',
         accepts: function (rope, target, source, sibling) {
             var total_rope_length = getTotalRopeLength(target);
-            total_rope_length += parseInt(rope.dataset.length);
+            // total_rope_length += parseInt(rope.dataset.length);
             return total_rope_length <= parseInt(target.dataset.capacity);
         },
     });
@@ -73,7 +73,7 @@ function createRopes() {
         let rope_css_size = length * 10;
         rope_element.dataset.length = length;
         rope_element.classList.add('rope');
-        rope_element.style.width = rope_css_size.toString() + '%';
+        rope_element.style.flexBasis = rope_css_size.toString() + '%';
 
         let value_element = document.createElement('div');
         value_element.classList.add('rope-value');

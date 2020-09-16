@@ -41,9 +41,7 @@ function setup() {
         mirrorContainer: document.querySelector('#stage-river-crossing'),
         direction: 'horizontal',
         accepts: function (rope, target, source, sibling) {
-            var total_rope_length = getTotalRopeLength(target);
-            // total_rope_length += parseInt(rope.dataset.length);
-            return total_rope_length <= parseInt(target.dataset.capacity);
+            return !isRopeCompleted(target);
         },
     });
     drake.on('dragend', checkBridgeComplete);
@@ -54,9 +52,22 @@ function checkBridgeComplete(el) {
     var rope_container_top = document.querySelector('#river-crossing-rope-top');
     var rope_container_middle = document.querySelector('#river-crossing-rope-middle');
     var rope_container_bottom = document.querySelector('#river-crossing-rope-bottom');
-    // TODO
+
+    var top_complete = isRopeCompleted(rope_container_top);
+    var middle_complete = isRopeCompleted(rope_container_middle);
+    var bottom_complete = isRopeCompleted(rope_container_bottom);
+    console.log(top_complete, middle_complete, bottom_complete);
+
+    if (top_complete && middle_complete && bottom_complete) {
+        displayContinueUi();
+    }
 }
 
+
+function isRopeCompleted(rope_container) {
+    var total_rope_length = getTotalRopeLength(rope_container);
+    return total_rope_length >= parseInt(rope_container.dataset.capacity);
+}
 
 
 function getTotalRopeLength(rope_container) {
@@ -90,6 +101,12 @@ function createRopes() {
         initial_container.appendChild(rope_element);
     }
 
+}
+
+
+function displayContinueUi() {
+    // TODO: Display narrative text, then reveal button.
+    $('#stage-river-crossing #river-crossing-next-stage').fadeIn();
 }
 
 

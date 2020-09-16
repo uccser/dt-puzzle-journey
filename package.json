@@ -7,9 +7,10 @@
     "author": "UCCSER",
     "scripts": {
         "build": "parcel build src/index.njk src/complete/index.njk --public-url /dt-puzzle-journey/",
-        "dev": "parcel ./src/index.njk ./src/complete/index.njk",
+        "dev": "parcel src/index.njk src/complete/index.njk",
         "start": "npm run build && npm run dev",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "postinstall": "patch-package"
     },
     "dependencies": {
         "animejs": "^3.2.0",
@@ -22,6 +23,7 @@
         "parcel-bundler": "^1.12.4",
         "parcel-plugin-nuke-dist": "^1.0.1",
         "parcel-plugin-nunjucks": "^2.2.1",
+        "patch-package": "^6.2.2",
         "sass": "^1.26.10"
     }
 }

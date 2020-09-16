@@ -1,0 +1,17 @@
+diff --git a/node_modules/parcel-bundler/src/packagers/JSPackager.js b/node_modules/parcel-bundler/src/packagers/JSPackager.js
+index a07ff3b..8adcc67 100644
+--- a/node_modules/parcel-bundler/src/packagers/JSPackager.js
++++ b/node_modules/parcel-bundler/src/packagers/JSPackager.js
+@@ -216,6 +216,12 @@ class JSPackager extends Packager {
+       );
+       await this.addAssetToBundle(asset);
+       entry.push(asset.id);
++
++      let cssLoaderAsset = await this.bundler.getAsset(
++        require.resolve('../builtins/css-loader')
++      );
++      await this.addAssetToBundle(cssLoaderAsset);
++      entry.push(cssLoaderAsset.id);
+     }
+ 
+     if (await this.writeBundleLoaders()) {

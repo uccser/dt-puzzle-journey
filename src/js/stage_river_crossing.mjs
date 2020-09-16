@@ -25,7 +25,14 @@ function start() {
 function setup() {
     // Get SVG
     var svg = getSvg('river-crossing-svg');
-    // addStylesToSvg(svg);
+    var water_middle = svg.querySelector('#water-middle');
+    anime({
+        targets: water_middle,
+        translateY: ['-66.6%', '0%'],
+        easing: 'linear',
+        duration: 4000,
+        loop: true
+    });
 
     // Create ropes
     createRopes();

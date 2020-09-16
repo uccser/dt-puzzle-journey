@@ -7,6 +7,8 @@
 @import 'stage_fern_interactive';
 @import 'stage_fern_message';
 @import 'stage_river_crossing';
+@import 'stage_plains';
+@import 'complete';
 
 html, body {
     margin: 0;
@@ -18,7 +20,7 @@ body {
     background-color: $background-color;
     color: #fff;
     padding: 0;
-    font-size: 2vw;
+    font-size: 1rem;
 }
 
 p {

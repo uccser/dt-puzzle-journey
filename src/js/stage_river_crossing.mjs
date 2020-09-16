@@ -45,6 +45,9 @@ function setup() {
         },
     });
     drake.on('dragend', checkBridgeComplete);
+
+    // Setup buttons
+    $('#stage-river-crossing #river-crossing-next-stage').on('click', end);
 }
 
 
@@ -107,6 +110,17 @@ function createRopes() {
 function displayContinueUi() {
     // TODO: Display narrative text, then reveal button.
     $('#stage-river-crossing #river-crossing-next-stage').fadeIn();
+}
+
+
+function end() {
+    $('#animation-blindfold').fadeIn(
+        BLINDFOLD_FADE_DURATION,
+        function () {
+            $('#stage-river-crossing').addClass('hidden');
+            changeStage('plains');
+        }
+    );
 }
 
 

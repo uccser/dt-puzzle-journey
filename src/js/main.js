@@ -30,6 +30,7 @@ import { start as stageLandscapeViewStart } from './stage_landscape_view.mjs';
 import { start as stageFernInteractiveStart } from './stage_fern_interactive.mjs';
 import { start as stageFernMessageStart } from './stage_fern_message.mjs';
 import { start as stageRiverCrossingStart } from './stage_river_crossing.mjs';
+import { start as stagePlainsStart } from './stage_plains.mjs';
 
 console.log('DEBUG is set to ' + DEBUG + '.');
 
@@ -58,6 +59,10 @@ const STAGES = {
     'river-crossing': {
         button_text: 'Start at the river crossing',
         initial_function: stageRiverCrossingStart,
+    },
+    'plains': {
+        button_text: 'Start at the plains',
+        initial_function: stagePlainsStart,
     },
 };
 var default_stage = 'landscape-view';

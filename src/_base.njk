@@ -11,12 +11,12 @@
         <meta property="og:url" content="">
         <meta property="og:image" content="">
 
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="icon" type="image/png" href="img/icon.png" >
-        <link rel="apple-touch-icon" href="img/icon.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="icon" type="image/png" href="/img/icon.png" >
+        <link rel="apple-touch-icon" href="/img/icon.png">
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.scss">
+        <link rel="stylesheet" href="/css/normalize.css">
+        <link rel="stylesheet" href="/css/main.scss">
 
         <meta name="theme-color" content="#fafafa">
     </head>
@@ -24,9 +24,10 @@
         {% block content %}
         {% endblock %}
 
-        <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script src="/js/vendor/modernizr-3.11.2.min.js"></script>
+        <script src="/js/plugins.js"></script>
+        {% block scripts %}
+        {% endblock %}
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
         <script>
             window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;

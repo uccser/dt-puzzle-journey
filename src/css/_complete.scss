@@ -1,0 +1,17 @@
+#complete-page {
+    background-image: url('../img/outside-pa.svg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    #complete-message {
+        margin-top: 80vh;
+        transform: translateY(-50%);
+    }
+}

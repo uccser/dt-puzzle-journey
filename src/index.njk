@@ -136,9 +136,19 @@
                     Cross the bridge
                 </button>
             </div>
+            <div id="stage-plains" class="stage">
+                <object id="plains-svg" type="image/svg+xml" data="img/plains.svg" class="svg"></object>
+                <button id="plains-next-stage" class="button d-none">
+                    Walk towards the pā
+                </button>
+            </div>
         </div>
     </div>
     <div class="text-center credits">
         Copyright and license information will be displayed here.
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/js/main.js"></script>
 {% endblock %}

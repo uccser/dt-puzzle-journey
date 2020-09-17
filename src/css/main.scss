@@ -25,8 +25,11 @@ body {
     font-size: 1rem;
 }
 
-p {
-    margin-top: 0;
+h1 {
+    @apply text-4xl;
+}
+h2 {
+    @apply text-2xl;
 }
 
 #animation-container {
@@ -63,7 +66,7 @@ p {
     padding: 0.5rem 1rem;
     margin: 0.5rem;
     border-radius: 0.5rem;
-    font-size: 1.5vw;
+    font-size: 1rem;
 }
 
 .narrative-text {
@@ -73,7 +76,7 @@ p {
     @apply py-2;
     margin: 0.5rem;
     border-radius: 0.5rem;
-    font-size: 1.5vw;
+    font-size: 1rem;
 }
 
 .button {
@@ -83,20 +86,15 @@ p {
     cursor: pointer;
     text-align: center;
     padding: 0.5rem 1rem;
-    margin: 0.5rem;
     background-color: $background-color;
     border: 1px solid darken($background-color, 10%);
     display: inline;
     border-radius: 0.5rem;
-    font-size: 1.5vw;
+    font-size: 1rem;
 
     &:hover {
         background-color: darken($background-color, 8%);
     }
-}
-
-.text-center {
-    text-align: center;
 }
 
 .credits {
@@ -110,10 +108,6 @@ p {
 
 .opacity-0 {
     opacity: 0;
-}
-
-.mb-0 {
-    margin-bottom: 0;
 }
 
 .hidden {

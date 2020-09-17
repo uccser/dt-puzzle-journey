@@ -7,7 +7,7 @@ function start(next_level_id, stage_data, autostart=false) {
     if (DEBUG) {
         console.log('Displaying Welcome UI.');
     }
-    $('#stage-welcome-ui').removeClass('hidden');
+    $('#welcome-ui').removeClass('hidden');
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
 
     $('#welcome-end').on('click', function () { end(next_level_id); });
@@ -87,7 +87,7 @@ function checkAssetsAreReady() {
 function end(next_level_id) {
     $('.stage').addClass('hidden');
     $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, function () {
-        $('#stage-welcome-ui').addClass('hidden');
+        $('#welcome-ui').addClass('hidden');
         changeStage(next_level_id);
     });
 }

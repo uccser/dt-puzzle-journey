@@ -15,8 +15,10 @@
     "dependencies": {
         "animejs": "^3.2.0",
         "dragula": "^3.7.2",
+        "install": "^0.13.0",
         "jquery": "3.5.1",
-        "query-string": "^6.13.1"
+        "query-string": "^6.13.1",
+        "tailwindcss": "^1.8.10"
     },
     "devDependencies": {
         "nunjucks": "^3.2.0",

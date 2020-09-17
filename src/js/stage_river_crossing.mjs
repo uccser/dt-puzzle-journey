@@ -48,6 +48,10 @@ function setup() {
 
     // Setup buttons
     $('#stage-river-crossing #river-crossing-next-stage').on('click', end);
+
+    if (DEBUG) {
+        console.log('River crossing setup complete.');
+    }
 }
 
 

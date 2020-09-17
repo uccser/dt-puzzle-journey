@@ -1,4 +1,6 @@
-@import 'boilerplate';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 @import './node_modules/dragula/dist/dragula';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 @import '_constants';
@@ -67,7 +69,8 @@ p {
 .narrative-text {
     background-color: #000000c7;
     display: inline-block;
-    padding: 0.5rem 1rem;
+    @apply px-4;
+    @apply py-2;
     margin: 0.5rem;
     border-radius: 0.5rem;
     font-size: 1.5vw;
@@ -111,4 +114,8 @@ p {
 
 .mb-0 {
     margin-bottom: 0;
+}
+
+.hidden {
+  display: none !important;
 }

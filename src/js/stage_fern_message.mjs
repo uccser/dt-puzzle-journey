@@ -142,7 +142,7 @@ function displayUi() {
 
 
 function animateAnts(svg) {
-    var ants = svg.querySelector('#ants-2');
+    var ants = svg.querySelector('#ants');
     anime({
         targets: ants,
         strokeDashoffset: [0, ants.getTotalLength()],

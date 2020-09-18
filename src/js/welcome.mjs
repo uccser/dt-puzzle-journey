@@ -67,20 +67,32 @@ function displayLoadError() {
 }
 
 
-
 function checkAssetsAreReady() {
     let ready = true;
-    let svg_elements = document.querySelectorAll('object.svg');
-    for (let i = 0; i < svg_elements.length; i++) {
-        let svg_id = svg_elements[i].id;
-        if (window.ready_assets.has(svg_id)) {
+    // Create copy to avoid issues when deleting from original set while iterating.
+    let svg_ids = new Set(window.unchecked_assets);
+    for (let svg_id of svg_ids) {
+        if (checkAssetIsReady(svg_id)) {
             let checkbox = document.querySelector('#' + svg_id + '-checkbox');
             checkbox.classList.add('success');
+            window.unchecked_assets.delete(svg_id);
         } else {
             ready = false;
         }
     }
     return ready;
+}
+
+
+function checkAssetIsReady(svg_id) {
+    let svg_element = document.querySelector('#' + svg_id);
+    if (window.ready_assets.has(svg_id)) {
+        return true;
+    } else if (svg_element.contentDocument.readyState == "complete") {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 

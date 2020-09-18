@@ -38,12 +38,7 @@ console.log('DEBUG is set to ' + DEBUG + '.');
 
 // Create global variable to track ready assets
 window.ready_assets = new Set();
-$('object.svg').each(function () {
-    this.addEventListener('load', function () {
-        markAssetAsReady(this.id);
-    });
-});
-
+window.unchecked_assets = new Set();
 
 const STAGES = {
     'landscape-view': {
@@ -79,6 +74,14 @@ var default_stage = 'landscape-view';
 
 
 $(document).ready(function () {
+    // Setup asset tracking for loader checks
+    $('object.svg').each(function () {
+        window.unchecked_assets.add(this.id);
+        this.addEventListener('load', function () {
+            markAssetAsReady(this.id);
+        });
+    });
+
     var stage_value = default_stage;
     const parameters = queryString.parse(location.search);
     if ('stage' in parameters) {

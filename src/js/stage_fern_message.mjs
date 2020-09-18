@@ -91,7 +91,7 @@ function start() {
 
 function setup() {
     $('#fern-message-previous-stage').on('click', { level_id: 'fern-interactive' }, end);
-    $('#fern-message-next-stage').on('click', { level_id: 'river-crossing' }, end);
+    $('#fern-message-next-stage').on('click', { level_id: 'before-river' }, end);
     $('#fern-message-check:not(:disabled)').on('click', checkValues);
 
     // Get SVG

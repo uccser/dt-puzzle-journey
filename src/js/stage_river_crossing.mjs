@@ -97,25 +97,62 @@ function getTotalRopeLength(rope_container) {
 
 
 function createRopes() {
-    // TODO: Generate random rope lengths
-    var rope_lengths = [7, 3, 1, 4, 1, 2, 2, 3, 5, 2];
+    var rope_lengths = createRopeLengths();
     var initial_container = document.querySelector('#river-crossing-bank');
     for (let i = 0; i < rope_lengths.length; i++) {
         let length = rope_lengths[i];
         let rope_element = document.createElement('div');
-        let rope_css_size = length * 10;
         rope_element.dataset.length = length;
         rope_element.classList.add('rope');
-        rope_element.style.flexBasis = rope_css_size.toString() + '%';
+        rope_element.style.flexBasis = length.toString() + '%';
 
         let value_element = document.createElement('div');
         value_element.classList.add('rope-value');
-        value_element.innerText = length.toString() + 'm';
+        value_element.innerText = (length / 10).toString() + 'm';
         rope_element.appendChild(value_element);
 
         initial_container.appendChild(rope_element);
     }
 
+}
+
+
+function createRopeLengths() {
+    // Create 7 rope lengths, creating three lots of 100cms.
+    var rope_lengths = [];
+    // Length of one rope (multiple required for bridge).
+    var combined_rope_length = 100;
+
+    // Create one rope of 2 pieces
+    let rope_a = anime.random(51, 89);
+    let rope_b = combined_rope_length - rope_a;
+    rope_lengths.push(rope_a, rope_b);
+
+    // Create two ropes of 3 pieces
+    for (let i = 0; i < 2; i++) {
+        let rope_a = anime.random(21, 66);
+        let remaining = combined_rope_length - rope_a;
+        let rope_b = Math.floor(anime.random(remaining * 0.4, remaining * 0.6));
+        let rope_c = combined_rope_length - rope_a - rope_b;
+        rope_lengths.push(rope_a, rope_b, rope_c);
+    }
+
+    return shuffle(rope_lengths);
+}
+
+/**
+ * Shuffles array in place.
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+    }
+    return a;
 }
 
 

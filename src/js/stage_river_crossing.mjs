@@ -25,12 +25,20 @@ function start() {
 function setup() {
     // Get SVG
     var svg = getSvg('river-crossing-svg');
+    var water_top = svg.querySelector('#water-top');
     var water_middle = svg.querySelector('#water-middle');
+    anime({
+        targets: water_top,
+        translateY: ['-66.6%', '0%'],
+        easing: 'linear',
+        duration: 4000,
+        loop: true
+    });
     anime({
         targets: water_middle,
         translateY: ['-66.6%', '0%'],
         easing: 'linear',
-        duration: 4000,
+        duration: 8000,
         loop: true
     });
 
@@ -121,8 +129,8 @@ function end() {
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
-            $('#stage-river-crossing').addClass('hidden');
-            changeStage('plains');
+            $('#stage-plains').addClass('hidden');
+            changeStage('before-plains');
         }
     );
 }

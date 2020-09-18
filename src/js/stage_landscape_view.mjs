@@ -22,7 +22,7 @@ function animateLandscapeView() {
     var svg_container = document.getElementById('landscape-view');
     var svg = getSvg('landscape-view');
     var container_height = $('#animation-container').height();
-    var plains = svg.querySelector('#plains');
+    var plains = svg.querySelector('#plains-2');
     var river = svg.querySelector('#river');
     var forest_layer_far = svg.querySelector('#forest-layer-far');
     var forest_layer_close = svg.querySelector('#forest-layer-close');

@@ -97,8 +97,8 @@ function setup() {
     // Get SVG
     var svg = getSvg('fern-message-svg');
     addStylesToSvg(svg);
+    animateAnts(svg);
 
-    // Setup moss
     var moss = Array.from(svg.querySelector('#moss').children);
     moss.forEach(function (moss_element) {
         moss_element.classList.add('interactable');
@@ -137,6 +137,18 @@ function displayUi() {
         duration: 1000,
         delay: anime.stagger(300, {start: BLINDFOLD_FADE_DURATION}),
         easing: 'linear',
+    });
+}
+
+
+function animateAnts(svg) {
+    var ants = svg.querySelector('#ants-2');
+    anime({
+        targets: ants,
+        strokeDashoffset: [0, ants.getTotalLength()],
+        easing: 'linear',
+        duration: 80000,
+        loop: true
     });
 }
 

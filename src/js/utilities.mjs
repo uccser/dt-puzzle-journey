@@ -59,3 +59,21 @@ export function addStylesToSvg(svg) {
     var style_sheet = style_element.sheet;
     style_sheet.insertRule(styles);
 }
+
+
+export function getRandomInt(min, max) {
+    // The maximum is exclusive and the minimum is inclusive
+    // From: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min);
+}
+
+
+export function getRandomIntInclusive(min, max) {
+    // The maximum is inclusive and the minimum is inclusive
+    // From: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}

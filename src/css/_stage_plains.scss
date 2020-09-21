@@ -24,6 +24,7 @@
             }
 
             #plains-grid {
+                $cell-border: 0.2rem dashed rgb(70, 70, 70);
                 position: absolute;
                 width: 100%;
                 height: 100%;
@@ -31,7 +32,6 @@
                 justify-items: stretch;
                 align-items: stretch;
 
-                $cell-border: 0.2rem dashed rgba(0, 0, 0, 0.3);
                 .cell {
                     flex: 1 0 auto;
                     border-top: $cell-border;
@@ -46,12 +46,41 @@
             }
         }
     }
-    #plains-right-container {
+    #plains-user-instructions {
         position: absolute;
         top: $container-padding;
+        bottom: 25%;
+        left: 50%;
+        right: $container-padding;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+    #plains-instruction-blocks {
+        position: absolute;
+        top: 75%;
         bottom: $container-padding;
         left: 50%;
         right: $container-padding;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+    }
+    .instruction-block {
+        flex: 1 0 auto;
+        margin: 1rem;
+        cursor: grab;
+    }
+    #instruction-forward-source {
+        background: blue;
+    }
+    #instruction-turn-left-source {
+        background: green;
+    }
+    #instruction-turn-right-source {
+        background: purple;
     }
 
     #plains-next-stage {

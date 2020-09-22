@@ -93,13 +93,17 @@ $grid-container-border: 0.2rem solid black;
                 .cell-obstacle-d {
                     background-image: url('../img/plains-grid-obstacle-d.svg');
                 }
-                #grid-avatar {
+                #grid-avatar-container {
                     position: absolute;
                     top: 0;
                     right: 0;
                     bottom: 0;
                     left: 0;
+                }
+                #grid-avatar {
                     background-image: url('../img/plains-avatar.svg');
+                    width: 100%;
+                    height: 100%;
                 }
             }
         }
@@ -124,6 +128,9 @@ $grid-container-border: 0.2rem solid black;
             touch-action: none;
             overflow: hidden;
             display: none;
+            .instruction-block {
+                cursor: grab !important;
+            }
             &:last-child {
                 display: block;
             }
@@ -158,7 +165,9 @@ $grid-container-border: 0.2rem solid black;
         justify-content: space-around;
         align-items: stretch;
         align-content: stretch;
-
+        .instruction-block {
+            cursor: grab !important;
+        }
     }
     .instruction-block {
         width: 100%;
@@ -166,7 +175,7 @@ $grid-container-border: 0.2rem solid black;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
-        cursor: grab;
+        cursor: not-allowed;
     }
     .instruction-forward {
         background-image: url('../img/plains-instruction-forward.svg');

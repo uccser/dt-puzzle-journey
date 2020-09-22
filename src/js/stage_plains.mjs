@@ -9,7 +9,8 @@ import dragula from 'dragula/dragula.js';
 
 var require_setup = true;
 var grid_data;
-const INSTRUCTION_LIMIT = 16;
+const INSTRUCTION_ANIMATION_DURATION = 800;
+const INSTRUCTION_FADE = 350;
 const CELL_SPACE_VARIANTS = [
     'cell-space-a',
     'cell-space-b',
@@ -45,7 +46,178 @@ function setup() {
     setupInstructionBlocks();
     setupAvatar();
 
+    $('#plains-run-button').on('click', runInstructions);
     $('#plains-reset-button').on('click', resetInstructions);
+}
+
+
+function runInstructions() {
+    // TODO: Disable run button
+
+    // Go through instructions and add animations to Anime.js timeline.
+    var timeline = anime.timeline({
+        easing: 'easeInOutSine',
+        autoplay: false,
+        complete: checkRunInstructions,
+    });
+
+    var avatar = document.getElementById('grid-avatar');
+    var avatar_container = document.getElementById('grid-avatar-container');
+    var instructions = document.getElementById('plains-user-instructions').children;
+
+    var heading = 0;
+    var i = 0;
+    var valid_sequence = true;
+    var x_coord = grid_data.starting_location.x_coord;
+    var y_coord = grid_data.starting_location.y_coord;
+    while (valid_sequence && i < instructions.length) {
+        let target = avatar;
+        let instruction_element = instructions[i];
+        let instruction = getInstructionFromContainerElement(instruction_element);
+        if (instruction) {
+            var transform = '';
+            if (instruction == 'F') {
+                // TODO: Check if move is valid.
+                if (heading == 90) {
+                    x_coord++;
+                } else if (heading == 270) {
+                    x_coord--;
+                } else if (heading == 0) {
+                    y_coord--;
+                } else {
+                    y_coord++;
+                }
+                valid_sequence = grid_data.pathfinding_grid.isWalkableAt(x_coord, y_coord);
+                // Animate movement
+                if (heading == 90) {
+                    transform = {translateX: '+=100%'};
+                    target = avatar_container;
+                } else if (heading == 270) {
+                    transform = {translateX: '-=100%'};
+                    target = avatar_container;
+                } else if (heading == 0) {
+                    transform = {translateY: '-=100%'};
+                } else {
+                    transform = {translateY: '+=100%'};
+                }
+                if (!valid_sequence) {
+                    let transform_type = Object.keys(transform)[0];
+                    let operator = transform[transform_type][0];
+                    let opposite_operator = (operator == '+') ? '-' : '+';
+                    transform[transform_type] = [
+                        '+=0%',
+                        `${operator}=30%`,
+                        `${opposite_operator}=30%`,
+                    ];
+                    console.log(transform);
+                }
+            } else if (instruction == 'L') {
+                transform = {rotate: '-=90deg'};
+                heading = (heading + 270) % 360;
+            } else if (instruction == 'R') {
+                transform = {rotate: '+=90deg'};
+                heading = (heading + 90) % 360;
+            }
+            var fade_options = {
+                targets: instruction_element,
+                duration: INSTRUCTION_FADE,
+            }
+            timeline.add(Object.assign({
+                background: ['#00ff0000', '#00ff00'],
+            }, fade_options));
+            if (transform) {
+                var options = Object.assign({
+                    targets: target,
+                    duration: INSTRUCTION_ANIMATION_DURATION,
+                }, transform);
+                timeline.add(options);
+            } else {
+                fade_options.delay = INSTRUCTION_ANIMATION_DURATION;
+            }
+            timeline.add(Object.assign({
+                background: ['#00ff00', '#00ff0000'],
+            }, fade_options));
+        }
+        i++;
+    }
+    if (x_coord == grid_data.goal_location.x_coord && y_coord == grid_data.goal_location.y_coord) {
+        grid_data.completed = true;
+    };
+    timeline.play();
+}
+
+
+function checkRunInstructions() {
+    var avatar = document.getElementById('grid-avatar');
+    var avatar_container = document.getElementById('grid-avatar-container');
+    if (grid_data.completed) {
+        anime({
+            targets: avatar,
+            translateY: '-=200%',
+            duration: INSTRUCTION_ANIMATION_DURATION * 3,
+            easing: 'easeInOutSine',
+        });
+    } else {
+        anime.timeline({
+            easing: 'linear',
+            duration: 500,
+        }).add({
+            targets: avatar_container,
+            opacity: 0,
+        }).add({
+            targets: avatar_container,
+            translateX: 0,
+            duration: 1,
+        }).add({
+            targets: avatar,
+            translateY: 0,
+            rotate: 0,
+            duration: 1,
+        }).add({
+            targets: avatar_container,
+            opacity: 1,
+        });
+        // TODO: Re-enable run button.
+    }
+}
+
+
+function getInstructionFromContainerElement(element) {
+    // Possible return values:
+    // 'F' - Forward
+    // 'L' - Turn left
+    // 'R' - Turn right
+    // '?' - Empty instruction
+    // '' - No instruction (when box is not available to user)
+    if (element.hasChildNodes()) {
+        element = element.children[0];
+        if (element.classList.contains('instruction-user-defined')) {
+            if (element.hasChildNodes()) {
+                return getInstructionFromBlockElement(element.children[0]);
+            } else {
+                return '?';
+            }
+        } else {
+            return getInstructionFromBlockElement(element);
+        }
+    } else {
+        return '';
+    }
+}
+
+
+function getInstructionFromBlockElement(element) {
+    // Possible return values:
+    // 'F' - Forward
+    // 'L' - Turn left
+    // 'R' - Turn right
+    if (element.classList.contains('instruction-turn-left')) {
+        return 'L';
+    } else if (element.classList.contains('instruction-turn-right')) {
+        return 'R';
+    } else {
+        return 'F';
+    }
 }
 
 
@@ -59,9 +231,12 @@ function resetInstructions() {
 
 function setupAvatar() {
     let starting_cell = getGridElementFromCoords(grid_data.starting_location.x_coord, grid_data.starting_location.y_coord);
+    let avatar_container = document.createElement('div');
+    avatar_container.id = 'grid-avatar-container';
+    starting_cell.appendChild(avatar_container);
     let avatar = document.createElement('div');
     avatar.id = 'grid-avatar';
-    starting_cell.appendChild(avatar);
+    avatar_container.appendChild(avatar);
 }
 
 

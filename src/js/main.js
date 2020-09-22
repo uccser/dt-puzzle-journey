@@ -11,6 +11,7 @@
             - Template literals (Template strings)
             - ClassList
             - Spread operator
+            - Object.assign()
         - CSS
             - Flexbox
             - Grid

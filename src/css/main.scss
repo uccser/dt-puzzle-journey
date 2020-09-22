@@ -16,7 +16,6 @@
 
 html, body {
     margin: 0;
-    height: 100%;
     font-family: 'Noto Sans', sans-serif;
 }
 
@@ -37,13 +36,13 @@ h2 {
 #animation-container {
     cursor: default;
     user-select: none;
-    $container-size: 97;  // % of lower screen dimension
+    $container-size: 98;  // % of lower screen dimension
     $container-ratio: 16 / 9;
     width: $container-size * 1vw;
     height: $container-size * 1vw / $container-ratio;
     max-height: $container-size * 1vh;
     max-width: $container-ratio * $container-size * 1vh;
-    margin: max(1vw, 1vh) auto;
+    margin: min(0.5vw, 0.5vh) auto;
     overflow: hidden;
     position: relative;
     background: #222;

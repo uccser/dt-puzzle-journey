@@ -41,41 +41,74 @@ function setup() {
 
     // Create grid
     var grid_size = 4;
-    setupGridData(grid_size);
+    setupGrid(grid_size);
+    setupInstructionBlocks();
+}
 
-    // Setup instruction blocks
-    var source_instructions = document.getElementById('plains-instruction-blocks');
+
+function setupInstructionBlocks() {
+    // Create path for user to solve
+    // Replace random instructions (not first instructions)
+    var instructions = grid_data.inital_path.slice();
+    var indexes_to_replace = [];
+    while (indexes_to_replace.length < 3) {
+        let index = getRandomInt(1, instructions.length);
+        if (!indexes_to_replace.includes(index)) {
+            indexes_to_replace.push(index);
+        }
+    }
+    for (let i = 0; i < indexes_to_replace.length; i++) {
+        instructions[indexes_to_replace[i]] = '?';
+    }
+
+    // Create blocks
     var user_instructions = document.getElementById('plains-user-instructions');
-    var drake = dragula([source_instructions, user_instructions], {
-        mirrorContainer: user_instructions,
-        // direction: 'horizontal',
+    for (let i = 0; i < 16; i++) {
+        let instruction_container = document.createElement('div');
+        instruction_container.classList.add('instruction-container');
+        if (i < instructions.length) {
+            let block = document.createElement('div');
+            let instruction = instructions[i];
+            if (instruction == 'F') {
+                block.classList.add('instruction-block');
+                block.classList.add('instruction-forward');
+            } else if (instruction == 'L') {
+                block.classList.add('instruction-block');
+                block.classList.add('instruction-turn-left');
+            } else if (instruction == 'R') {
+                block.classList.add('instruction-block');
+                block.classList.add('instruction-turn-right');
+            } else {
+                block.classList.add('instruction-user-defined');
+            }
+            instruction_container.appendChild(block);
+        }
+        user_instructions.appendChild(instruction_container);
+    }
+
+    var draggable_containers = Array.from(document.querySelectorAll('.instruction-user-defined'));
+    var source_container = document.getElementById('plains-instruction-blocks');
+    draggable_containers.push(source_container);
+
+    var drake = dragula(draggable_containers, {
+        mirrorContainer: source_container,
+        direction: 'horizontal',
         removeOnSpill: true,
         copy: function (el, source) {
-            return source === source_instructions;
+            return source === source_container;
         },
         accepts: function (el, target) {
-            return target == user_instructions;
-        },
-        moves: function (el, source, handle, sibling) {
-            return (source == user_instructions || (source == source_instructions) && (user_instructions.children.length < INSTRUCTION_LIMIT));
+            return target !== source_container;
         }
     });
-    drake.on('dragend', checkInstructionLimit);
+    drake.on('drop', function (el, target, source, sibling) {
+        target.innerHTML = '';
+        target.appendChild(el);
+    });
 }
 
 
-function checkInstructionLimit(el) {
-    var source_instructions = document.getElementById('plains-instruction-blocks');
-    var user_instructions = document.getElementById('plains-user-instructions');
-    if (user_instructions.children.length >= INSTRUCTION_LIMIT) {
-        source_instructions.classList.add('disabled');
-    } else {
-        source_instructions.classList.remove('disabled');
-    }
-}
-
-
-function setupGridData(grid_size) {
+function setupGrid(grid_size) {
     grid_data = {
         grid_size: grid_size,
     };
@@ -92,13 +125,13 @@ function setupGridData(grid_size) {
     createGridObstacles();
     // Find shortest path
     grid_data.inital_path = shortestGridPathInstructions();
-    // Create path for user to solve
-
     // Add styling to grid cells
     styleGrid();
 
-    // Temp
-    console.log(grid_data);
+    if (DEBUG) {
+        console.log('Grid data:');
+        console.log(grid_data);
+    }
 }
 
 

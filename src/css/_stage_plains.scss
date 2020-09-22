@@ -96,15 +96,29 @@
         }
     }
     #plains-user-instructions {
-        background: yellow;
         position: absolute;
         top: 87%;
         bottom: $container-padding;
         left: $container-padding;
         right: $container-padding;
         display: flex;
-        align-content: flex-start;
-        justify-content: flex-start;
+        align-items: stretch;
+        justify-content: space-between;
+
+        .instruction-container {
+            flex: 0 1 (100%/17);
+        }
+        .instruction-user-defined {
+            height: 100%;
+            border: 0.2rem dashed #000000a1;
+            border-radius: .5rem;
+            touch-action: none;
+            overflow: hidden;
+            display: none;
+            &:last-child {
+                display: block;
+            }
+        }
     }
     #plains-instruction-text {
         position: absolute;
@@ -132,25 +146,23 @@
         justify-content: space-around;
         align-items: stretch;
         align-content: stretch;
+
     }
     .instruction-block {
-        flex: 0 1 100%;
-        margin-left: 1%;
-        cursor: grab;
+        width: 100%;
+        height: 100%;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
+        cursor: grab;
     }
-    .disabled > .instruction-block {
-        cursor: not-allowed;
-    }
-    #instruction-forward-source {
+    .instruction-forward {
         background-image: url('../img/plains-instruction-forward.svg');
     }
-    #instruction-turn-left-source {
+    .instruction-turn-left {
         background-image: url('../img/plains-instruction-turn-left.svg');
     }
-    #instruction-turn-right-source {
+    .instruction-turn-right {
         background-image: url('../img/plains-instruction-turn-right.svg');
     }
 
@@ -158,5 +170,8 @@
         position: absolute;
         bottom: 1rem;
         right: 1rem;
+    }
+    .gu-mirror {
+        cursor: grabbing;
     }
 }

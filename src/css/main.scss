@@ -107,8 +107,12 @@ h2 {
 }
 
 .credits {
+    margin-top: 2rem;
     font-size: 0.7rem;
     color: #888;
+    a {
+        text-decoration: underline;
+    }
 }
 
 .d-none {

@@ -93,6 +93,15 @@ $grid-container-border: 0.2rem solid black;
                 .cell-obstacle-d {
                     background-image: url('../img/plains-grid-obstacle-d.svg');
                 }
+                .cell-obstacle-e {
+                    background-image: url('../img/plains-grid-obstacle-e.svg');
+                }
+                .cell-obstacle-f {
+                    background-image: url('../img/plains-grid-obstacle-f.svg');
+                }
+                .cell-obstacle-g {
+                    background-image: url('../img/plains-grid-obstacle-g.svg');
+                }
                 #grid-avatar-container {
                     position: absolute;
                     top: 0;
@@ -165,6 +174,10 @@ $grid-container-border: 0.2rem solid black;
         justify-content: space-around;
         align-items: stretch;
         align-content: stretch;
+        background-image: url('../img/plains-instruction-stack.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
         .instruction-block {
             cursor: grab !important;
             flex: 0 1 25%;

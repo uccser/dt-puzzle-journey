@@ -56,8 +56,8 @@ function start() {
 function setup() {
     // Setup ants
     var svg = getSvg('fern-svg');
-    first_digit_ants_element = svg.querySelector('#ants-10-digit');
-    second_digit_ants_element = svg.querySelector('#ants-1-digit');
+    first_digit_ants_element = svg.querySelector('#fi-ants-10-digit');
+    second_digit_ants_element = svg.querySelector('#fi-ants-1-digit');
     var blank_path = getDigitPath('blank', 'blank');
     first_digit_ants_element.setAttribute('d', blank_path);
     second_digit_ants_element.setAttribute('d', blank_path);
@@ -141,8 +141,8 @@ function getDigitPath(digit, place) {
 
 
 function animateAnts(svg) {
-    var ants_1 = svg.querySelector('#ants-1');
-    var ants_2 = svg.querySelector('#ants-2');
+    var ants_1 = svg.querySelector('#fi-ants-1');
+    var ants_2 = svg.querySelector('#fi-ants-2');
     anime({
         targets: ants_1,
         strokeDashoffset: [0, -ants_1.getTotalLength()],

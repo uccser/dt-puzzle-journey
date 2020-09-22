@@ -22,10 +22,10 @@ function animateLandscapeView() {
     var svg_container = document.getElementById('landscape-view');
     var svg = getSvg('landscape-view');
     var container_height = $('#animation-container').height();
-    var plains = svg.querySelector('#plains-2');
-    var river = svg.querySelector('#river');
-    var forest_layer_far = svg.querySelector('#forest-layer-far');
-    var forest_layer_close = svg.querySelector('#forest-layer-close');
+    var plains = svg.querySelector('#lv-plains');
+    var river = svg.querySelector('#lv-river');
+    var forest_layer_far = svg.querySelector('#lv-forest-layer-far');
+    var forest_layer_close = svg.querySelector('#lv-forest-layer-close');
     var landscape_layers = [
         plains,
         river,

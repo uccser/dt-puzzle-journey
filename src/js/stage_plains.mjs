@@ -22,6 +22,9 @@ const CELL_OBSTACLE_VARIANTS = [
     'cell-obstacle-b',
     'cell-obstacle-c',
     'cell-obstacle-d',
+    'cell-obstacle-e',
+    'cell-obstacle-f',
+    'cell-obstacle-g',
 ];
 
 function start() {

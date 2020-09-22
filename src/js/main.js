@@ -10,6 +10,7 @@
             - Default parameters
             - Template literals (Template strings)
             - ClassList
+            - Spread operator
         - CSS
             - Flexbox
             - Grid

@@ -5,9 +5,23 @@ import { getSvg, changeStage, getRandomInt } from './utilities.mjs';
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 import pathfinder from 'pathfinding';
+import dragula from 'dragula/dragula.js';
 
 var require_setup = true;
 var grid_data;
+const INSTRUCTION_LIMIT = 16;
+const CELL_SPACE_VARIANTS = [
+    'cell-space-a',
+    'cell-space-b',
+    'cell-space-c',
+    'cell-space-d',
+];
+const CELL_OBSTACLE_VARIANTS = [
+    'cell-obstacle-a',
+    'cell-obstacle-b',
+    'cell-obstacle-c',
+    'cell-obstacle-d',
+];
 
 function start() {
     $('#stage-plains').removeClass('hidden');
@@ -24,13 +38,47 @@ function start() {
 function setup() {
     // Setup buttons
     $('#stage-plains #plains-next-stage').on('click', end);
+
+    // Create grid
     var grid_size = 4;
     setupGridData(grid_size);
+
+    // Setup instruction blocks
+    var source_instructions = document.getElementById('plains-instruction-blocks');
+    var user_instructions = document.getElementById('plains-user-instructions');
+    var drake = dragula([source_instructions, user_instructions], {
+        mirrorContainer: user_instructions,
+        // direction: 'horizontal',
+        removeOnSpill: true,
+        copy: function (el, source) {
+            return source === source_instructions;
+        },
+        accepts: function (el, target) {
+            return target == user_instructions;
+        },
+        moves: function (el, source, handle, sibling) {
+            return (source == user_instructions || (source == source_instructions) && (user_instructions.children.length < INSTRUCTION_LIMIT));
+        }
+    });
+    drake.on('dragend', checkInstructionLimit);
+}
+
+
+function checkInstructionLimit(el) {
+    var source_instructions = document.getElementById('plains-instruction-blocks');
+    var user_instructions = document.getElementById('plains-user-instructions');
+    if (user_instructions.children.length >= INSTRUCTION_LIMIT) {
+        source_instructions.classList.add('disabled');
+    } else {
+        source_instructions.classList.remove('disabled');
+    }
 }
 
 
 function setupGridData(grid_size) {
-    grid_data = {};
+    grid_data = {
+        grid_size: grid_size,
+    };
 
     createGrid(grid_size);
 
@@ -46,19 +94,46 @@ function setupGridData(grid_size) {
     grid_data.inital_path = shortestGridPathInstructions();
     // Create path for user to solve
 
-
-
+    // Add styling to grid cells
+    styleGrid();
 
     // Temp
-    gridElementFromCoords(grid_data.starting_location).style.setProperty(
-        'background-color',
-        'yellow'
-    );
-    gridElementFromCoords(grid_data.goal_location).style.setProperty(
-        'background-color',
-        'green'
-    );
     console.log(grid_data);
+}
+
+
+function styleGrid() {
+    var grid_element = document.querySelector('#plains-grid');
+    for (let y_coord = 0; y_coord < grid_data.grid_size; y_coord++) {
+        for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
+            let coords = {x_coord: x_coord, y_coord: y_coord};
+            let cell = gridElementFromCoords(x_coord, y_coord);
+            let css_class;
+            if (coordsMatch(coords, grid_data.starting_location)) {
+                css_class = 'cell-space-entrance';
+            } else if (coordsMatch(coords, grid_data.goal_location)) {
+                css_class = 'cell-space-goal';
+            } else if (!grid_data.pathfinding_grid.isWalkableAt(x_coord, y_coord)) {
+                css_class = CELL_OBSTACLE_VARIANTS[Math.floor(Math.random() * CELL_OBSTACLE_VARIANTS.length)];
+            } else {
+                css_class = CELL_SPACE_VARIANTS[Math.floor(Math.random() * CELL_SPACE_VARIANTS.length)];
+            }
+            cell.classList.add(css_class);
+        }
+    }
+    // Add entrance and goal paths
+    let entrance_path = document.querySelector('#plains-grid-entrance-path');
+    let entrance_x_coord = grid_data.starting_location.x_coord;
+    entrance_path.style.setProperty(
+        'grid-area',
+        `3 / ${entrance_x_coord + 2} / 4 / ${entrance_x_coord + 3}`
+    );
+    let goal_path = document.querySelector('#plains-grid-goal-path');
+    let goal_x_coord = grid_data.goal_location.x_coord;
+    goal_path.style.setProperty(
+        'grid-area',
+        `1 / ${goal_x_coord + 2} / 2 / ${goal_x_coord + 3}`
+    );
 }
 
 
@@ -78,7 +153,6 @@ function shortestGridPathInstructions() {
     var [prev_x_coord, prev_y_coord] = path[0];
     var heading = 0;
     var required_heading;
-    console.log(path);
     for (let i = 1; i < path.length; i++) {
         [x_coord, y_coord] = path[i];
         if (x_coord + 1 == prev_x_coord) {
@@ -107,26 +181,31 @@ function shortestGridPathInstructions() {
         [prev_x_coord, prev_y_coord] = [x_coord, y_coord];
         heading = required_heading;
     }
-    console.log(instructions);
     return instructions;
 }
 
 
-
 function createGridObstacles() {
-    // For first stage, create one obstacle in front of starting location
-    var x_coord = grid_data.starting_location.x_coord;
-    var y_coord = 1;
-    createGridObstacle(x_coord, y_coord);
+    var obstacle_coords = [];
+    // For first stage, create one obstacle in front of starting location,
+    // plus all empty spots on top and bottom rows.
+    obstacle_coords.push([grid_data.starting_location.x_coord, 1]);
+    for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
+        if (!(x_coord == grid_data.starting_location.x_coord)) {
+            obstacle_coords.push([x_coord, grid_data.grid_size - 1]);
+        }
+        if (!(x_coord == grid_data.goal_location.x_coord)) {
+            obstacle_coords.push([x_coord, 0]);
+        }
+    }
+    for (let i = 0; i < obstacle_coords.length; i++) {
+        createGridObstacle(...obstacle_coords[i]);
+    }
 }
 
 
 function createGridObstacle(x_coord, y_coord) {
     grid_data.pathfinding_grid.setWalkableAt(x_coord, y_coord, false);
-    gridElementFromCoords({x_coord: x_coord, y_coord: y_coord }).style.setProperty(
-        'background-color',
-        'red'
-    );
 }
 
 
@@ -137,9 +216,19 @@ function selectGridStartingLocation(grid_size) {
 }
 
 
-function gridElementFromCoords(coords) {
-    let id = `grid-cell-${coords.x_coord}-${coords.y_coord}`;
+function gridElementFromCoords(x_coord, y_coord) {
+    let id = getGridCellId(x_coord, y_coord);
     return document.querySelector(`#plains-grid #${id}`);
+}
+
+
+function getGridCellId(x_coord, y_coord) {
+    return `grid-cell-${x_coord}-${y_coord}`;
+}
+
+
+function coordsMatch(coords_a, coords_b) {
+    return coords_a.x_coord == coords_b.x_coord && coords_a.y_coord == coords_b.y_coord;
 }
 
 
@@ -167,14 +256,19 @@ function createGrid(grid_size) {
 
 function createGridContainer(grid_size) {
     var parent_container = document.querySelector('#plains-left-container');
-    var grid_square = document.querySelector('#plains-grid-container');
     parent_container.style.setProperty(
         'grid-template-columns',
-        'repeat(' + grid_size + ', 1fr)'
+        `22% repeat(${grid_size}, 1fr) 22%`
     );
+    var grid_square = document.querySelector('#plains-grid-container');
     grid_square.style.setProperty(
+        'grid-column-end',
+        grid_size + 2
+    );
+    var grid_right_edge = document.querySelector('#plains-grid-right-edge');
+    grid_right_edge.style.setProperty(
         'grid-area',
-        '2 / 1 / 3 / ' + (grid_size + 1)
+        `1 / ${grid_size + 2} / 4 / ${grid_size + 3}`
     );
 }
 
@@ -192,7 +286,7 @@ function createGridCells(grid_size) {
     for (let y_coord = 0; y_coord < grid_size; y_coord++) {
         for (let x_coord = 0; x_coord < grid_size; x_coord++) {
             let cell = document.createElement('div');
-            cell.id = `grid-cell-${x_coord}-${y_coord}`;
+            cell.id = getGridCellId(x_coord, y_coord);
             cell.classList.add('cell');
             if (y_coord == grid_size - 1) {
                 cell.classList.add('bottom-edge');

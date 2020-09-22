@@ -5,26 +5,45 @@
     $container-padding: 0.5rem;
     #plains-left-container {
         position: absolute;
-        top: $container-padding;
-        bottom: $container-padding;
-        left: $container-padding;
-        right: 50%;
-        padding-left: 5%;
-        padding-right: 5%;
+        top: 0;
+        bottom: 14.3%;
+        left: 0;
+        right: 31.2%;
         display: grid;
-        grid-template-rows: 1fr auto 1fr;
+        grid-template-rows: 10% auto 10%;
+        $grid-container-border: 0.2rem solid black;
+        border-right: $grid-container-border;
+        border-bottom: $grid-container-border;
 
+        #plains-grid-left-edge {
+            grid-area: 1 / 1 / 4 / 2;
+            background-image: url('../img/plains-bushes-left.svg');
+            background-size: cover;
+            background-position: right center;
+        }
+        #plains-grid-right-edge {
+            background-image: url('../img/plains-bushes-right.svg');
+            background-size: cover;
+            background-position: left center;
+        }
+        #plains-grid-entrance-path {
+            background-image: url('../img/plains-path.svg');
+            background-size: cover;
+            background-position: center top;
+        }
+        #plains-grid-goal-path {
+            background-image: url('../img/plains-path.svg');
+            background-size: cover;
+            background-position: center bottom;
+        }
         #plains-grid-container {
             position: relative;
-            width: 100%;
-            &:after {
-                content: "";
-                display: block;
-                padding-bottom: 100%;
-            }
+            grid-row-start: 2;
+            grid-row-end: 3;
+            grid-column-start: 2;
 
             #plains-grid {
-                $cell-border: 0.2rem dashed rgb(70, 70, 70);
+                $cell-border: 0.15rem dashed darken(#9b955d, 10%);
                 position: absolute;
                 width: 100%;
                 height: 100%;
@@ -43,44 +62,96 @@
                         border-bottom: $cell-border;
                     }
                 }
+                .cell-space-entrance {
+                    background-image: url('../img/plains-grid-space-entrance.svg');
+                }
+                .cell-space-goal {
+                    background-image: url('../img/plains-grid-space-exit.svg');
+                }
+                .cell-space-a {
+                    background-image: url('../img/plains-grid-space-a.svg');
+                }
+                .cell-space-b {
+                    background-image: url('../img/plains-grid-space-b.svg');
+                }
+                .cell-space-c {
+                    background-image: url('../img/plains-grid-space-c.svg');
+                }
+                .cell-space-d {
+                    background-image: url('../img/plains-grid-space-d.svg');
+                }
+                .cell-obstacle-a {
+                    background-image: url('../img/plains-grid-obstacle-a.svg');
+                }
+                .cell-obstacle-b {
+                    background-image: url('../img/plains-grid-obstacle-b.svg');
+                }
+                .cell-obstacle-c {
+                    background-image: url('../img/plains-grid-obstacle-c.svg');
+                }
+                .cell-obstacle-d {
+                    background-image: url('../img/plains-grid-obstacle-d.svg');
+                }
             }
         }
     }
     #plains-user-instructions {
+        background: yellow;
         position: absolute;
-        top: $container-padding;
-        bottom: 25%;
-        left: 50%;
+        top: 87%;
+        bottom: $container-padding;
+        left: $container-padding;
         right: $container-padding;
         display: flex;
+        align-content: flex-start;
         justify-content: flex-start;
-        flex-wrap: wrap;
-        align-items: stretch;
+    }
+    #plains-instruction-text {
+        position: absolute;
+        top: $container-padding;
+        bottom: 40%;
+        left: 68.8%;
+        right: $container-padding;
+        padding: 1% 0;
+    }
+    #plains-instruction-buttons {
+        position: absolute;
+        top: 60%;
+        bottom: 28%;
+        left: 68.8%;
+        right: $container-padding;
+        padding: 1% 0;
     }
     #plains-instruction-blocks {
         position: absolute;
-        top: 75%;
-        bottom: $container-padding;
-        left: 50%;
+        top: 72%;
+        bottom: 14.3%;
+        left: 68.8%;
         right: $container-padding;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: stretch;
         align-content: stretch;
     }
     .instruction-block {
-        flex: 1 0 auto;
-        margin: 1rem;
+        flex: 0 1 100%;
+        margin-left: 1%;
         cursor: grab;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    .disabled > .instruction-block {
+        cursor: not-allowed;
     }
     #instruction-forward-source {
-        background: blue;
+        background-image: url('../img/plains-instruction-forward.svg');
     }
     #instruction-turn-left-source {
-        background: green;
+        background-image: url('../img/plains-instruction-turn-left.svg');
     }
     #instruction-turn-right-source {
-        background: purple;
+        background-image: url('../img/plains-instruction-turn-right.svg');
     }
 
     #plains-next-stage {

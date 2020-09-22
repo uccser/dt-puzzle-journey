@@ -43,6 +43,15 @@ function setup() {
     var grid_size = 4;
     setupGrid(grid_size);
     setupInstructionBlocks();
+    setupAvatar();
+}
+
+
+function setupAvatar() {
+    let starting_cell = getGridElementFromCoords(grid_data.starting_location.x_coord, grid_data.starting_location.y_coord);
+    let avatar = document.createElement('div');
+    avatar.id = 'grid-avatar';
+    starting_cell.appendChild(avatar);
 }
 
 
@@ -140,7 +149,7 @@ function styleGrid() {
     for (let y_coord = 0; y_coord < grid_data.grid_size; y_coord++) {
         for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
             let coords = {x_coord: x_coord, y_coord: y_coord};
-            let cell = gridElementFromCoords(x_coord, y_coord);
+            let cell = getGridElementFromCoords(x_coord, y_coord);
             let css_class;
             if (coordsMatch(coords, grid_data.starting_location)) {
                 css_class = 'cell-space-entrance';
@@ -249,7 +258,7 @@ function selectGridStartingLocation(grid_size) {
 }
 
 
-function gridElementFromCoords(x_coord, y_coord) {
+function getGridElementFromCoords(x_coord, y_coord) {
     let id = getGridCellId(x_coord, y_coord);
     return document.querySelector(`#plains-grid #${id}`);
 }

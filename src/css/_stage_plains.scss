@@ -1,8 +1,10 @@
 @import '_constants';
 
-#animation-container {
+$cell-border: 0.12rem dashed darken(#9b955d, 10%);
+$container-padding: 0.5rem;
+$grid-container-border: 0.2rem solid black;
 
-    $container-padding: 0.5rem;
+#animation-container {
     #plains-left-container {
         position: absolute;
         top: 0;
@@ -11,7 +13,6 @@
         right: 31.2%;
         display: grid;
         grid-template-rows: 10% auto 10%;
-        $grid-container-border: 0.2rem solid black;
         border-right: $grid-container-border;
         border-bottom: $grid-container-border;
 
@@ -43,7 +44,6 @@
             grid-column-start: 2;
 
             #plains-grid {
-                $cell-border: 0.15rem dashed darken(#9b955d, 10%);
                 position: absolute;
                 width: 100%;
                 height: 100%;
@@ -52,18 +52,19 @@
                 align-items: stretch;
 
                 .cell {
-                    flex: 1 0 auto;
-                    border-top: $cell-border;
-                    border-left: $cell-border;
-                    &.right-edge {
-                        border-right: $cell-border;
-                    }
-                    &.bottom-edge {
-                        border-bottom: $cell-border;
-                    }
+                    outline: $cell-border;
+                    // border-top: $cell-border;
+                    // border-left: $cell-border;
+                    // &.right-edge {
+                    //     border-right: $cell-border;
+                    // }
+                    // &.bottom-edge {
+                    //     border-bottom: $cell-border;
+                    // }
                 }
                 .cell-space-entrance {
                     background-image: url('../img/plains-grid-space-entrance.svg');
+                    position: relative;
                 }
                 .cell-space-goal {
                     background-image: url('../img/plains-grid-space-exit.svg');
@@ -91,6 +92,14 @@
                 }
                 .cell-obstacle-d {
                     background-image: url('../img/plains-grid-obstacle-d.svg');
+                }
+                #grid-avatar {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background-image: url('../img/plains-avatar.svg');
                 }
             }
         }

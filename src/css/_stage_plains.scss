@@ -144,6 +144,9 @@ $grid-container-border: 0.2rem solid black;
         left: 68.8%;
         right: $container-padding;
         padding: 1% 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
     #plains-instruction-blocks {
         position: absolute;

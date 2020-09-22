@@ -44,6 +44,16 @@ function setup() {
     setupGrid(grid_size);
     setupInstructionBlocks();
     setupAvatar();
+
+    $('#plains-reset-button').on('click', resetInstructions);
+}
+
+
+function resetInstructions() {
+    var user_defined = document.querySelectorAll('.instruction-user-defined');
+    for (let i = 0; i < user_defined.length; i++) {
+        user_defined[i].innerHTML = '';
+    }
 }
 
 

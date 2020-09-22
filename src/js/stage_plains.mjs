@@ -77,7 +77,6 @@ function runInstructions() {
         if (instruction) {
             var transform = '';
             if (instruction == 'F') {
-                // TODO: Check if move is valid.
                 if (heading == 90) {
                     x_coord++;
                 } else if (heading == 270) {
@@ -109,7 +108,6 @@ function runInstructions() {
                         `${operator}=30%`,
                         `${opposite_operator}=30%`,
                     ];
-                    console.log(transform);
                 }
             } else if (instruction == 'L') {
                 transform = {rotate: '-=90deg'};

@@ -167,6 +167,7 @@ $grid-container-border: 0.2rem solid black;
         align-content: stretch;
         .instruction-block {
             cursor: grab !important;
+            flex: 0 1 25%;
         }
     }
     .instruction-block {

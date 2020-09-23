@@ -50,12 +50,13 @@ function setup() {
     setupAvatar();
 
     $('#plains-run-button').on('click', runInstructions);
-    $('#plains-reset-button').on('click', resetInstructions);
 }
 
 
 function runInstructions() {
-    // TODO: Disable run button
+    // Disable run button
+    let run_button = document.querySelector('#plains-run-button');
+    run_button.setAttribute('disabled', 'disabled');
 
     // Go through instructions and add animations to Anime.js timeline.
     var timeline = anime.timeline({
@@ -157,6 +158,7 @@ function checkRunInstructions() {
             translateY: '-=200%',
             duration: INSTRUCTION_ANIMATION_DURATION * 3,
             easing: 'easeInOutSine',
+            complete: displayContinueUi,
         });
     } else {
         anime.timeline({
@@ -178,7 +180,8 @@ function checkRunInstructions() {
             targets: avatar_container,
             opacity: 1,
         });
-        // TODO: Re-enable run button.
+        let run_button = document.querySelector('#plains-run-button');
+        run_button.removeAttribute('disabled');
     }
 }
 
@@ -218,14 +221,6 @@ function getInstructionFromBlockElement(element) {
         return 'R';
     } else {
         return 'F';
-    }
-}
-
-
-function resetInstructions() {
-    var user_defined = document.querySelectorAll('.instruction-user-defined');
-    for (let i = 0; i < user_defined.length; i++) {
-        user_defined[i].innerHTML = '';
     }
 }
 

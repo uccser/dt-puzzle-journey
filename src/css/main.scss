@@ -65,7 +65,7 @@ h2 {
     display: inline-block;
     font-style: italic;
     padding: 0.5rem 1rem;
-    margin: 0.5rem;
+    @apply mb-2;
     border-radius: 0.5rem;
     font-size: 1rem;
 }
@@ -75,7 +75,7 @@ h2 {
     display: inline-block;
     @apply px-4;
     @apply py-2;
-    margin: 0.5rem;
+    @apply mb-2;
     border-radius: 0.5rem;
     font-size: 1rem;
 }
@@ -104,25 +104,28 @@ h2 {
             background-color: #d69e2e;
         }
     }
-}
-
-.credits {
-    margin-top: 2rem;
-    font-size: 0.7rem;
-    color: #888;
-    a {
-        text-decoration: underline;
+    &:disabled {
+        background-color: #444;
+        border-color: #333;
+        color: #aaa;
+        cursor: not-allowed;
     }
 }
 
+.credits {
+    @apply my-8;
+    font-size: 0.7rem;
+    color: #888;
+}
+a:not(.button) {
+    text-decoration: underline;
+}
 .d-none {
     display: none;
 }
-
 .opacity-0 {
     opacity: 0;
 }
-
 .hidden {
   display: none !important;
 }

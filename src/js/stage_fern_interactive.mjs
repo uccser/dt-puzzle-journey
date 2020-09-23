@@ -50,6 +50,7 @@ function start() {
         show_next_stage_button();
     }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    displayUi();
 }
 
 
@@ -73,7 +74,6 @@ function setup() {
         }
     });
     $('#fern-next-stage').on('click', end);
-    displayUi();
 }
 
 

@@ -70,8 +70,9 @@ const DOUBLE_LETTER_DICTIONARY = [
     'ng',
     'wh',
 ]
+const SECONDARY_TEXT_START = 30000;
 
-var message_word = window.sessionStorage.getItem('fern-message-word');
+var message_word = '';
 var message_values = [];
 var require_setup = true;
 
@@ -86,6 +87,7 @@ function start() {
         require_setup = false;
     }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    displayUi();
 }
 
 
@@ -114,12 +116,8 @@ function setup() {
     });
 
     // Create word
-    if (!message_word) {
-        message_word = POSSIBLE_WORDS[Math.floor(Math.random() * POSSIBLE_WORDS.length)];
-        window.sessionStorage.setItem('fern-message-word', message_word);
-    }
+    message_word = POSSIBLE_WORDS[Math.floor(Math.random() * POSSIBLE_WORDS.length)];
     createWordWithBranches(message_word);
-    displayUi();
 }
 
 
@@ -127,16 +125,42 @@ function displayUi() {
     if (DEBUG) {
         console.log('Displaying Fern Message UI.');
     }
-    var ui_elements = Array.from(document.querySelector('#fern-message-value-container').children);
+    // Setup text for later
     document.querySelector('#fern-message-word').textContent = message_word;
-    document.querySelector('#fern-message-word-translation').textContent = WORD_TRANSLATIONS[message_word];
-    ui_elements.push(document.querySelector('#fern-message-check'));
-    anime({
-        targets: ui_elements,
-        opacity: 1,
+    let word_translation = WORD_TRANSLATIONS[message_word]
+    document.querySelector('#fern-message-word-translation').textContent = word_translation;
+    document.querySelector('#fern-message-word-sentence').textContent = word_translation;
+
+    // Reveal UI elements
+    var initial_text = Array.from(document.querySelectorAll('#fern-message-narrative-text .initial-text'))
+    var secondary_text = Array.from(document.querySelectorAll('#fern-message-narrative-text .secondary-text'))
+    var ui_elements_controls = [];
+    var ui_elements_text = initial_text.slice();
+    ui_elements_text.push(document.querySelector('#fern-message-narrative-text .instruction-text'));
+    ui_elements_controls.push(Array.from(document.querySelector('#fern-message-value-container').children));
+    ui_elements_controls.push(document.querySelector('#fern-message-check'));
+
+    $(ui_elements_text).css('visibility', 'visible');
+    $(ui_elements_controls).css('visibility', 'visible');
+    anime.timeline({
         duration: 1000,
-        delay: anime.stagger(300, {start: BLINDFOLD_FADE_DURATION}),
+        opacity: 1,
         easing: 'linear',
+    }).add({
+        targets: ui_elements_text,
+        delay: anime.stagger(3000, {start: BLINDFOLD_FADE_DURATION}),
+        opacity: 1,
+    }).add({
+        targets: ui_elements_controls,
+        opacity: 1,
+        delay: anime.stagger(500),
+    }).add({
+        // Hide initial text, then display secondary text after timer.
+        targets: initial_text,
+        opacity: 0,
+    }, `+=${SECONDARY_TEXT_START}`).add({
+        targets: secondary_text,
+        opacity: 1,
     });
 }
 
@@ -273,8 +297,23 @@ function checkValues() {
 
 
 function displayContinueUi() {
-    // TODO: Display narrative text, then reveal button.
-    $('#stage-fern-message #fern-message-next-stage').fadeIn();
+    // Hide text, then display final text.
+    var other_text = Array.from(document.querySelectorAll('#fern-message-narrative-text'))
+    var final_text = Array.from(document.querySelectorAll('#fern-message-narrative-text-final'))
+    anime.timeline({
+        duration: 1000,
+        opacity: 1,
+        easing: 'linear',
+        complete: function () {
+            $('#stage-fern-message #fern-message-next-stage').fadeIn();
+        },
+    }).add({
+        targets: other_text,
+        opacity: 0,
+    }).add({
+        targets: final_text,
+        opacity: 1,
+    });
 }
 
 

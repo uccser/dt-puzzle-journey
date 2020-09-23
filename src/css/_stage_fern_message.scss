@@ -69,12 +69,6 @@
             opacity: 0;
         }
 
-        #fern-message-check:disabled {
-            background-color: #444;
-            border-color: #333;
-            color: #aaa;
-            cursor: not-allowed;
-        }
         select:disabled {
             background: #ccc;
         }
@@ -110,10 +104,25 @@
         flex-direction: column;
         justify-content: start;
 
+        .secondary-text {
+            position: absolute;
+            top: 0;
+        }
+
         // Hide direct descendants
         & > * {
-            // visibility: hidden;
-            // opacity: 0;
+            opacity: 0;
         }
+    }
+    #fern-message-narrative-text-final {
+        position: absolute;
+        top: 1%;
+        bottom: 35%;
+        left: 1%;
+        right: 68%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        opacity: 0;
     }
 }

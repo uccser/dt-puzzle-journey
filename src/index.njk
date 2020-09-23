@@ -89,15 +89,26 @@
             <div id="stage-fern-message" class="stage">
                 <object id="fern-message-svg" type="image/svg+xml" data="img/fern-message.svg" class="svg"></object>
                 <div id="fern-message-narrative-text">
-                    <p class="narrative-text">
-                        I've found the secret message hanging on a Rimu trunk.
+                    <p class="narrative-text initial-text">
+                        I've found the secret message hanging on a rimu trunk.
                         The dots have been rubbed off the leaves to make it harder to decipher.
                     </p>
-                    <p class="narrative-text">
+                    <p class="narrative-text initial-text">
                         I need to figure out what the word is, so I know when to head down the valley to find the river crossing.
                     </p>
+                    <p class="narrative-text secondary-text">
+                        I might need to head back up the path if I don't understand how the code works.
+                        Maybe the fern leaves and the ants can help me.
+                    </p>
                     <p class="instruction-text">
-                        Using the legend below, figure out the word.
+                        Using the symbols on the fallen log below, figure out the word written with ferns.
+                    </p>
+                </div>
+                <div id="fern-message-narrative-text-final">
+                    <p class="narrative-text">
+                        Ah!
+                        Since the number has appeared on a rimu tree, I will continue down the track until I pass <span id="fern-message-word-sentence"></span> Rimu trees.
+                        Then I will head downhill to the river, and I should find the river crossing there.
                     </p>
                 </div>
                 <button id="fern-message-previous-stage" class="button">
@@ -106,9 +117,6 @@
                 <button id='fern-message-next-stage' class="button d-none">
                     Continue down the path
                 </button>
-                <div id="fern-message-continue-narrative-text" class="narrative-text">
-                    The message is clear now. I need to head down the valley towards the river once I pass <span id="fern-message-word-sentence"></span> Rimu trees.
-                </div>
                 <div id="fern-message-word-container"></div>
                 <div id="fern-message-value-container"></div>
                 <div id="fern-message-feedback-container">

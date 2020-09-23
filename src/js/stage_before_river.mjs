@@ -40,7 +40,6 @@ function setup() {
 
 
 function displayContinueUi() {
-    // TODO: Display narrative text, then reveal button.
     $('#stage-before-river #before-river-next-stage').fadeIn();
 }
 

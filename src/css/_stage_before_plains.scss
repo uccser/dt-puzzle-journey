@@ -1,6 +1,21 @@
 @import '_constants';
 
 #animation-container {
+    #before-plains-ui {
+        position: absolute;
+        top: 1%;
+        bottom: 1%;
+        left: 1%;
+        right: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        // Hide direct descendants
+        & > * {
+            opacity: 0;
+        }
+    }
     #before-plains-next-stage {
         position: absolute;
         bottom: 1rem;

@@ -24,9 +24,18 @@ function start() {
 function setup() {
     // Setup buttons
     $('#stage-before-river #before-river-next-stage').on('click', end);
-
-    // TEMP
-    displayContinueUi();
+    if (DEBUG) {
+        console.log('Displaying Before River UI.');
+    }
+    var ui_elements = Array.from(document.querySelector('#before-river-ui').children);
+    anime({
+        targets: ui_elements,
+        opacity: 1,
+        duration: 1000,
+        delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
+        easing: 'linear',
+        complete: displayContinueUi,
+    });
 }
 
 

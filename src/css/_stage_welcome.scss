@@ -22,13 +22,19 @@
                 font-size: 5vw;
                 margin: 1vw;
             }
-            #alpha-label {
+            #alpha-info {
                 background: #ffee00;
                 color: #222;
-                padding: 0.4vw 1vw;
-                font-size: 1.5vw;
-                font-weight: bold;
+                padding: 2%;
+                font-size: 0.8rem;
                 border-radius: 2vw;
+                p {
+                    @apply mb-2;
+                }
+                ul {
+                    @apply pl-6;
+                    list-style-type: disc;
+                }
             }
         }
         .notice-icon {

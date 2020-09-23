@@ -551,7 +551,7 @@ function end() {
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
-            location.assign("/complete/index.html");
+            location.assign("./complete/index.html");
         }
     );
 }

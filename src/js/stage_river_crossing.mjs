@@ -19,6 +19,7 @@ function start() {
         require_setup = false;
     }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    displayUi();
 }
 
 
@@ -61,6 +62,23 @@ function setup() {
         console.log('River crossing setup complete.');
     }
 }
+
+
+function displayUi() {
+    if (DEBUG) {
+        console.log('Displaying River Crossing UI.');
+    }
+    // Reveal UI elements
+    var ui_elements = Array.from(document.querySelector('#river-crossing-narrative-text').children);
+    anime({
+        targets: ui_elements,
+        duration: 1000,
+        opacity: 1,
+        easing: 'linear',
+        delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
+    });
+}
+
 
 
 function checkBridgeComplete(el) {
@@ -157,8 +175,23 @@ function shuffle(a) {
 
 
 function displayContinueUi() {
-    // TODO: Display narrative text, then reveal button.
-    $('#stage-river-crossing #river-crossing-next-stage').fadeIn();
+    // Hide text, then display final text.
+    var other_text = Array.from(document.querySelectorAll('#river-crossing-narrative-text'))
+    var final_text = Array.from(document.querySelectorAll('#river-crossing-narrative-text-final'))
+    anime.timeline({
+        duration: 1000,
+        opacity: 1,
+        easing: 'linear',
+        complete: function () {
+            $('#stage-river-crossing #river-crossing-next-stage').fadeIn();
+        },
+    }).add({
+        targets: other_text,
+        opacity: 0,
+    }).add({
+        targets: final_text,
+        opacity: 1,
+    });
 }
 
 

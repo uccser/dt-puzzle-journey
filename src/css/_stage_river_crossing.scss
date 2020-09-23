@@ -69,7 +69,6 @@
     }
     #river-crossing-cursor-catchment {
         // This element prevents issues with Dragula losing the cursor over the SVG.
-        // TODO: Investigate this further.
         position: absolute;
         top: 0%;
         bottom: 0%;
@@ -114,6 +113,37 @@
         border-radius: 50%;
         background-color: #8f663a;
         border: 0.2vw solid #7c5934;
+    }
+    #river-crossing-narrative-text {
+        position: absolute;
+        top: 46%;
+        bottom: 1%;
+        left: 1%;
+        right: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        .secondary-text {
+            position: absolute;
+            top: 0;
+        }
+
+        // Hide direct descendants
+        & > * {
+            opacity: 0;
+        }
+    }
+    #river-crossing-narrative-text-final {
+        position: absolute;
+        top: 46%;
+        bottom: 1%;
+        left: 1%;
+        right: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        opacity: 0;
     }
     #river-crossing-next-stage {
         position: absolute;

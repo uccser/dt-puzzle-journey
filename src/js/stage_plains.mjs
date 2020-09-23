@@ -37,6 +37,7 @@ function start() {
         require_setup = false;
     }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    displayUi();
 }
 
 function setup() {
@@ -50,6 +51,23 @@ function setup() {
     setupAvatar();
 
     $('#plains-run-button').on('click', runInstructions);
+}
+
+
+function displayUi() {
+    if (DEBUG) {
+        console.log('Displaying Plains UI.');
+    }
+    // Reveal UI elements
+    var ui_elements = Array.from(document.querySelector('#plains-narrative-text').children);
+    ui_elements.push(document.querySelector('#plains-instruction-buttons'));
+    anime({
+        targets: ui_elements,
+        duration: 1000,
+        opacity: 1,
+        easing: 'linear',
+        delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
+    });
 }
 
 

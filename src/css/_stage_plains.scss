@@ -145,13 +145,20 @@ $grid-container-border: 0.2rem solid black;
             }
         }
     }
-    #plains-instruction-text {
+    #plains-narrative-text {
         position: absolute;
         top: $container-padding;
         bottom: 40%;
-        left: 68.8%;
+        left: 69.6%;
         right: $container-padding;
-        padding: 1% 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        // Hide direct descendants
+        & > * {
+            opacity: 0;
+        }
     }
     #plains-instruction-buttons {
         position: absolute;
@@ -163,6 +170,7 @@ $grid-container-border: 0.2rem solid black;
         display: flex;
         justify-content: space-around;
         align-items: center;
+        opacity: 0;
     }
     #plains-instruction-blocks {
         position: absolute;

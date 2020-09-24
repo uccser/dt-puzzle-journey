@@ -17,6 +17,7 @@
             - Grid
             - Transform-box: Fill-box
             - Backface visibility
+            - vmin unit: https://caniuse.com/viewport-units
 */
 
 // Import third party libraries

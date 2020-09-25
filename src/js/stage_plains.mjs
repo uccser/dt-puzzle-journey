@@ -128,15 +128,15 @@ function runInstructions() {
                 valid_sequence = grid_data.pathfinding_grid.isWalkableAt(x_coord, y_coord);
                 // Animate movement
                 if (heading == 90) {
-                    transform = {translateX: '+=100%'};
+                    transform = { translateX: '+=100%' };
                     target = avatar_container;
                 } else if (heading == 270) {
-                    transform = {translateX: '-=100%'};
+                    transform = { translateX: '-=100%' };
                     target = avatar_container;
                 } else if (heading == 0) {
-                    transform = {translateY: '-=100%'};
+                    transform = { translateY: '-=100%' };
                 } else {
-                    transform = {translateY: '+=100%'};
+                    transform = { translateY: '+=100%' };
                 }
                 if (!valid_sequence) {
                     let transform_type = Object.keys(transform)[0];
@@ -149,10 +149,10 @@ function runInstructions() {
                     ];
                 }
             } else if (instruction == 'L') {
-                transform = {rotate: '-=90deg'};
+                transform = { rotate: '-=90deg' };
                 heading = (heading + 270) % 360;
             } else if (instruction == 'R') {
-                transform = {rotate: '+=90deg'};
+                transform = { rotate: '+=90deg' };
                 heading = (heading + 90) % 360;
             }
             var fade_options = {
@@ -212,6 +212,10 @@ function checkRunInstructions() {
         anime.timeline({
             easing: 'linear',
             duration: 500,
+            complete: function () {
+                let run_button = document.querySelector('#plains-run-button');
+                run_button.removeAttribute('disabled');
+            }
         }).add({
             targets: avatar_container,
             opacity: 0,
@@ -228,8 +232,6 @@ function checkRunInstructions() {
             targets: avatar_container,
             opacity: 1,
         });
-        let run_button = document.querySelector('#plains-run-button');
-        run_button.removeAttribute('disabled');
     }
 }
 
@@ -376,7 +378,7 @@ function styleGrid() {
     var grid_element = document.querySelector('#plains-grid');
     for (let y_coord = 0; y_coord < grid_data.grid_size; y_coord++) {
         for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
-            let coords = {x_coord: x_coord, y_coord: y_coord};
+            let coords = { x_coord: x_coord, y_coord: y_coord };
             let cell = getGridElementFromCoords(x_coord, y_coord);
             let css_class;
             if (coordsMatch(coords, grid_data.starting_location)) {
@@ -488,7 +490,7 @@ function createGridObstacle(x_coord, y_coord) {
 function selectGridStartingLocation(grid_size) {
     var x_coord = getRandomInt(0, grid_size);
     var y_coord = grid_size - 1; // Bottom row
-    return {x_coord: x_coord, y_coord: y_coord};
+    return { x_coord: x_coord, y_coord: y_coord };
 }
 
 

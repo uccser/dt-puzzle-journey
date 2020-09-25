@@ -6,6 +6,7 @@ import { getSvg, changeStage, getRandomInt } from './utilities.mjs';
 import anime from 'animejs/lib/anime.es.js';
 import pathfinder from 'pathfinding';
 import dragula from 'dragula/dragula.js';
+import { timeline } from 'animejs';
 
 var require_setup = true;
 var plains_substage_num, grid_data;
@@ -29,9 +30,13 @@ const CELL_OBSTACLE_VARIANTS = [
 const SUBSTAGE_DATA = {
     1: {
         grid_size: 4,
+        instruction_loss_rate: 0.5,
+        instruction_loss_start_index: 1,
     },
     2: {
         grid_size: 6,
+        instruction_loss_rate: 0.7,
+        instruction_loss_start_index: 0,
     },
     3: {
         grid_size: 4,
@@ -175,6 +180,7 @@ function runInstructions() {
     if (x_coord == grid_data.goal_location.x_coord && y_coord == grid_data.goal_location.y_coord) {
         grid_data.completed = true;
     };
+    grid_data.avatar_heading = heading;
     timeline.play();
 }
 
@@ -183,13 +189,25 @@ function checkRunInstructions() {
     var avatar = document.getElementById('grid-avatar');
     var avatar_container = document.getElementById('grid-avatar-container');
     if (grid_data.completed) {
-        anime({
+        var timeline = anime.timeline({
+            easing: 'easeInOutSine',
+            autoplay: false,
+            complete: displayContinueUi,
+        });
+        // If avatar is not facing right direction
+        if (grid_data.avatar_heading) {
+            timeline.add({
+                targets: avatar,
+                rotate: 0,
+                duration: INSTRUCTION_ANIMATION_DURATION,
+            });
+        }
+        timeline.add({
             targets: avatar,
             translateY: '-=200%',
             duration: INSTRUCTION_ANIMATION_DURATION * 2,
-            easing: 'easeInSine',
-            complete: displayContinueUi,
         });
+        timeline.play();
     } else {
         anime.timeline({
             easing: 'linear',
@@ -271,8 +289,10 @@ function setupInstructionBlocks() {
     // Replace random instructions (not first instructions)
     var instructions = grid_data.inital_path.slice();
     var indexes_to_replace = [];
-    while (indexes_to_replace.length < 3) {
-        let index = getRandomInt(1, instructions.length);
+    var number_to_remove = Math.floor(instructions.length * grid_data.instruction_loss_rate);
+    var instruction_loss_start_index = grid_data.instruction_loss_start_index;
+    while (indexes_to_replace.length < number_to_remove) {
+        let index = getRandomInt(instruction_loss_start_index, instructions.length);
         if (!indexes_to_replace.includes(index)) {
             indexes_to_replace.push(index);
         }
@@ -329,19 +349,15 @@ function setupInstructionBlocks() {
 
 
 function setupGrid(substage_num) {
-    var grid_size = SUBSTAGE_DATA[substage_num].grid_size;
-    grid_data = {
-        grid_size: grid_size,
-    };
-
-    createGrid(grid_size);
+    grid_data = SUBSTAGE_DATA[substage_num];
+    createGrid(grid_data.grid_size);
 
     // Create logic array for locations
-    grid_data.pathfinding_grid = new pathfinder.Grid(grid_size, grid_size);
+    grid_data.pathfinding_grid = new pathfinder.Grid(grid_data.grid_size, grid_data.grid_size);
     // Pick starting location
-    grid_data.starting_location = selectGridStartingLocation(grid_size);
+    grid_data.starting_location = selectGridStartingLocation(grid_data.grid_size);
     // Pick goal location
-    grid_data.goal_location = selectGridGoalLocation(grid_size, grid_data.starting_location);
+    grid_data.goal_location = selectGridGoalLocation(grid_data.grid_size, grid_data.starting_location);
     // Create obstacles (both in array and interface)
     createGridObstacles();
     // Find shortest path
@@ -443,13 +459,19 @@ function createGridObstacles() {
     var obstacle_coords = [];
     // For first stage, create one obstacle in front of starting location,
     // plus all empty spots on top and bottom rows.
-    obstacle_coords.push([grid_data.starting_location.x_coord, 1]);
-    for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
-        if (!(x_coord == grid_data.starting_location.x_coord)) {
-            obstacle_coords.push([x_coord, grid_data.grid_size - 1]);
-        }
-        if (!(x_coord == grid_data.goal_location.x_coord)) {
-            obstacle_coords.push([x_coord, 0]);
+    if (plains_substage_num == 2) {
+
+    } else if (plains_substage_num == 3) {
+
+    } else {
+        obstacle_coords.push([grid_data.starting_location.x_coord, 1]);
+        for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
+            if (!(x_coord == grid_data.starting_location.x_coord)) {
+                obstacle_coords.push([x_coord, grid_data.grid_size - 1]);
+            }
+            if (!(x_coord == grid_data.goal_location.x_coord)) {
+                obstacle_coords.push([x_coord, 0]);
+            }
         }
     }
     for (let i = 0; i < obstacle_coords.length; i++) {

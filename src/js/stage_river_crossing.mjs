@@ -26,6 +26,8 @@ function start() {
 function setup() {
     // Get SVG
     var svg = getSvg('river-crossing-svg');
+
+    // Animate water
     var water_top = svg.querySelector('#water-top');
     var water_middle = svg.querySelector('#water-middle');
     anime({

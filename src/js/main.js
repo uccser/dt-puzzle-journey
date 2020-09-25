@@ -68,9 +68,19 @@ const STAGES = {
         button_text: 'Start at the plains',
         initial_function: stageBeforePlainsStart,
     },
-    'plains': {
+    'plains-1': {
         button_text: 'Start at the plains',
         initial_function: stagePlainsStart,
+    },
+    'plains-2': {
+        button_text: 'Start on the plains',
+        initial_function: stagePlainsStart,
+        additional_parameters: {substage: 2},
+    },
+    'plains-3': {
+        button_text: 'Start on the plains',
+        initial_function: stagePlainsStart,
+        additional_parameters: {substage: 3},
     },
 };
 var default_stage = 'landscape-view';
@@ -106,5 +116,6 @@ function run_stage(event) {
     if (DEBUG) {
         console.log("Starting level '" + event.detail + "'.");
     }
-    stage_data.initial_function();
+    var additional_parameters = stage_data.additional_parameters || {};
+    stage_data.initial_function(additional_parameters);
 };

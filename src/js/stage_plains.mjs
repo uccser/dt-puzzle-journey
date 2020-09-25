@@ -8,7 +8,7 @@ import pathfinder from 'pathfinding';
 import dragula from 'dragula/dragula.js';
 
 var require_setup = true;
-var grid_data;
+var plains_substage_num, grid_data;
 const INSTRUCTION_ANIMATION_DURATION = 800;
 const INSTRUCTION_FADE = 350;
 const CELL_SPACE_VARIANTS = [
@@ -26,31 +26,43 @@ const CELL_OBSTACLE_VARIANTS = [
     'cell-obstacle-f',
     'cell-obstacle-g',
 ];
+const SUBSTAGE_DATA = {
+    1: {
+        grid_size: 4,
+    },
+    2: {
+        grid_size: 6,
+    },
+    3: {
+        grid_size: 4,
+    },
+}
 
-function start() {
+function start(additional_parameters) {
     $('#stage-plains').removeClass('hidden');
     if (DEBUG) {
         console.log('Plains loaded.');
+        if (additional_parameters) {
+            console.log('Additional parameters loaded.');
+        }
     }
     if (require_setup) {
-        setup();
+        // Setup buttons
+        $('#stage-plains #plains-next-stage').on('click', end);
+        $('#plains-run-button').on('click', runInstructions);
         require_setup = false;
     }
+    plains_substage_num = additional_parameters.substage || 1;
+    setup(plains_substage_num);
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
     displayUi();
 }
 
-function setup() {
-    // Setup buttons
-    $('#stage-plains #plains-next-stage').on('click', end);
-
+function setup(substage_num) {
     // Create grid
-    var grid_size = 4;
-    setupGrid(grid_size);
+    setupGrid(substage_num);
     setupInstructionBlocks();
     setupAvatar();
-
-    $('#plains-run-button').on('click', runInstructions);
 }
 
 
@@ -174,8 +186,8 @@ function checkRunInstructions() {
         anime({
             targets: avatar,
             translateY: '-=200%',
-            duration: INSTRUCTION_ANIMATION_DURATION * 3,
-            easing: 'easeInOutSine',
+            duration: INSTRUCTION_ANIMATION_DURATION * 2,
+            easing: 'easeInSine',
             complete: displayContinueUi,
         });
     } else {
@@ -316,7 +328,8 @@ function setupInstructionBlocks() {
 }
 
 
-function setupGrid(grid_size) {
+function setupGrid(substage_num) {
+    var grid_size = SUBSTAGE_DATA[substage_num].grid_size;
     grid_data = {
         grid_size: grid_size,
     };
@@ -547,11 +560,30 @@ function displayContinueUi() {
 }
 
 
+function cleanUp() {
+    // Only reset elements that have children added. Styles will be overwritten.
+    document.getElementById('plains-grid').innerHTML = '';
+    document.getElementById('plains-user-instructions').innerHTML = '';
+    document.getElementById('plains-run-button').removeAttribute('disabled');
+    var elements = document.querySelectorAll('#plains-narrative-text .initial-text');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].classList.add('hidden');
+    }
+    $('#plains-next-stage').hide();
+}
+
+
 function end() {
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
-            location.assign("./complete/index.html");
+            if (plains_substage_num + 1 in SUBSTAGE_DATA) {
+                cleanUp();
+                changeStage(`plains-${plains_substage_num + 1}`);
+            } else {
+                // Completed all stages
+                location.assign("./complete/index.html");
+            }
         }
     );
 }

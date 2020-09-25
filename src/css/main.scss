@@ -69,7 +69,7 @@ $text-font-size: 2vmin;
     margin-bottom: $text-font-size;
     border-radius: $text-font-size/2;
     font-size: $text-font-size;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .narrative-text {
@@ -80,7 +80,7 @@ $text-font-size: 2vmin;
     margin-bottom: $text-font-size;
     border-radius: $text-font-size/2;
     font-size: $text-font-size;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .button {

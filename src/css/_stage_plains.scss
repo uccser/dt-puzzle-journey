@@ -53,54 +53,6 @@ $grid-container-border: 0.2rem solid black;
 
                 .cell {
                     outline: $cell-border;
-                    // border-top: $cell-border;
-                    // border-left: $cell-border;
-                    // &.right-edge {
-                    //     border-right: $cell-border;
-                    // }
-                    // &.bottom-edge {
-                    //     border-bottom: $cell-border;
-                    // }
-                }
-                .cell-space-entrance {
-                    background-image: url('../img/plains-grid-space-entrance.svg');
-                    position: relative;
-                }
-                .cell-space-goal {
-                    background-image: url('../img/plains-grid-space-exit.svg');
-                }
-                .cell-space-a {
-                    background-image: url('../img/plains-grid-space-a.svg');
-                }
-                .cell-space-b {
-                    background-image: url('../img/plains-grid-space-b.svg');
-                }
-                .cell-space-c {
-                    background-image: url('../img/plains-grid-space-c.svg');
-                }
-                .cell-space-d {
-                    background-image: url('../img/plains-grid-space-d.svg');
-                }
-                .cell-obstacle-a {
-                    background-image: url('../img/plains-grid-obstacle-a.svg');
-                }
-                .cell-obstacle-b {
-                    background-image: url('../img/plains-grid-obstacle-b.svg');
-                }
-                .cell-obstacle-c {
-                    background-image: url('../img/plains-grid-obstacle-c.svg');
-                }
-                .cell-obstacle-d {
-                    background-image: url('../img/plains-grid-obstacle-d.svg');
-                }
-                .cell-obstacle-e {
-                    background-image: url('../img/plains-grid-obstacle-e.svg');
-                }
-                .cell-obstacle-f {
-                    background-image: url('../img/plains-grid-obstacle-f.svg');
-                }
-                .cell-obstacle-g {
-                    background-image: url('../img/plains-grid-obstacle-g.svg');
                 }
                 #grid-avatar-container {
                     position: absolute;
@@ -115,6 +67,56 @@ $grid-container-border: 0.2rem solid black;
                     height: 100%;
                 }
             }
+        }
+        .cell-space-entrance {
+            background-image: url('../img/plains-grid-space-entrance.svg');
+            position: relative;
+        }
+        .cell-space-goal {
+            background-image: url('../img/plains-grid-space-exit.svg');
+        }
+        .cell-space-a {
+            background-image: url('../img/plains-grid-space-a.svg');
+        }
+        .cell-space-b {
+            background-image: url('../img/plains-grid-space-b.svg');
+        }
+        .cell-space-c {
+            background-image: url('../img/plains-grid-space-c.svg');
+        }
+        .cell-space-d {
+            background-image: url('../img/plains-grid-space-d.svg');
+        }
+        .cell-obstacle-a {
+            background-image: url('../img/plains-grid-obstacle-a.svg');
+        }
+        .cell-obstacle-b {
+            background-image: url('../img/plains-grid-obstacle-b.svg');
+        }
+        .cell-obstacle-c {
+            background-image: url('../img/plains-grid-obstacle-c.svg');
+        }
+        .cell-obstacle-d {
+            background-image: url('../img/plains-grid-obstacle-d.svg');
+        }
+        .cell-obstacle-e {
+            background-image: url('../img/plains-grid-obstacle-e.svg');
+        }
+        .cell-obstacle-f {
+            background-image: url('../img/plains-grid-obstacle-f.svg');
+        }
+        .cell-obstacle-g {
+            background-image: url('../img/plains-grid-obstacle-g.svg');
+        }
+        .obstacle-outside-cell {
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .obstacle-outside-top {
+            background-position: bottom;
+        }
+        .obstacle-outside-bottom {
+            background-position: top;
         }
     }
     #plains-user-instructions {

@@ -375,7 +375,7 @@ function setupGrid(substage_num) {
 
 
 function styleGrid() {
-    var grid_element = document.querySelector('#plains-grid');
+    // Style inside grid
     for (let y_coord = 0; y_coord < grid_data.grid_size; y_coord++) {
         for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
             let coords = { x_coord: x_coord, y_coord: y_coord };
@@ -386,26 +386,38 @@ function styleGrid() {
             } else if (coordsMatch(coords, grid_data.goal_location)) {
                 css_class = 'cell-space-goal';
             } else if (!grid_data.pathfinding_grid.isWalkableAt(x_coord, y_coord)) {
-                css_class = CELL_OBSTACLE_VARIANTS[Math.floor(Math.random() * CELL_OBSTACLE_VARIANTS.length)];
+                css_class = getRandomGridObstacleStyle();
             } else {
                 css_class = CELL_SPACE_VARIANTS[Math.floor(Math.random() * CELL_SPACE_VARIANTS.length)];
             }
             cell.classList.add(css_class);
         }
     }
-    // Add entrance and goal paths
-    let entrance_path = document.querySelector('#plains-grid-entrance-path');
-    let entrance_x_coord = grid_data.starting_location.x_coord;
-    entrance_path.style.setProperty(
-        'grid-area',
-        `3 / ${entrance_x_coord + 2} / 4 / ${entrance_x_coord + 3}`
-    );
-    let goal_path = document.querySelector('#plains-grid-goal-path');
-    let goal_x_coord = grid_data.goal_location.x_coord;
-    goal_path.style.setProperty(
-        'grid-area',
-        `1 / ${goal_x_coord + 2} / 2 / ${goal_x_coord + 3}`
-    );
+    // Style outside grid.
+    // Note: Uses CSS Grid positioning: Starts at 1, and y values are only 1 and 3.
+    var container = document.getElementById('plains-left-container');
+    for (let y_coord = 1; y_coord < 4; y_coord += 2) {
+        for (let x_coord = 2; x_coord < grid_data.grid_size + 2; x_coord++) {
+            let element = document.createElement('div');
+            element.style.setProperty(
+                'grid-area',
+                `${y_coord} / ${x_coord} / ${y_coord + 1} / ${x_coord + 1}`
+            );
+            if (x_coord - 2 == grid_data.goal_location.x_coord && y_coord == 1) {
+                element.id = 'plains-grid-goal-path';
+            } else if (x_coord - 2 == grid_data.starting_location.x_coord && y_coord == 3) {
+                element.id = 'plains-grid-entrance-path';
+            } else {
+                element.classList.add(getRandomGridObstacleStyle(), 'obstacle-outside-cell');
+                if (y_coord == 1) {
+                    element.classList.add('obstacle-outside-top');
+                } else {
+                    element.classList.add('obstacle-outside-bottom');
+                }
+            }
+            container.appendChild(element);
+        }
+    }
 }
 
 
@@ -484,6 +496,11 @@ function createGridObstacles() {
 
 function createGridObstacle(x_coord, y_coord) {
     grid_data.pathfinding_grid.setWalkableAt(x_coord, y_coord, false);
+}
+
+
+function getRandomGridObstacleStyle() {
+    return CELL_OBSTACLE_VARIANTS[Math.floor(Math.random() * CELL_OBSTACLE_VARIANTS.length)];
 }
 
 

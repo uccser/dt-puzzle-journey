@@ -1,12 +1,11 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage, getRandomInt } from './utilities.mjs';
+import { changeStage, getRandomInt } from './utilities.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 import pathfinder from 'pathfinding';
 import dragula from 'dragula/dragula.js';
-import { timeline } from 'animejs';
 
 var require_setup = true;
 var plains_substage_num, grid_data;
@@ -34,7 +33,7 @@ const SUBSTAGE_DATA = {
         instruction_loss_start_index: 1,
     },
     2: {
-        grid_size: 6,
+        grid_size: 5,  // Note: A lot of obstacle logic is based off this number being 5.
         instruction_loss_rate: 0.7,
         instruction_loss_start_index: 0,
     },
@@ -347,6 +346,9 @@ function setupInstructionBlocks() {
         target.innerHTML = '';
         target.appendChild(el);
     });
+    if (DEBUG) {
+        console.log('Instructions block setup complete.')
+    }
 }
 
 
@@ -358,10 +360,19 @@ function setupGrid(substage_num) {
     grid_data.pathfinding_grid = new pathfinder.Grid(grid_data.grid_size, grid_data.grid_size);
     // Pick starting location
     grid_data.starting_location = selectGridStartingLocation(grid_data.grid_size);
+    if (DEBUG) {
+        console.log('Grid start location picked.')
+    }
     // Pick goal location
     grid_data.goal_location = selectGridGoalLocation(grid_data.grid_size, grid_data.starting_location);
+    if (DEBUG) {
+        console.log('Grid goal location picked.')
+    }
     // Create obstacles (both in array and interface)
     createGridObstacles();
+    if (DEBUG) {
+        console.log('Grid obstacle locations picked.')
+    }
     // Find shortest path
     grid_data.inital_path = shortestGridPathInstructions();
     // Add styling to grid cells
@@ -471,13 +482,55 @@ function shortestGridPathInstructions() {
 
 function createGridObstacles() {
     var obstacle_coords = [];
-    // For first stage, create one obstacle in front of starting location,
-    // plus all empty spots on top and bottom rows.
     if (plains_substage_num == 2) {
-
+        // Always obstacles
+        var temp_obstacle_coords = [
+            [2, 0],
+            [2, 4],
+            [0, 2],
+            [1, 2],
+            [3, 2],
+            [4, 2],
+        ];
+        var temp_grid = new pathfinder.Grid(grid_data.grid_size, grid_data.grid_size);
+        for (let i = 0; i < temp_obstacle_coords.length; i++) {
+            temp_grid.setWalkableAt(temp_obstacle_coords[i][0], temp_obstacle_coords[i][1], false);
+        }
+        var finder = new pathfinder.IDAStarFinder();
+        var path = finder.findPath(
+            grid_data.starting_location.x_coord,
+            grid_data.starting_location.y_coord,
+            grid_data.goal_location.x_coord,
+            grid_data.goal_location.y_coord,
+            temp_grid,
+        );
+        var possible_obstacle_coords = [];
+        for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
+            for (let y_coord = 0; y_coord < grid_data.grid_size; y_coord++) {
+                let valid_obstacle = true;
+                for (let i = 0; i < path.length; i++) {
+                    let [path_x_coord, path_y_coord] = path[i];
+                    if (x_coord == path_x_coord && y_coord == path_y_coord) {
+                        valid_obstacle = false;
+                    }
+                }
+                if (valid_obstacle) {
+                    possible_obstacle_coords.push([x_coord, y_coord]);
+                }
+            }
+        }
+        var number_to_pick = 12;
+        var picked = 0;
+        while (picked < number_to_pick) {
+            let index = getRandomInt(0, possible_obstacle_coords.length);
+            obstacle_coords.push(possible_obstacle_coords.splice(index, 1)[0]);
+            picked++;
+        }
     } else if (plains_substage_num == 3) {
 
-    } else {
+    } else { // plains_substage_num == 1
+        // For first stage, create one obstacle in front of starting location,
+        // plus all empty spots on top and bottom rows.
         obstacle_coords.push([grid_data.starting_location.x_coord, 1]);
         for (let x_coord = 0; x_coord < grid_data.grid_size; x_coord++) {
             if (!(x_coord == grid_data.starting_location.x_coord)) {
@@ -504,13 +557,6 @@ function getRandomGridObstacleStyle() {
 }
 
 
-function selectGridStartingLocation(grid_size) {
-    var x_coord = getRandomInt(0, grid_size);
-    var y_coord = grid_size - 1; // Bottom row
-    return { x_coord: x_coord, y_coord: y_coord };
-}
-
-
 function getGridElementFromCoords(x_coord, y_coord) {
     let id = getGridCellId(x_coord, y_coord);
     return document.querySelector(`#plains-grid #${id}`);
@@ -526,20 +572,36 @@ function coordsMatch(coords_a, coords_b) {
     return coords_a.x_coord == coords_b.x_coord && coords_a.y_coord == coords_b.y_coord;
 }
 
+function selectGridStartingLocation(grid_size) {
+    var x_coord = getRandomInt(0, grid_size);
+    if (plains_substage_num == 2) {
+        if (x_coord == Math.floor(grid_size / 2)) {
+            x_coord++;
+        }
+    }
+    var y_coord = grid_size - 1; // Bottom row
+    return { x_coord: x_coord, y_coord: y_coord };
+}
+
 
 function selectGridGoalLocation(grid_size, starting_location) {
     var starting_x_coord = starting_location.x_coord;
-    var possible_x_coords = [];
-    if (starting_x_coord - 1 >= 0) {
-        possible_x_coords.push(starting_x_coord - 1);
+    if (plains_substage_num == 2) {
+        var x_coord = (starting_x_coord + Math.ceil(grid_size / 2)) % (grid_size + 1);
+    } else if (plains_substage_num == 3) {
+
+    } else { // plains_substage_num == 1
+        var possible_x_coords = [];
+        if (starting_x_coord - 1 >= 0) {
+            possible_x_coords.push(starting_x_coord - 1);
+        }
+        if (starting_x_coord + 1 <= grid_size - 1) {
+            possible_x_coords.push(starting_x_coord + 1);
+        }
+        var random_x_coord_index = getRandomInt(0, possible_x_coords.length);
+        var x_coord = possible_x_coords[random_x_coord_index];
     }
-    if (starting_x_coord + 1 <= grid_size - 1) {
-        possible_x_coords.push(starting_x_coord + 1);
-    }
-    var random_x_coord_index = getRandomInt(0, possible_x_coords.length);
-    var x_coord = possible_x_coords[random_x_coord_index];
-    var y_coord = 0; // Top row
-    return { x_coord: x_coord, y_coord: y_coord };
+    return { x_coord: x_coord, y_coord: 0 };
 }
 
 

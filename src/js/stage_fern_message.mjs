@@ -322,12 +322,17 @@ function displayContinueUi() {
 }
 
 
+function cleanUp() {
+    document.getElementById('stage-fern-interactive').innerHTML = '';
+    document.getElementById('stage-fern-message').innerHTML = '';
+}
+
 
 function end(event) {
-    window.sessionStorage.setItem('fern-interactive-show-next', false);
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
+            cleanUp();
             $('#stage-fern-message').addClass('hidden');
             changeStage(event.data.level_id);
         }

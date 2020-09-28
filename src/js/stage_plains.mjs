@@ -744,6 +744,7 @@ function displayContinueUi() {
 
 
 function cleanUp() {
+    // Do not delete SVG as used by multiple levels
     // Only reset elements that have children added. Styles will be overwritten.
     document.getElementById('plains-grid').innerHTML = '';
     document.getElementById('plains-instruction-blocks').innerHTML = '';

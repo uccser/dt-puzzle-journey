@@ -43,10 +43,17 @@ function displayContinueUi() {
     $('#stage-before-river #before-river-next-stage').fadeIn();
 }
 
+
+function cleanUp() {
+    document.getElementById('stage-before-river').innerHTML = '';
+}
+
+
 function end() {
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
+            cleanUp();
             $('#stage-before-river').addClass('hidden');
             changeStage('river-crossing');
         }

@@ -43,10 +43,17 @@ function displayContinueUi() {
     $('#stage-before-plains #before-plains-next-stage').fadeIn();
 }
 
+
+function cleanUp() {
+    document.getElementById('stage-before-plains').innerHTML = '';
+}
+
+
 function end() {
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
+            cleanUp();
             $('#stage-before-plains').addClass('hidden');
             changeStage('plains');
         }

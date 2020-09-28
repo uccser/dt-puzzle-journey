@@ -197,10 +197,16 @@ function displayContinueUi() {
 }
 
 
+function cleanUp() {
+    document.getElementById('stage-river-crossing').innerHTML = '';
+}
+
+
 function end() {
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
+            cleanUp();
             $('#stage-river-crossing').addClass('hidden');
             changeStage('before-plains');
         }

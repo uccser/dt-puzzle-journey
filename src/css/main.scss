@@ -26,8 +26,6 @@ body {
     font-size: 2.5vmin;
 }
 
-$text-font-size: 1.6vmin;
-
 h1 {
     font-size: $text-font-size*4;
 }
@@ -65,21 +63,22 @@ h2 {
 .ui-text {
     display: inline-block;
     padding: $text-font-size/2 $text-font-size;
-    margin-bottom: $text-font-size*0.8;
+    margin-bottom: $text-font-size*0.3;
     border-radius: $text-font-size/2;
     font-size: $text-font-size;
     overflow-y: auto;
 }
 
+$text-opacity: 0.9;
 .instruction-text {
     @extend .ui-text;
-    background-color: #0b2e50c7;
+    background-color: rgba(#0b2e50, $text-opacity);
     font-style: italic;
 }
 
 .narrative-text {
     @extend .ui-text;
-    background-color: #000000c7;
+    background-color: rgba(#000000, $text-opacity);
 }
 
 .button {

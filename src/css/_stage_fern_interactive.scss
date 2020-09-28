@@ -77,26 +77,42 @@
         }
     }
 
-    #fern-interactive-ui {
+    #fern-interactive-ui-1 {
         position: absolute;
         top: 1%;
-        bottom: 35%;
+        bottom: 40%;
         left: 1%;
-        right: 50%;
+        right: 66%;
         display: flex;
         flex-direction: column;
         justify-content: start;
 
         // Hide direct descendants
         & > * {
-            visibility: hidden;
+            opacity: 0;
+        }
+    }
+    #fern-interactive-ui-2 {
+        position: absolute;
+        top: 1%;
+        bottom: 40%;
+        left: 37%;
+        right: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+
+        // Hide direct descendants
+        & > * {
             opacity: 0;
         }
     }
 
     #fern-next-stage {
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: 1%;
+        right: 1%;
+        opacity: 0;
+        visibility: hidden;
     }
 }

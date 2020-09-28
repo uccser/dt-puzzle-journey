@@ -74,7 +74,7 @@ const SECONDARY_TEXT_START = 30000;
 
 var message_word = '';
 var message_values = [];
-var require_setup = true;
+var fm_require_setup = true;
 
 function start() {
     $('#stage-fern-message').removeClass('hidden');
@@ -82,12 +82,12 @@ function start() {
         console.log('Fern message loaded.');
     }
     window.sessionStorage.setItem('fern-interactive-show-next', true);
-    if (require_setup) {
+    if (fm_require_setup) {
         setup();
-        require_setup = false;
+        displayUi();
+        fm_require_setup = false;
     }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
-    displayUi();
 }
 
 
@@ -118,6 +118,11 @@ function setup() {
     // Create word
     message_word = POSSIBLE_WORDS[Math.floor(Math.random() * POSSIBLE_WORDS.length)];
     createWordWithBranches(message_word);
+}
+
+
+function isFMSetup() {
+    return !fm_require_setup;
 }
 
 
@@ -330,4 +335,4 @@ function end(event) {
 }
 
 
-export { start };
+export { start, isFMSetup };

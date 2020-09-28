@@ -1,16 +1,24 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage } from './utilities.mjs';
+import { getSvg, changeStage, getRandomInt } from './utilities.mjs';
+import { isFMSetup } from './stage_fern_message.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
-var show_next =
-    window.sessionStorage.getItem('fern-interactive-show-next') || false;
 var card_interactions = 0;
 var require_setup = true;
 var first_digit_ants_element, second_digit_ants_element;
-const REQUIRED_CARD_INTERACTIONS = 5;
+var ant_puzzle_data = {
+    puzzles: [
+        runAntPuzzlesPart1,
+        runAntPuzzlesPart2,
+        runAntPuzzlesPart3,
+    ],
+    unstarted: true,
+    completed: false,
+};
+const REQUIRED_CARD_INTERACTIONS = 3;
 const DIGIT_ANT_SPEED = 20000;
 const DIGIT_ANT_TRANSITION = 5000;
 const DIGIT_POSITIONS = {
@@ -44,13 +52,13 @@ function start() {
     }
     if (require_setup) {
         setup();
+        displayUi();
         require_setup = false;
     }
-    if (show_next) {
-        show_next_stage_button();
+    if (isFMSetup()) {
+        showNextStageButton();
     }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
-    displayUi();
 }
 
 
@@ -69,8 +77,13 @@ function setup() {
         $(this).toggleClass('flipped');
         card_interactions++;
         updateDotCount();
-        if (!show_next && card_interactions >= REQUIRED_CARD_INTERACTIONS) {
-            show_next_stage_button();
+        if (!ant_puzzle_data.completed) {
+            if (ant_puzzle_data.unstarted && card_interactions >= REQUIRED_CARD_INTERACTIONS) {
+                ant_puzzle_data.unstarted = false;
+                ant_puzzle_data.puzzles.shift()();
+            } else if (getDotCount() == ant_puzzle_data.current_goal) {
+                ant_puzzle_data.puzzles.shift()();
+            }
         }
     });
     $('#fern-next-stage').on('click', end);
@@ -81,8 +94,7 @@ function displayUi() {
     if (DEBUG) {
         console.log('Displaying Fern Interactive UI.');
     }
-    var ui_elements = Array.from(document.querySelector('#fern-interactive-ui').children);
-    $(ui_elements).css('visibility', 'visible');
+    var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-1 .narrative-text'));
     anime({
         targets: ui_elements,
         opacity: 1,
@@ -93,14 +105,71 @@ function displayUi() {
 }
 
 
-function show_next_stage_button() {
-    $('#stage-fern-interactive #fern-next-stage').fadeIn();
-    show_next = true;
-    window.sessionStorage.setItem('fern-interactive-show-next', true);
+function runAntPuzzlesPart1() {
+    ant_puzzle_data.current_goal = getRandomInt(3, 31);
+    if (ant_puzzle_data.current_goal == getDotCount()) {
+        ant_puzzle_data.current_goal++;
+    }
+    document.getElementById('ant-puzzle-1-goal').innerText = ant_puzzle_data.current_goal;
+    var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-1'));
+    anime({
+        targets: ui_elements,
+        opacity: 1,
+        duration: 1000,
+        delay: anime.stagger(2500),
+        easing: 'linear',
+    });
 }
 
 
-function updateDotCount() {
+function runAntPuzzlesPart2() {
+    ant_puzzle_data.current_goal = getRandomInt(0, 27);
+    if (ant_puzzle_data.current_goal & 2 == 0) {
+        ant_puzzle_data.current_goal++;
+    }
+    if (ant_puzzle_data.current_goal == getDotCount()) {
+        ant_puzzle_data.current_goal += 2;
+    }
+    document.getElementById('ant-puzzle-2-goal').innerText = ant_puzzle_data.current_goal;
+    var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-2'));
+    anime({
+        targets: ui_elements,
+        opacity: 1,
+        duration: 1000,
+        delay: anime.stagger(2000, { start: DIGIT_ANT_TRANSITION * 0.1 }),
+        easing: 'linear',
+    });
+}
+
+
+function runAntPuzzlesPart3() {
+    ant_puzzle_data.completed = true;
+    var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-3'));
+    anime({
+        targets: ui_elements,
+        opacity: 1,
+        duration: 1000,
+        delay: DIGIT_ANT_TRANSITION * 0.1,
+        easing: 'linear',
+        complete: showNextStageButton,
+    });
+}
+
+
+function showNextStageButton() {
+    var ui_elements = document.querySelector('#stage-fern-interactive #fern-next-stage');
+    $(ui_elements).css('visibility', 'visible');
+    anime({
+        targets: ui_elements,
+        opacity: 1,
+        duration: 1000,
+        delay: anime.stagger(3000),
+        easing: 'linear',
+    });
+}
+
+
+function getDotCount() {
     let dot_count = 0;
     let cards = document.querySelectorAll('#stage-fern-interactive .fern-leaf');
     for (var i = 0; i < cards.length; i++) {
@@ -109,6 +178,13 @@ function updateDotCount() {
             dot_count += parseInt(card.dataset.value);
         }
     }
+    return dot_count;
+}
+
+
+
+function updateDotCount() {
+    let dot_count = getDotCount();
     let count_text = dot_count.toString().padStart(2, '0');
     let tens_digit_path = getDigitPath(count_text[0], 10);
     let ones_digit_path = getDigitPath(count_text[1], 1);

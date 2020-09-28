@@ -26,11 +26,13 @@ body {
     font-size: 2.5vmin;
 }
 
+$text-font-size: 1.6vmin;
+
 h1 {
-    font-size: 8vmin;
+    font-size: $text-font-size*4;
 }
 h2 {
-    font-size: 3.5vmin;
+    font-size: $text-font-size*2;
 }
 
 #animation-container {
@@ -60,27 +62,24 @@ h2 {
     }
 }
 
-$text-font-size: 2vmin;
-.instruction-text {
-    background-color: #0b2e50c7;
+.ui-text {
     display: inline-block;
-    font-style: italic;
     padding: $text-font-size/2 $text-font-size;
-    margin-bottom: $text-font-size;
+    margin-bottom: $text-font-size*0.8;
     border-radius: $text-font-size/2;
     font-size: $text-font-size;
     overflow-y: auto;
 }
 
+.instruction-text {
+    @extend .ui-text;
+    background-color: #0b2e50c7;
+    font-style: italic;
+}
+
 .narrative-text {
+    @extend .ui-text;
     background-color: #000000c7;
-    display: inline-block;
-    @apply px-4;
-    padding: $text-font-size/2 $text-font-size;
-    margin-bottom: $text-font-size;
-    border-radius: $text-font-size/2;
-    font-size: $text-font-size;
-    overflow-y: auto;
 }
 
 .button {
@@ -94,7 +93,7 @@ $text-font-size: 2vmin;
     border: 1px solid #333;
     display: inline;
     border-radius: 0.5rem;
-    font-size: 2.8vmin;
+    font-size: $text-font-size * 1.2;
 
     &:hover {
         background-color: darken($background-color, 8%);

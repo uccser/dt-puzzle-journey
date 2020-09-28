@@ -188,9 +188,14 @@ $grid-container-border: 0.2rem solid black;
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
+        > div {
+            flex: 0 1 25%;
+        }
         .instruction-block {
             cursor: grab !important;
-            flex: 0 1 25%;
+        }
+        &.kea-blocks {
+            background-image: url('../img/plains-instruction-stack-missing-right.svg') !important;
         }
     }
     .instruction-block {

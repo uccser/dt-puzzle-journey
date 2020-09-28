@@ -6,11 +6,14 @@ import { changeStage, getRandomInt } from './utilities.mjs';
 import anime from 'animejs/lib/anime.es.js';
 import pathfinder from 'pathfinding';
 import dragula from 'dragula/dragula.js';
+import { css } from 'jquery';
 
-var require_setup = true;
+var setup_events = true;
+var setup_initial_text = true;
 var plains_substage_num, grid_data;
 const INSTRUCTION_ANIMATION_DURATION = 800;
 const INSTRUCTION_FADE = 350;
+const INSTRUCTION_MAX_COUNT = 16;
 const CELL_SPACE_VARIANTS = [
     'cell-space-a',
     'cell-space-b',
@@ -38,7 +41,8 @@ const SUBSTAGE_DATA = {
         instruction_loss_start_index: 0,
     },
     3: {
-        grid_size: 4,
+        grid_size: 6,
+        // Hard coded grid
     },
 }
 
@@ -50,11 +54,11 @@ function start(additional_parameters) {
             console.log('Additional parameters loaded.');
         }
     }
-    if (require_setup) {
+    if (setup_events) {
         // Setup buttons
         $('#stage-plains #plains-next-stage').on('click', end);
         $('#plains-run-button').on('click', runInstructions);
-        require_setup = false;
+        setup_events = false;
     }
     plains_substage_num = additional_parameters.substage || 1;
     setup(plains_substage_num);
@@ -75,7 +79,15 @@ function displayUi() {
         console.log('Displaying Plains UI.');
     }
     // Reveal UI elements
-    var ui_elements = Array.from(document.querySelector('#plains-narrative-text').children);
+    var ui_elements = [];
+    if (setup_initial_text) {
+        ui_elements.push(Array.from(document.querySelectorAll('#plains-narrative-text .initial-text')));
+        ui_elements.push(Array.from(document.querySelectorAll('#plains-narrative-text .instruction-text')));
+        setup_initial_text = false;
+    }
+    if (plains_substage_num == 3) {
+        ui_elements.push(document.getElementById('kea-text-1'));
+    }
     ui_elements.push(document.querySelector('#plains-instruction-buttons'));
     anime({
         targets: ui_elements,
@@ -96,19 +108,20 @@ function runInstructions() {
     var timeline = anime.timeline({
         easing: 'easeInOutSine',
         autoplay: false,
-        complete: checkRunInstructions,
+        complete: runInstructionsCompleted,
     });
 
     var avatar = document.getElementById('grid-avatar');
     var avatar_container = document.getElementById('grid-avatar-container');
     var instructions = document.getElementById('plains-user-instructions').children;
 
+    grid_data.completed = false;
     var heading = 0;
     var i = 0;
     var valid_sequence = true;
     var x_coord = grid_data.starting_location.x_coord;
     var y_coord = grid_data.starting_location.y_coord;
-    while (valid_sequence && i < instructions.length) {
+    while (valid_sequence && !grid_data.completed && i < instructions.length) {
         let target = avatar;
         let instruction_element = instructions[i];
         let instruction = getInstructionFromContainerElement(instruction_element);
@@ -146,6 +159,10 @@ function runInstructions() {
                         `${operator}=30%`,
                         `${opposite_operator}=30%`,
                     ];
+                } else if (coordsMatch({ x_coord: x_coord, y_coord: y_coord }, grid_data.goal_location)) {
+                    grid_data.completed = true;
+                } else {
+                    grid_data.last_coords = { x_coord: x_coord, y_coord: y_coord };
                 }
             } else if (instruction == 'L') {
                 transform = { rotate: '-=90deg' };
@@ -176,15 +193,12 @@ function runInstructions() {
         }
         i++;
     }
-    if (x_coord == grid_data.goal_location.x_coord && y_coord == grid_data.goal_location.y_coord) {
-        grid_data.completed = true;
-    };
     grid_data.avatar_heading = heading;
     timeline.play();
 }
 
 
-function checkRunInstructions() {
+function runInstructionsCompleted() {
     var avatar = document.getElementById('grid-avatar');
     var avatar_container = document.getElementById('grid-avatar-container');
     if (grid_data.completed) {
@@ -231,6 +245,15 @@ function checkRunInstructions() {
             targets: avatar_container,
             opacity: 1,
         });
+        if (coordsMatch(grid_data.last_coords, { x_coord: 2, y_coord: 5 })) {
+            anime({
+                targets: document.getElementById('kea-text-2'),
+                duration: 1000,
+                opacity: 1,
+                easing: 'linear',
+                delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
+            });
+        }
     }
 }
 
@@ -288,23 +311,49 @@ function setupAvatar() {
 function setupInstructionBlocks() {
     // Create path for user to solve
     // Replace random instructions (not first instructions)
-    var instructions = grid_data.inital_path.slice();
-    var indexes_to_replace = [];
-    var number_to_remove = Math.floor(instructions.length * grid_data.instruction_loss_rate);
-    var instruction_loss_start_index = grid_data.instruction_loss_start_index;
-    while (indexes_to_replace.length < number_to_remove) {
-        let index = getRandomInt(instruction_loss_start_index, instructions.length);
-        if (!indexes_to_replace.includes(index)) {
-            indexes_to_replace.push(index);
+    if (plains_substage_num == 3) {
+        var instructions = Array(INSTRUCTION_MAX_COUNT).fill('?');
+    } else {
+        var instructions = grid_data.inital_path.slice();
+        var indexes_to_replace = [];
+        var number_to_remove = Math.floor(instructions.length * grid_data.instruction_loss_rate);
+        var instruction_loss_start_index = grid_data.instruction_loss_start_index;
+        while (indexes_to_replace.length < number_to_remove) {
+            let index = getRandomInt(instruction_loss_start_index, instructions.length);
+            if (!indexes_to_replace.includes(index)) {
+                indexes_to_replace.push(index);
+            }
+        }
+        for (let i = 0; i < indexes_to_replace.length; i++) {
+            instructions[indexes_to_replace[i]] = '?';
         }
     }
-    for (let i = 0; i < indexes_to_replace.length; i++) {
-        instructions[indexes_to_replace[i]] = '?';
+
+    // Create source blocks
+    var source_container = document.getElementById('plains-instruction-blocks');
+    for (let i = 0; i < 3; i++) {
+        var source_block = document.createElement('div');
+        var css_class;
+        if (i == 0) {
+            source_block.classList.add('instruction-block', 'instruction-forward');
+        } else if (i == 1) {
+            source_block.classList.add('instruction-block', 'instruction-turn-left');
+        } else if (plains_substage_num == 3) {
+            source_block.classList.add('kea-block', 'instruction-turn-right');
+            // Temporary until animation added
+            source_block.style.opacity = 0;
+        } else {
+            source_block.classList.add('instruction-block', 'instruction-turn-right');
+        }
+        source_container.appendChild(source_block);
+    }
+    if (plains_substage_num == 3) {
+        source_container.classList.add('kea-blocks');
     }
 
-    // Create blocks
+    // Create user blocks
     var user_instructions = document.getElementById('plains-user-instructions');
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < INSTRUCTION_MAX_COUNT; i++) {
         let instruction_container = document.createElement('div');
         instruction_container.classList.add('instruction-container');
         if (i < instructions.length) {
@@ -328,7 +377,6 @@ function setupInstructionBlocks() {
     }
 
     var draggable_containers = Array.from(document.querySelectorAll('.instruction-user-defined'));
-    var source_container = document.getElementById('plains-instruction-blocks');
     draggable_containers.push(source_container);
 
     var drake = dragula(draggable_containers, {
@@ -337,6 +385,9 @@ function setupInstructionBlocks() {
         removeOnSpill: true,
         copy: function (el, source) {
             return source === source_container;
+        },
+        moves: function (el, source, handle, sibling) {
+            return !el.classList.contains('kea-block');
         },
         accepts: function (el, target) {
             return target !== source_container;
@@ -374,7 +425,9 @@ function setupGrid(substage_num) {
         console.log('Grid obstacle locations picked.')
     }
     // Find shortest path
-    grid_data.inital_path = shortestGridPathInstructions();
+    if (plains_substage_num != 3) {
+        grid_data.inital_path = shortestGridPathInstructions();
+    }
     // Add styling to grid cells
     styleGrid();
 
@@ -527,7 +580,30 @@ function createGridObstacles() {
             picked++;
         }
     } else if (plains_substage_num == 3) {
-
+        obstacle_coords = [
+            // Row 0
+            [0, 0],
+            [1, 0],
+            [2, 0],
+            [4, 0],
+            [5, 0],
+            // Row 1
+            [0, 1],
+            [1, 1],
+            [2, 1],
+            [4, 1],
+            [5, 1],
+            // Row 3
+            [1, 3],
+            [2, 3],
+            [4, 3],
+            // Row 4
+            [1, 4],
+            [2, 4],
+            [4, 4],
+            // Row 5
+            [4, 5],
+        ]
     } else { // plains_substage_num == 1
         // For first stage, create one obstacle in front of starting location,
         // plus all empty spots on top and bottom rows.
@@ -573,11 +649,15 @@ function coordsMatch(coords_a, coords_b) {
 }
 
 function selectGridStartingLocation(grid_size) {
-    var x_coord = getRandomInt(0, grid_size);
     if (plains_substage_num == 2) {
+        var x_coord = getRandomInt(0, grid_size);
         if (x_coord == Math.floor(grid_size / 2)) {
             x_coord++;
         }
+    } else if (plains_substage_num == 3) {
+        var x_coord = 5;
+    } else {
+        var x_coord = getRandomInt(0, grid_size);
     }
     var y_coord = grid_size - 1; // Bottom row
     return { x_coord: x_coord, y_coord: y_coord };
@@ -589,7 +669,7 @@ function selectGridGoalLocation(grid_size, starting_location) {
     if (plains_substage_num == 2) {
         var x_coord = (starting_x_coord + Math.ceil(grid_size / 2)) % (grid_size + 1);
     } else if (plains_substage_num == 3) {
-
+        var x_coord = 3;
     } else { // plains_substage_num == 1
         var possible_x_coords = [];
         if (starting_x_coord - 1 >= 0) {
@@ -666,6 +746,7 @@ function displayContinueUi() {
 function cleanUp() {
     // Only reset elements that have children added. Styles will be overwritten.
     document.getElementById('plains-grid').innerHTML = '';
+    document.getElementById('plains-instruction-blocks').innerHTML = '';
     document.getElementById('plains-user-instructions').innerHTML = '';
     document.getElementById('plains-run-button').removeAttribute('disabled');
     var elements = document.querySelectorAll('#plains-narrative-text .initial-text');

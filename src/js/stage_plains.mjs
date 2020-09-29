@@ -463,6 +463,7 @@ function styleGrid() {
     for (let y_coord = 1; y_coord < 4; y_coord += 2) {
         for (let x_coord = 2; x_coord < grid_data.grid_size + 2; x_coord++) {
             let element = document.createElement('div');
+            element.classList.add('to-cleanup');
             element.style.setProperty(
                 'grid-area',
                 `${y_coord} / ${x_coord} / ${y_coord + 1} / ${x_coord + 1}`
@@ -750,6 +751,7 @@ function cleanUp() {
     document.getElementById('plains-instruction-blocks').innerHTML = '';
     document.getElementById('plains-user-instructions').innerHTML = '';
     document.getElementById('plains-run-button').removeAttribute('disabled');
+    document.querySelectorAll('#stage-plains .to-cleanup').forEach(el => el.remove());
     var elements = document.querySelectorAll('#plains-narrative-text .initial-text');
     for (let i = 0; i < elements.length; i++) {
         elements[i].classList.add('hidden');

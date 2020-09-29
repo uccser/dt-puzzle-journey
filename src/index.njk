@@ -47,17 +47,12 @@
             </div>
             <div id="stage-landscape-view" class="stage">
                 <object id="landscape-view" type="image/svg+xml" data="img/landscape-view.svg" class="svg"></object>
-                <div id="landscape-ui-1">
-                    <p class="narrative-text">
-                        It is time to return home to my whānau
-                    </p>
+                <div id="landscape-ui">
+                    <p id="landscape-ui-narrative-text" class="narrative-text"></p>
                 </div>
-                <div id="landscape-ui-2" class="text-center">
-                    <p class="narrative-text">
-                        Not far to go now...
-                    </p>
-                    <button id='landscape-stage-end' class="button">Step into the forest</button>
-                </div>
+                <button id="landscape-view-next-stage" class="button">
+                    Step into the forest
+                </button>
             </div>
             <div id="stage-fern-interactive" class="stage">
                 <object id="fern-svg" type="image/svg+xml" data="img/fern-interactive.svg" class="svg"></object>
@@ -142,7 +137,7 @@
                     Go back up the path
                 </button>
                 <button id='fern-message-next-stage' class="button d-none">
-                    Continue down the path
+                    Head down the valley
                 </button>
                 <div id="fern-message-word-container"></div>
                 <div id="fern-message-value-container"></div>
@@ -243,7 +238,7 @@
                         I can replace them from this pile of spare steps.
                     </p>
                     <p class="instruction-text">
-                        Drag steps from the pile of spares, to create a set of instructions to reach the path at the top
+                        Drag steps from the pile of spares, to create a set of instructions to reach the path at the top.
                     </p>
                     <p id="kea-text-1" class="narrative-text">
                         It appears a kea has taken all the right arrows, I'll have to complete the instructions without them.

@@ -6,12 +6,12 @@ import { getSvg, changeStage } from './utilities.mjs';
 import anime from 'animejs/lib/anime.es.js';
 
 const ZOOM_DURATION = 30000;
-const SMOKE_FAST_DURATION = 12000;
-const SMOKE_SLOW_DURATION = 26000;
+const SMOKE_FAST_DURATION = 40000;
+const SMOKE_SLOW_DURATION = 60000;
 const TEXT_FADE_DURATION = 1000;
 const TEXT_GAP_DURATION = 1000;
 const TEXT_DURATION = 4000;
-const INITIAL_ZOOM = 10;
+const INITIAL_ZOOM = 18;
 const INITIAL_ZOOM_DELAY = (TEXT_FADE_DURATION * 2) + 3000;
 
 function start() {
@@ -139,28 +139,28 @@ function animateSmoke(svg) {
     var smoke_right_slow = svg.querySelector('#lv-smoke-right-slow');
     anime({
         targets: smoke_left_fast,
-        strokeDashoffset: [0, anime.setDashoffset],
+        strokeDashoffset: [anime.setDashoffset, 0],
         easing: 'linear',
         duration: SMOKE_FAST_DURATION,
         loop: true
     });
     anime({
         targets: smoke_right_fast,
-        strokeDashoffset: [0, anime.setDashoffset],
+        strokeDashoffset: [anime.setDashoffset, 0],
         easing: 'linear',
         duration: SMOKE_FAST_DURATION,
         loop: true
     });
     anime({
         targets: smoke_left_slow,
-        strokeDashoffset: [0, anime.setDashoffset],
+        strokeDashoffset: [anime.setDashoffset, 0],
         easing: 'linear',
         duration: SMOKE_SLOW_DURATION,
         loop: true
     });
     anime({
         targets: smoke_right_slow,
-        strokeDashoffset: [0, anime.setDashoffset],
+        strokeDashoffset: [anime.setDashoffset, 0],
         easing: 'linear',
         duration: SMOKE_SLOW_DURATION,
         loop: true

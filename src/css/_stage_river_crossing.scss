@@ -107,12 +107,12 @@
     .rope-bridge .rope+.rope:before {
         content: '';
         display: block;
-        width: 0.3vw;
+        width: 0.7vmin;
         height: 100%;
-        transform: translate(-50%, -20%);
+        transform: translateX(-50%);
         border-radius: 50%;
         background-color: #8f663a;
-        border: 0.2vw solid #7c5934;
+        border: 0.2vmin solid #7c5934;
     }
     #river-crossing-narrative-text {
         position: absolute;

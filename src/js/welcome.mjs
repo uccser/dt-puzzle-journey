@@ -1,6 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { changeStage } from './utilities.mjs';
+import { playFX } from './audio.mjs';
 
 
 function start(next_level_id, stage_data, autostart=false) {
@@ -97,6 +98,7 @@ function checkAssetIsReady(svg_id) {
 
 
 function end(next_level_id) {
+    playFX('change-stage');
     $('.stage').addClass('hidden');
     $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, function () {
         $('#welcome-ui').addClass('hidden');

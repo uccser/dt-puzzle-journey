@@ -1,6 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { getSvg, changeStage } from './utilities.mjs';
+import { playFX, playMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -24,6 +25,7 @@ function start() {
 
 
 function setup() {
+    playMusic('river');
     // Get SVG
     var svg = getSvg('river-crossing-svg');
 
@@ -55,6 +57,9 @@ function setup() {
             return !isRopeCompleted(target);
         },
     });
+    drake.on('drag', function () {
+        playFX('rope-creak');
+    });
     drake.on('dragend', checkBridgeComplete);
 
     // Setup buttons
@@ -84,6 +89,7 @@ function displayUi() {
 
 
 function checkBridgeComplete(el) {
+    playFX('rope-creak');
     var rope_container_top = document.querySelector('#river-crossing-rope-top');
     var rope_container_middle = document.querySelector('#river-crossing-rope-middle');
     var rope_container_bottom = document.querySelector('#river-crossing-rope-bottom');
@@ -91,7 +97,6 @@ function checkBridgeComplete(el) {
     var top_complete = isRopeCompleted(rope_container_top);
     var middle_complete = isRopeCompleted(rope_container_middle);
     var bottom_complete = isRopeCompleted(rope_container_bottom);
-    console.log(top_complete, middle_complete, bottom_complete);
 
     if (top_complete && middle_complete && bottom_complete) {
         displayContinueUi();

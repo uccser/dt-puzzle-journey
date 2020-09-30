@@ -1,6 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { getSvg, changeStage } from './utilities.mjs';
+import { playMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -29,6 +30,7 @@ function start() {
 
 
 function setup() {
+    playMusic('forest');
     var svg_container = document.getElementById('landscape-view');
     svg_container.style.transform = `scale(${INITIAL_ZOOM})`;
     var svg = getSvg('landscape-view');

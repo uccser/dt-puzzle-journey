@@ -2,6 +2,7 @@
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { getSvg, changeStage, getRandomInt } from './utilities.mjs';
 import { isFMSetup } from './stage_fern_message.mjs';
+import { playFX, playMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -63,6 +64,7 @@ function start() {
 
 
 function setup() {
+    playMusic('forest');
     // Setup ants
     var svg = getSvg('fern-svg');
     first_digit_ants_element = svg.querySelector('#fi-ants-10-digit');
@@ -74,6 +76,7 @@ function setup() {
 
     // Other elements
     $('#fern-container').on('click', '.fern-leaf', function () {
+        playFX('fern-flip');
         $(this).toggleClass('flipped');
         card_interactions++;
         updateDotCount();

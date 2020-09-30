@@ -1,6 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { getSvg, changeStage, setSvgElementAnchor, addStylesToSvg } from './utilities.mjs';
+import { playMusic, stopMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -92,6 +93,7 @@ function start() {
 
 
 function setup() {
+    playMusic('forest');
     $('#fern-message-previous-stage').on('click', { level_id: 'fern-interactive' }, end);
     $('#fern-message-next-stage').on('click', { level_id: 'before-river' }, end);
     $('#fern-message-check:not(:disabled)').on('click', checkValues);
@@ -329,10 +331,13 @@ function cleanUp() {
 
 
 function end(event) {
+    stopMusic('forest');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
-            cleanUp();
+            if (event.target.id == 'fern-message-next-stage') {
+                cleanUp();
+            }
             $('#stage-fern-message').addClass('hidden');
             changeStage(event.data.level_id);
         }

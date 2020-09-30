@@ -1,12 +1,12 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { changeStage, getRandomInt } from './utilities.mjs';
+import { playFX } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 import pathfinder from 'pathfinding';
 import dragula from 'dragula/dragula.js';
-import { css } from 'jquery';
 
 var setup_events = true;
 var setup_initial_text = true;
@@ -182,6 +182,9 @@ function runInstructions() {
                 var options = Object.assign({
                     targets: target,
                     duration: INSTRUCTION_ANIMATION_DURATION,
+                    begin: function() {
+                        playFX('footsteps');
+                    }
                 }, transform);
                 timeline.add(options);
             } else {

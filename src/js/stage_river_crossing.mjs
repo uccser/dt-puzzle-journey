@@ -8,6 +8,7 @@ import anime from 'animejs/lib/anime.es.js';
 import dragula from 'dragula/dragula.js';
 
 var require_setup = true;
+const EEL_SPEED = 35000;
 
 
 function start() {
@@ -44,6 +45,27 @@ function setup() {
         translateY: ['-66.6%', '0%'],
         easing: 'linear',
         duration: 8000,
+        loop: true
+    });
+
+    // Animate eel
+    let eel_container = svg.querySelector('#rc-eel');
+    let eel = eel_container.querySelector('path');
+    let eel_length = 12;
+    let eel_path_length = eel.getTotalLength();
+    eel.style.strokeDasharray = `${eel_length}%,${(1 - (eel_length / 100)) * eel_path_length}`;
+    anime({
+        targets: eel,
+        strokeDashoffset: [0, anime.setDashoffset],
+        easing: 'linear',
+        duration: EEL_SPEED,
+        loop: true
+    });
+    anime({
+        targets: eel_container,
+        translateY: ['-50%', '-10%'],
+        easing: 'linear',
+        duration: EEL_SPEED,
         loop: true
     });
 

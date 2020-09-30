@@ -73,9 +73,11 @@
             background: #ccc;
         }
         #fern-message-feedback-error-text {
+            margin-top: 1vmin;
             font-size: $text-font-size;
         }
         #fern-message-feedback-success-text {
+            margin-top: 1vmin;
             text-align: center;
             font-size: $text-font-size;
             line-height: $text-font-size * 1.5;

@@ -1,7 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { getSvg, changeStage } from './utilities.mjs';
-import { playFX, playMusic } from './audio.mjs';
+import { playFX, playMusic, stopMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -230,6 +230,7 @@ function cleanUp() {
 
 
 function end() {
+    stopMusic('river');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {

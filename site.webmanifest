@@ -1,1 +1,1 @@
-{"short_name":"","name":"","icons":[{"src":"favicon.5208b216.png","type":"image/png","sizes":"192x192"}],"start_url":"/?utm_source=homescreen","background_color":"#fafafa","theme_color":"#fafafa","orientation":"landscape","display":"fullscreen"}
+{"short_name":"","name":"","icons":[{"src":"favicon.5208b216.png","type":"image/png","sizes":"192x192"}],"start_url":"/?utm_source=homescreen","background_color":"#fafafa","theme_color":"#fafafa","display":"standalone","orientation":"landscape"}

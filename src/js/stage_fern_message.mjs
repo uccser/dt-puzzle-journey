@@ -10,14 +10,26 @@ import anime from 'animejs/lib/anime.es.js';
 import leaf_back_a from '../img/leaf-back-a.svg';
 import leaf_back_b from '../img/leaf-back-b.svg';
 import leaf_back_c from '../img/leaf-back-c.svg';
+import leaf_back_1 from '../img/leaf-1-back.svg';
+import leaf_back_2 from '../img/leaf-2-back.svg';
+import leaf_back_4 from '../img/leaf-4-back.svg';
+import leaf_back_8 from '../img/leaf-8-back.svg';
+import leaf_back_16 from '../img/leaf-16-back.svg';
+import leaf_front_a from '../img/leaf-front-a.svg';
+import leaf_front_b from '../img/leaf-front-b.svg';
+import leaf_front_c from '../img/leaf-front-c.svg';
 const LEAF_BACKS = [
     leaf_back_a,
     leaf_back_b,
     leaf_back_c,
 ]
-import leaf_front_a from '../img/leaf-front-a.svg';
-import leaf_front_b from '../img/leaf-front-b.svg';
-import leaf_front_c from '../img/leaf-front-c.svg';
+const LEAF_BACKS_WITH_DOTS = {
+    1: leaf_back_1,
+    2: leaf_back_2,
+    4: leaf_back_4,
+    8: leaf_back_8,
+    16: leaf_back_16,
+}
 const LEAF_FRONTS = [
     leaf_front_a,
     leaf_front_b,
@@ -185,6 +197,7 @@ function animateAnts(svg) {
 
 
 function createWordWithBranches(word) {
+    var fern_back_count = 0;
     var word_container = document.querySelector('#fern-message-word-container');
     var value_container = document.querySelector('#fern-message-value-container');
     for (let i = 0; i < word.length; i++) {
@@ -202,11 +215,18 @@ function createWordWithBranches(word) {
         let letter_value = DECIMAL_DICTIONARY.indexOf(letter) + 1;
         message_values.push(letter_value);
         let binary_string = letter_value.toString(2).padStart(5, '0');
-        for (let j = 0; j < binary_string.length; j++) {
+        for (let j = binary_string.length - 1; j >= 0 ; j--) {
+            var image_path;
             if (binary_string[j] == '0') {
-                var image_path = LEAF_FRONTS[Math.floor(Math.random() * LEAF_FRONTS.length)];
+                image_path = LEAF_FRONTS[Math.floor(Math.random() * LEAF_FRONTS.length)];
             } else {
-                var image_path = LEAF_BACKS[Math.floor(Math.random() * LEAF_BACKS.length)];
+                fern_back_count++;
+                if (fern_back_count % 3 == 1) {
+                    let value = Math.pow(2, j);
+                    image_path = LEAF_BACKS_WITH_DOTS[value];
+                } else {
+                    image_path = LEAF_BACKS[Math.floor(Math.random() * LEAF_BACKS.length)];
+                }
             }
             var digit_element = document.createElement('div');
             digit_element.classList.add('digit-element');

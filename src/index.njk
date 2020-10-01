@@ -58,13 +58,16 @@
                 <object id="fern-svg" type="image/svg+xml" data="img/fern-interactive.svg" class="svg"></object>
                 <div id="fern-interactive-ui-1">
                     <p class="narrative-text">
-                        I come across a group of fern leaves laid upon a large rock.
+                        A group of fern leaves has been laid upon a large rock.
                     </p>
                     <p class="narrative-text">
                         I remember my whānau telling me that I will come across a secret message informing me which path to take to find the river crossing.
                     </p>
                     <p class="narrative-text">
                         I should understand what is special about these leaves before continuing.
+                    </p>
+                    <p class="instruction-text">
+                        Click on the leaves to interact with them.
                     </p>
                 </div>
                 <div id="fern-interactive-ui-2">
@@ -73,10 +76,10 @@
                         I should understand how the numbers are formed.
                     </p>
                     <p class="narrative-text ant-text-1">
-                        I try to make the number <span id='ant-puzzle-1-goal'></span>.
+                        How do I make the number <span id='ant-puzzle-1-goal'></span>?
                     </p>
                     <p class="narrative-text ant-text-2">
-                        Righto, I try to then make the number <span id='ant-puzzle-2-goal'></span>.
+                        Ahh, that worked. What about the number <span id='ant-puzzle-2-goal'></span>?
                     </p>
                     <p class="narrative-text ant-text-3">
                         I think it's time to head further down the path now.
@@ -113,24 +116,25 @@
                 <div id="fern-message-narrative-text">
                     <p class="narrative-text initial-text">
                         I've found the secret message hanging on a rimu trunk.
-                        The dots have been rubbed off the leaves to make it harder to decipher.
+                        Some of the dots have been rubbed off the leaves to make it harder to decipher.
                     </p>
                     <p class="narrative-text initial-text">
-                        I need to figure out what the word is, so I know when to head down the valley to find the river crossing.
+                        I need to figure out what the word is, so I know which path to take down the valley to the river crossing.
                     </p>
                     <p class="narrative-text secondary-text">
-                        I might need to head back up the path if I don't understand how the code works.
-                        Maybe the fern leaves and the ants can help me.
+                        If I don't understand how the code works I might need to head back up the path.
+                        Maybe the fern leaves and the number the ants formed can help me.
                     </p>
                     <p class="instruction-text">
-                        Using the symbols on the fallen log below, figure out the word written with ferns.
+                        I need to figure out the letters – represented by the ferns – using the symbols on the fallen log below.
+                        The resulting word should tell me which path to take.
                     </p>
                 </div>
                 <div id="fern-message-narrative-text-final">
                     <p class="narrative-text">
                         Ah!
-                        Since the number has appeared on a rimu tree, I will continue down the track until I pass <span id="fern-message-word-sentence"></span> Rimu trees.
-                        Then I will head downhill to the river, and I should find the river crossing there.
+                        Since the number has appeared on a rimu tree, I will continue down the track until I pass <span id="fern-message-word-sentence"></span> rimu.
+                        I can head downhill to the river at that point, and I should find the river crossing.
                     </p>
                 </div>
                 <button id="fern-message-previous-stage" class="button">
@@ -143,10 +147,11 @@
                 <div id="fern-message-value-container"></div>
                 <div id="fern-message-feedback-container">
                     <button id="fern-message-check" class="button">
-                        Check
+                        Check the letters
                     </button>
                     <div id="fern-message-feedback-error-text" class="narrative-text">
-                        Something doesn't seem right. I need to try again.
+                        Something doesn't seem right.
+                        I need to try again.
                     </div>
                     <div id="fern-message-feedback-success-text" class="narrative-text">
                         <div id="fern-message-word"></div>
@@ -210,7 +215,7 @@
                 <object id="before-plains-svg" type="image/svg+xml" data="img/before-plains.svg" class="svg"></object>
                 <div id="before-plains-ui">
                     <p class="narrative-text">
-                        I can see the pā in the distance, but I still need to cross the large grassy plains
+                        I can see the pā in the distance, but I still need to cross the large grassy plains.
                     </p>
                     <p class="narrative-text">
                         There are obstacles everywhere.
@@ -234,19 +239,22 @@
                 <div id="plains-user-instructions"></div>
                 <div id="plains-narrative-text">
                     <p class="narrative-text initial-text">
-                        My whānau have left instructions for me, but some of them were lost in the storm.
-                        I can replace them from this pile of spare steps.
+                        My whānau have left instructions for me, but some of the instructions were lost in the storm.
+                        I can replace them from this pile of spares.
                     </p>
                     <p class="instruction-text">
                         Drag steps from the pile of spares, to create a set of instructions to reach the path at the top.
                     </p>
                     <p id="kea-text-1" class="narrative-text">
-                        It appears a kea has taken all the right arrows, I'll have to complete the instructions without them.
+                        Oh no!
+                        That kea has taken all the right arrows!
+                        I'll have to complete the instructions without them.
                         I have plenty of space for instructions, but I don't think I'll need to use them all.
                     </p>
                     <p id="kea-text-2" class="narrative-text">
                         There isn't enough room for all the instructions.
-                        There must be a quicker way to get through with the blocks I've got.
+                        There must be a quicker way to get through with the blocks I have.
+                        I wonder if I need to think creatively about how I use the arrows…
                     </p>
                 </div>
                 <div id="plains-instruction-buttons">

@@ -215,14 +215,16 @@ function createWordWithBranches(word) {
         let letter_value = DECIMAL_DICTIONARY.indexOf(letter) + 1;
         message_values.push(letter_value);
         let binary_string = letter_value.toString(2).padStart(5, '0');
-        for (let j = binary_string.length - 1; j >= 0 ; j--) {
+        for (let j = 0; j < binary_string.length; j++) {
             var image_path;
             if (binary_string[j] == '0') {
                 image_path = LEAF_FRONTS[Math.floor(Math.random() * LEAF_FRONTS.length)];
             } else {
                 fern_back_count++;
                 if (fern_back_count % 3 == 1) {
-                    let value = Math.pow(2, j);
+                    let binary_value_position = binary_string.length - 1 - j;
+                    let value = Math.pow(2, binary_value_position);
+                    console.log(value);
                     image_path = LEAF_BACKS_WITH_DOTS[value];
                 } else {
                     image_path = LEAF_BACKS[Math.floor(Math.random() * LEAF_BACKS.length)];

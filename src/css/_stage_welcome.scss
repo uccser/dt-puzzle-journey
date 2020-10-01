@@ -6,7 +6,11 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 2fr auto 1fr;
-        grid-template-areas: "header header" "notice-1-icon notice-2-icon" "notice-1 notice-2" "footer footer";
+        grid-template-areas:
+            "header header"
+            "notice-1-icon notice-2-icon"
+            "notice-1 notice-2"
+            "footer footer";
         position: absolute;
         grid-gap: 1vw;
         top: 0;
@@ -20,20 +24,6 @@
             grid-area: header;
             h1 {
                 margin: 1vmin;
-            }
-            #alpha-info {
-                background: #ffee00;
-                color: #222;
-                padding: 2%;
-                font-size: 2vmin;
-                border-radius: 2vmin;
-                p {
-                    margin-bottom: 1vmin;
-                }
-                ul {
-                    @apply pl-6;
-                    list-style-type: disc;
-                }
             }
         }
         .notice-icon {
@@ -49,13 +39,7 @@
             grid-area: notice-2-icon;
         }
         .notice {
-            h2 {
-                text-align: center;
-                margin: .5vmin;
-            }
-            p {
-                margin: 0;
-            }
+            text-align: center;
         }
         #notice-1 {
             grid-area: notice-1;
@@ -99,5 +83,19 @@
             color: red;
             padding: 0 1rem;
         }
+    }
+    @media screen and (orientation:landscape) {
+        // CSS applied when the device is in portrait mode
+        #welcome-ui {
+            grid-template-areas:
+                "header header"
+                "notice-2-icon notice-2-icon"
+                "notice-2 notice-2"
+                "footer footer";
+        }
+        #notice-1, #notice-1-icon {
+            display: none;
+        }
+
     }
 }

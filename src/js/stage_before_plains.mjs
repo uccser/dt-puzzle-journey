@@ -55,7 +55,7 @@ function end() {
         function () {
             cleanUp();
             $('#stage-before-plains').addClass('hidden');
-            changeStage('plains');
+            changeStage('plains-1');
         }
     );
 }

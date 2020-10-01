@@ -101,10 +101,9 @@ function displayUi() {
 
 function runInstructions() {
     // Disable run button
-    let run_button = document.querySelector('#plains-run-button');
-    run_button.setAttribute('disabled', 'disabled');
+    document.querySelector('#plains-run-button').setAttribute('disabled', 'disabled');
 
-    // Go through instructions and add animations to Anime.js timeline.
+    //Go through instructions and add animations to Anime.js timeline.
     var timeline = anime.timeline({
         easing: 'easeInOutSine',
         autoplay: false,
@@ -114,20 +113,21 @@ function runInstructions() {
     var avatar = document.getElementById('grid-avatar');
     var avatar_container = document.getElementById('grid-avatar-container');
     var instructions = document.getElementById('plains-user-instructions').children;
-
     grid_data.completed = false;
     var heading = 0;
     var i = 0;
     var valid_sequence = true;
     var x_coord = grid_data.starting_location.x_coord;
     var y_coord = grid_data.starting_location.y_coord;
+
     while (valid_sequence && !grid_data.completed && i < instructions.length) {
+        let transform;
         let target = avatar;
         let instruction_element = instructions[i];
         let instruction = getInstructionFromContainerElement(instruction_element);
         if (instruction) {
-            var transform = '';
             if (instruction == 'F') {
+                // Determine heading
                 if (heading == 90) {
                     x_coord++;
                 } else if (heading == 270) {
@@ -137,8 +137,11 @@ function runInstructions() {
                 } else {
                     y_coord++;
                 }
+
+                // Check if valid movement
                 valid_sequence = grid_data.pathfinding_grid.isWalkableAt(x_coord, y_coord);
-                // Animate movement
+
+                // Determine movement
                 if (heading == 90) {
                     transform = { translateX: '+=100%' };
                     target = avatar_container;
@@ -175,24 +178,33 @@ function runInstructions() {
                 targets: instruction_element,
                 duration: INSTRUCTION_FADE,
             }
-            timeline.add(Object.assign({
-                background: ['#00ff0000', '#00ff00'],
-            }, fade_options));
+            timeline.add(Object.assign(
+                {
+                    background: ['#00ff0000', '#00ff00'],
+                },
+                fade_options
+            ));
             if (transform) {
-                var options = Object.assign({
-                    targets: target,
-                    duration: INSTRUCTION_ANIMATION_DURATION,
-                    begin: function() {
-                        playFX('footsteps');
-                    }
-                }, transform);
+                var options = Object.assign(
+                    {
+                        targets: target,
+                        duration: INSTRUCTION_ANIMATION_DURATION,
+                        begin: function() {
+                            playFX('footsteps');
+                        }
+                    },
+                    transform
+                );
                 timeline.add(options);
             } else {
-                fade_options.delay = INSTRUCTION_ANIMATION_DURATION;
+                fade_options.delay = INSTRUCTION_ANIMATION_DURATION * 0.25;
             }
-            timeline.add(Object.assign({
-                background: ['#00ff00', '#00ff0000'],
-            }, fade_options));
+            timeline.add(Object.assign(
+                {
+                    background: ['#00ff00', '#00ff0000'],
+                },
+                fade_options
+            ));
         }
         i++;
     }
@@ -235,28 +247,11 @@ function runInstructionsCompleted() {
         }).add({
             targets: avatar_container,
             opacity: 0,
-        }).add({
-            targets: avatar_container,
-            translateX: 0,
-            duration: 1,
-        }).add({
-            targets: avatar,
-            translateY: 0,
-            rotate: 0,
-            duration: 1,
+            complete: setAvatarToStartPosition,
         }).add({
             targets: avatar_container,
             opacity: 1,
         });
-        if (coordsMatch(grid_data.last_coords, { x_coord: 2, y_coord: 5 })) {
-            anime({
-                targets: document.getElementById('kea-text-2'),
-                duration: 1000,
-                opacity: 1,
-                easing: 'linear',
-                delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
-            });
-        }
     }
 }
 
@@ -301,13 +296,38 @@ function getInstructionFromBlockElement(element) {
 
 
 function setupAvatar() {
-    let starting_cell = getGridElementFromCoords(grid_data.starting_location.x_coord, grid_data.starting_location.y_coord);
+    // Position in top left cell
+    let starting_cell = getGridElementFromCoords(0, 0);
     let avatar_container = document.createElement('div');
     avatar_container.id = 'grid-avatar-container';
     starting_cell.appendChild(avatar_container);
     let avatar = document.createElement('div');
     avatar.id = 'grid-avatar';
     avatar_container.appendChild(avatar);
+    setAvatarToStartPosition();
+
+    // See: https://github.com/uccser/dt-puzzle-journey/issues/19
+    // anime({
+    //     target: document.getElementById('grid-avatar-container'),
+    //     duration: 0,
+    //     translateX: `${grid_data.starting_location.x_coord * 100}%`,
+    // });
+    // anime({
+    //     target: document.getElementById('grid-avatar'),
+    //     duration: 0,
+    //     translateY: `${grid_data.starting_location.y_coord * 100}%`,
+    // });
+}
+
+
+function setAvatarToStartPosition() {
+    let avatar_container = document.getElementById('grid-avatar-container');
+    let x_transform = `${grid_data.starting_location.x_coord * 100}%`;
+    avatar_container.style.transform = `translateX(${x_transform})`;
+
+    let avatar = document.getElementById('grid-avatar');
+    let y_transform = `${grid_data.starting_location.y_coord * 100}%`;
+    avatar.style.transform = `translateY(${y_transform})`;
 }
 
 
@@ -399,10 +419,34 @@ function setupInstructionBlocks() {
     drake.on('drop', function (el, target, source, sibling) {
         target.innerHTML = '';
         target.appendChild(el);
+        if (plains_substage_num == 3) {
+            let num_instructions = 0;
+            let instructions = document.getElementById('plains-user-instructions').children;
+            for (let i = 0; i < instructions.length; i++) {
+                let instruction = getInstructionFromContainerElement(instructions[i]);
+                if (!['', '?'].includes(instruction)) {
+                    num_instructions++;
+                }
+            }
+            if (num_instructions == INSTRUCTION_MAX_COUNT) {
+                showKeaHint();
+            }
+        }
     });
     if (DEBUG) {
         console.log('Instructions block setup complete.')
     }
+}
+
+
+function showKeaHint() {
+    anime({
+        targets: document.getElementById('kea-text-2'),
+        duration: 1000,
+        opacity: 1,
+        easing: 'linear',
+        delay: anime.stagger(3000),
+    });
 }
 
 

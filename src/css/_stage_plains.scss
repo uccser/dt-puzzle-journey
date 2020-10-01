@@ -4,7 +4,7 @@ $cell-border: 0.12rem dashed darken(#9b955d, 10%);
 $container-padding: 0.5rem;
 $grid-container-border: 0.2rem solid black;
 
-#animation-container {
+#stage-plains {
     #plains-left-container {
         position: absolute;
         top: 0;
@@ -52,6 +52,7 @@ $grid-container-border: 0.2rem solid black;
                 align-items: stretch;
 
                 .cell {
+                    position: relative;
                     outline: $cell-border;
                 }
                 #grid-avatar-container {
@@ -60,6 +61,7 @@ $grid-container-border: 0.2rem solid black;
                     right: 0;
                     bottom: 0;
                     left: 0;
+                    z-index: 10;
                 }
                 #grid-avatar {
                     background-image: url('../img/plains-avatar.svg');
@@ -70,7 +72,6 @@ $grid-container-border: 0.2rem solid black;
         }
         .cell-space-entrance {
             background-image: url('../img/plains-grid-space-entrance.svg');
-            position: relative;
         }
         .cell-space-goal {
             background-image: url('../img/plains-grid-space-exit.svg');
@@ -164,11 +165,10 @@ $grid-container-border: 0.2rem solid black;
     }
     #plains-instruction-buttons {
         position: absolute;
-        top: 60%;
-        bottom: 28%;
+        top: 77%;
+        bottom: 14%;
         left: 68.8%;
         right: $container-padding;
-        padding: 1% 0;
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -176,9 +176,9 @@ $grid-container-border: 0.2rem solid black;
     }
     #plains-instruction-blocks {
         position: absolute;
-        top: 72%;
-        bottom: 14.3%;
-        left: 68.8%;
+        top: 55%;
+        bottom: 29%;
+        left: 70%;
         right: $container-padding;
         display: flex;
         justify-content: space-around;

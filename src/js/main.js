@@ -71,6 +71,7 @@ const STAGES = {
     'plains-1': {
         button_text: 'Start at the plains',
         initial_function: stagePlainsStart,
+        additional_parameters: {substage: 1},
     },
     'plains-2': {
         button_text: 'Start on the plains',

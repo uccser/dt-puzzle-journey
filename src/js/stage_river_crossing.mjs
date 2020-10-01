@@ -80,7 +80,7 @@ function setup() {
         },
     });
     drake.on('drag', function () {
-        playFX('rope-creak');
+        // playFX('rope-pickup');
     });
     drake.on('dragend', checkBridgeComplete);
 

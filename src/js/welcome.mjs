@@ -89,7 +89,7 @@ function checkAssetIsReady(svg_id) {
     let svg_element = document.querySelector('#' + svg_id);
     if (window.ready_assets.has(svg_id)) {
         return true;
-    } else if (svg_element.contentDocument.readyState == "complete") {
+    } else if (svg_element.contentDocument && svg_element.contentDocument.readyState == "complete") {
         return true;
     } else {
         return false;

@@ -97,7 +97,7 @@ function displayUi() {
     if (DEBUG) {
         console.log('Displaying Fern Interactive UI.');
     }
-    var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-1 .narrative-text'));
+    var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-1 p'));
     anime({
         targets: ui_elements,
         opacity: 1,

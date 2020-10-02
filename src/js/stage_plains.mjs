@@ -162,7 +162,7 @@ function runInstructions() {
                         `${operator}=30%`,
                         `${opposite_operator}=30%`,
                     ];
-                } else if (coordsMatch({ x_coord: x_coord, y_coord: y_coord }, grid_data.goal_location)) {
+                } else if (coordsMatch({ x_coord: x_coord, y_coord: y_coord }, grid_data.goal_location) && heading == 0) {
                     grid_data.completed = true;
                 } else {
                     grid_data.last_coords = { x_coord: x_coord, y_coord: y_coord };
@@ -566,16 +566,26 @@ function shortestGridPathInstructions() {
         }
 
         // Add 270 instead of minus 90 to ensure positive number for modulo
-        if ((heading + 270) % 360 == required_heading) {
-            instructions.push('L');
-        } else if ((heading + 90) % 360 == required_heading) {
-            instructions.push('R');
-        } else if ((heading + 180) % 360 == required_heading) {
-            instructions.push('L', 'L');
-        }
+        instructions = adjustHeading(instructions, heading, required_heading);
         instructions.push('F');
         [prev_x_coord, prev_y_coord] = [x_coord, y_coord];
         heading = required_heading;
+    }
+    // Turn to face path
+    instructions = adjustHeading(instructions, heading, 0);
+    console.log(instructions);
+    return instructions;
+}
+
+
+function adjustHeading(instructions, heading, required_heading) {
+    // Add 270 instead of minus 90 to ensure positive number for modulo
+    if ((heading + 270) % 360 == required_heading) {
+        instructions.push('L');
+    } else if ((heading + 90) % 360 == required_heading) {
+        instructions.push('R');
+    } else if ((heading + 180) % 360 == required_heading) {
+        instructions.push('L', 'L');
     }
     return instructions;
 }

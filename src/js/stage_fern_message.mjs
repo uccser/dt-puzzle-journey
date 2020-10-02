@@ -353,11 +353,11 @@ function cleanUp() {
 
 
 function end(event) {
-    stopMusic('forest');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
             if (event.target.id == 'fern-message-next-stage') {
+                stopMusic('forest');
                 cleanUp();
             }
             $('#stage-fern-message').addClass('hidden');

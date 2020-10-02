@@ -184,7 +184,7 @@ function createRopeLengths() {
 
     // Create two ropes of 3 pieces
     for (let i = 0; i < 2; i++) {
-        let rope_a = anime.random(21, 66);
+        let rope_a = anime.random(41, 66);
         let remaining = combined_rope_length - rope_a;
         let rope_b = Math.floor(anime.random(remaining * 0.4, remaining * 0.6));
         let rope_c = combined_rope_length - rope_a - rope_b;

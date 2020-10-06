@@ -105,7 +105,15 @@ function setup() {
     drake.on('drag', function () {
         playFX('rope-pickup');
     });
-    drake.on('dragend', checkBridgeComplete);
+    drake.on('dragend', function () {
+        checkBridgeComplete();
+    });
+    drake.on('drop', function (el, target, source, sibling) {
+        playRopeSound(target);
+    });
+    drake.on('cancel', function (el, container, source) {
+        playRopeSound(container);
+    });
 
     // Setup buttons
     $('#stage-river-crossing #river-crossing-next-stage').on('click', end);
@@ -113,6 +121,16 @@ function setup() {
 
     if (DEBUG) {
         console.log('River crossing setup complete.');
+    }
+}
+
+
+function playRopeSound(container) {
+    if (container.classList.contains('rope-bridge')) {
+        playFX('rope-creak');
+
+    } else {
+        playFX('rope-pickup');
     }
 }
 
@@ -135,7 +153,6 @@ function displayUi() {
 
 
 function checkBridgeComplete(el) {
-    playFX('rope-creak');
     var rope_container_top = document.querySelector('#river-crossing-rope-top');
     var rope_container_middle = document.querySelector('#river-crossing-rope-middle');
     var rope_container_bottom = document.querySelector('#river-crossing-rope-bottom');

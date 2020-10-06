@@ -61,9 +61,9 @@ function setup() {
     anime({
         targets: reeds,
         scaleY: [1.2, 2.6],
-        duration: 2400,
+        duration: 1800,
         direction: 'alternate',
-        easing: 'easeInOutSine',
+        easing: 'cubicBezier(1,0,.82,1.16)',
         loop: true,
     });
 

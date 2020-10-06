@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage } from './utilities.mjs';
+import { getSvg, changeStage, setSvgElementAnchor } from './utilities.mjs';
 import { playFX, playMusic } from './audio.mjs';
 
 // Import third party libraries
@@ -59,6 +59,23 @@ function setup() {
         easing: 'linear',
         duration: 8000,
         loop: true
+    });
+
+    // Animate reeds
+    var reeds = [
+        svg.querySelector('#br-reeds-1'),
+    ]
+    reeds.forEach(function (reed_element) {
+        setSvgElementAnchor(reed_element);
+        reed_element.style.transformOrigin = 'bottom left';
+    });
+    anime({
+        targets: reeds,
+        skewX: [0, '-10deg'],
+        duration: 1800,
+        direction: 'alternate',
+        easing: 'cubicBezier(1,0,.82,1.16)',
+        loop: true,
     });
 }
 

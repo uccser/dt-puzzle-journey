@@ -162,8 +162,6 @@ function runInstructions() {
                         `${operator}=30%`,
                         `${opposite_operator}=30%`,
                     ];
-                } else if (coordsMatch({ x_coord: x_coord, y_coord: y_coord }, grid_data.goal_location) && heading == 0) {
-                    grid_data.completed = true;
                 } else {
                     grid_data.last_coords = { x_coord: x_coord, y_coord: y_coord };
                 }
@@ -205,6 +203,9 @@ function runInstructions() {
                 },
                 fade_options
             ));
+            if (coordsMatch({ x_coord: x_coord, y_coord: y_coord }, grid_data.goal_location) && heading == 0) {
+                grid_data.completed = true;
+            }
         }
         i++;
     }
@@ -217,25 +218,13 @@ function runInstructionsCompleted() {
     var avatar = document.getElementById('grid-avatar');
     var avatar_container = document.getElementById('grid-avatar-container');
     if (grid_data.completed) {
-        var timeline = anime.timeline({
-            easing: 'easeInOutSine',
-            autoplay: false,
-            complete: displayContinueUi,
-        });
-        // If avatar is not facing right direction
-        if (grid_data.avatar_heading) {
-            timeline.add({
-                targets: avatar,
-                rotate: 0,
-                duration: INSTRUCTION_ANIMATION_DURATION,
-            });
-        }
-        timeline.add({
+        anime({
             targets: avatar,
+            easing: 'easeInOutSine',
             translateY: '-=200%',
             duration: INSTRUCTION_ANIMATION_DURATION * 2,
+            complete: displayContinueUi,
         });
-        timeline.play();
     } else {
         anime.timeline({
             easing: 'linear',

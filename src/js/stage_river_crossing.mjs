@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage, hideUiElements } from './utilities.mjs';
+import { getSvg, changeStage, hideUiElements, setSvgElementAnchor } from './utilities.mjs';
 import { playFX, playMusic, stopMusic } from './audio.mjs';
 
 // Import third party libraries
@@ -32,8 +32,8 @@ function setup() {
     var svg = getSvg('river-crossing-svg');
 
     // Animate water
-    var water_top = svg.querySelector('#water-top');
-    var water_middle = svg.querySelector('#water-middle');
+    var water_top = svg.querySelector('#rc-water-top');
+    var water_middle = svg.querySelector('#rc-water-middle');
     anime({
         targets: water_top,
         translateY: ['-66.6%', '0%'],
@@ -47,6 +47,24 @@ function setup() {
         easing: 'linear',
         duration: 8000,
         loop: true
+    });
+
+    // Animate reeds
+    var reeds = [
+        svg.querySelector('#rc-reeds-1'),
+        svg.querySelector('#rc-reeds-2'),
+        svg.querySelector('#rc-reeds-3'),
+    ]
+    reeds.forEach(function (reed_element) {
+        setSvgElementAnchor(reed_element);
+    });
+    anime({
+        targets: reeds,
+        scaleY: [1.2, 2.6],
+        duration: 2400,
+        direction: 'alternate',
+        easing: 'easeInOutSine',
+        loop: true,
     });
 
     // Animate eel
@@ -85,7 +103,7 @@ function setup() {
         },
     });
     drake.on('drag', function () {
-        // playFX('rope-pickup');
+        playFX('rope-pick-up');
     });
     drake.on('dragend', checkBridgeComplete);
 
@@ -238,6 +256,7 @@ function hintRopes() {
         rope_containers[i].append(rope);
         rope.classList.remove('draggable');
     }
+    playFX('rope-creak');
     hideUiElements(document.querySelector('#river-crossing-help-me'));
 }
 
@@ -269,6 +288,7 @@ function cleanUp() {
 
 
 function end() {
+    playFX('change-stage');
     stopMusic('river');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,

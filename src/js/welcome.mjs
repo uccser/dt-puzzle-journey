@@ -150,7 +150,6 @@ function cleanUp() {
 
 
 function end(next_level_id) {
-    playFX('change-stage');
     $('.stage').addClass('hidden');
     $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, function () {
         $('#welcome-ui').addClass('hidden');

@@ -1,7 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { changeStage, getRandomInt } from './utilities.mjs';
-import { playFX } from './audio.mjs';
+import { playFX, playMusic, stopMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -67,6 +67,7 @@ function start(additional_parameters) {
 }
 
 function setup(substage_num) {
+    playMusic('plains');
     // Create grid
     setupGrid(substage_num);
     setupInstructionBlocks();
@@ -188,7 +189,7 @@ function runInstructions() {
                         targets: target,
                         duration: INSTRUCTION_ANIMATION_DURATION,
                         begin: function() {
-                            playFX('footsteps');
+                            playFX('steps');
                         }
                     },
                     transform
@@ -218,6 +219,7 @@ function runInstructionsCompleted() {
     var avatar = document.getElementById('grid-avatar');
     var avatar_container = document.getElementById('grid-avatar-container');
     if (grid_data.completed) {
+        playFX('change-stage');
         anime({
             targets: avatar,
             easing: 'easeInOutSine',
@@ -406,6 +408,7 @@ function setupInstructionBlocks() {
         }
     });
     drake.on('drop', function (el, target, source, sibling) {
+        playFX('click');
         target.innerHTML = '';
         target.appendChild(el);
         if (plains_substage_num == 3) {
@@ -814,6 +817,7 @@ function end() {
                 cleanUp();
                 changeStage(`plains-${plains_substage_num + 1}`);
             } else {
+                stopMusic('plains');
                 // Completed all stages
                 location.assign("./complete/index.html");
             }

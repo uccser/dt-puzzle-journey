@@ -1,7 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { changeStage } from './utilities.mjs';
-import { playMusic } from './audio.mjs';
+import { getSvg, changeStage } from './utilities.mjs';
+import { playFX, playMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -24,6 +24,7 @@ function start() {
 
 function setup() {
     playMusic('river');
+
     // Setup buttons
     $('#stage-before-river #before-river-next-stage').on('click', end);
     if (DEBUG) {
@@ -37,6 +38,27 @@ function setup() {
         delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
         easing: 'linear',
         complete: displayContinueUi,
+    });
+
+    // Get SVG
+    var svg = getSvg('before-river-svg');
+
+    // Animate water
+    var water_top = svg.querySelector('#br-water-top');
+    var water_middle = svg.querySelector('#br-water-middle');
+    anime({
+        targets: water_top,
+        translateX: ['-66.6%', '0%'],
+        easing: 'linear',
+        duration: 4000,
+        loop: true
+    });
+    anime({
+        targets: water_middle,
+        translateX: ['-66.6%', '0%'],
+        easing: 'linear',
+        duration: 8000,
+        loop: true
     });
 }
 
@@ -52,6 +74,7 @@ function cleanUp() {
 
 
 function end() {
+    playFX('change-stage');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {

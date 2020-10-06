@@ -254,6 +254,7 @@ function animateAnts(svg) {
 
 
 function end() {
+    playFX('change-stage');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {

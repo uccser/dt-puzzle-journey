@@ -1,6 +1,12 @@
 @import '_constants';
 
 #animation-container {
+    #before-river-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+    }
     #before-river-ui {
         position: absolute;
         top: 1%;

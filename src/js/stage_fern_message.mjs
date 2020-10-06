@@ -353,6 +353,7 @@ function cleanUp() {
 
 
 function end(event) {
+    playFX('change-stage');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {

@@ -1,6 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { changeStage } from './utilities.mjs';
+import { playMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -22,6 +23,7 @@ function start() {
 
 
 function setup() {
+    playMusic('plains');
     // Setup buttons
     $('#stage-before-plains #before-plains-next-stage').on('click', end);
     if (DEBUG) {
@@ -50,6 +52,7 @@ function cleanUp() {
 
 
 function end() {
+    playFX('change-stage');
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {

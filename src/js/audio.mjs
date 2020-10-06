@@ -25,9 +25,17 @@ const AUDIO_FX = {
     'rope-creak': new Howl({
         src: [require('../audio/fx-rope-creak.wav')],
     }),
-    'rope-pick-up': new Howl({
-        src: [require('../audio/fx-rope-pick-up.wav')],
-    }),
+    'rope-pickup': [
+        new Howl({
+            src: [require('../audio/fx-rope-pickup-1.wav')],
+        }),
+        new Howl({
+            src: [require('../audio/fx-rope-pickup-2.wav')],
+        }),
+        new Howl({
+            src: [require('../audio/fx-rope-pickup-3.wav')],
+        }),
+    ],
     'steps': [
         new Howl({
             src: [require('../audio/fx-steps-1.wav')],

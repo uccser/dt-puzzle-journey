@@ -103,7 +103,7 @@ function setup() {
         },
     });
     drake.on('drag', function () {
-        playFX('rope-pick-up');
+        playFX('rope-pickup');
     });
     drake.on('dragend', checkBridgeComplete);
 

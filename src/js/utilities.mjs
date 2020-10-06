@@ -1,4 +1,7 @@
-import { DEBUG } from './constants.mjs';
+import { DEBUG, UI_FADE_DURATION } from './constants.mjs';
+
+// Import third party libraries
+import anime from 'animejs/lib/anime.es.js';
 
 
 export function getSvg(id) {
@@ -76,4 +79,24 @@ export function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+
+export function showUiElements(ui_elements) {
+    // Fade UI elements from white to colour, also with scaling.
+
+}
+
+
+export function hideUiElements(ui_elements) {
+    // Fade UI elements until hidden
+    if (typeof ui_elements != Array) {
+        ui_elements = [ui_elements];
+    }
+    anime({
+        targets: ui_elements,
+        duration: UI_FADE_DURATION,
+        easing: 'linear',
+        opacity: [1, 0],
+    })
 }

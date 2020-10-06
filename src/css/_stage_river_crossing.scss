@@ -147,8 +147,13 @@
     }
     #river-crossing-next-stage {
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: 1%;
+        right: 1%;
+    }
+    #river-crossing-help-me {
+        position: absolute;
+        bottom: 1%;
+        left: 1%;
     }
     .gu-mirror {
         background-image: url('../img/flax-rope-bundle-asset.svg') !important;

@@ -111,6 +111,9 @@ $text-opacity: 0.9;
         color: #aaa;
         cursor: not-allowed;
     }
+    &.button-sm {
+        font-size: $text-font-size * 0.8;
+    }
 }
 
 .credits {

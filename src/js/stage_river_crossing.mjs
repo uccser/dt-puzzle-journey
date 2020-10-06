@@ -1,12 +1,13 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage } from './utilities.mjs';
+import { getSvg, changeStage, hideUiElements } from './utilities.mjs';
 import { playFX, playMusic, stopMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 import dragula from 'dragula/dragula.js';
 
+var rope_data;
 var require_setup = true;
 const EEL_SPEED = 35000;
 
@@ -70,11 +71,15 @@ function setup() {
     });
 
     // Create ropes
+    rope_data = {};
     createRopes();
     var rope_containers = document.querySelectorAll('.rope-container');
     var drake = dragula(Array.from(rope_containers), {
         mirrorContainer: document.querySelector('#stage-river-crossing'),
         direction: 'horizontal',
+        moves: function (rope, source, handle, sibling) {
+            return rope.classList.contains('draggable');
+        },
         accepts: function (rope, target, source, sibling) {
             return !isRopeCompleted(target);
         },
@@ -86,6 +91,7 @@ function setup() {
 
     // Setup buttons
     $('#stage-river-crossing #river-crossing-next-stage').on('click', end);
+    $('#stage-river-crossing #river-crossing-help-me').on('click', hintRopes);
 
     if (DEBUG) {
         console.log('River crossing setup complete.');
@@ -150,7 +156,7 @@ function createRopes() {
         let length = rope_lengths[i];
         let rope_element = document.createElement('div');
         rope_element.dataset.length = length;
-        rope_element.classList.add('rope');
+        rope_element.classList.add('rope', 'draggable');
         rope_element.style.flexBasis = length.toString() + '%';
 
         let value_element = document.createElement('div');
@@ -167,6 +173,7 @@ function createRopes() {
 function createRopeLengths() {
     // Create 7 rope lengths, creating three lots of 100cms.
     var rope_lengths = [];
+    var initial_rope_lengths = [];
     // Length of one rope (multiple required for bridge).
     var combined_rope_length = 100;
 
@@ -178,6 +185,9 @@ function createRopeLengths() {
         rope_total_length += rope_length;
         rope_lengths.push(rope_length);
         rope_count++;
+        if (rope_count == 1) {
+            initial_rope_lengths.push(rope_length);
+        }
     }
     let rope_remaining = combined_rope_length - rope_total_length;
     rope_lengths.push(rope_remaining);
@@ -185,12 +195,13 @@ function createRopeLengths() {
     // Create two ropes of 3 pieces
     for (let i = 0; i < 2; i++) {
         let rope_a = anime.random(41, 66);
+        initial_rope_lengths.push(rope_a);
         let remaining = combined_rope_length - rope_a;
         let rope_b = Math.floor(anime.random(remaining * 0.4, remaining * 0.6));
         let rope_c = combined_rope_length - rope_a - rope_b;
         rope_lengths.push(rope_a, rope_b, rope_c);
     }
-
+    rope_data.initial_rope_lengths = initial_rope_lengths;
     return shuffle(rope_lengths);
 }
 
@@ -207,6 +218,27 @@ function shuffle(a) {
         a[j] = x;
     }
     return a;
+}
+
+
+function hintRopes() {
+    var hint_rope_lengths = rope_data.initial_rope_lengths;
+    var initial_container = document.querySelector('#river-crossing-bank');
+    var rope_containers = [
+        document.querySelector('#river-crossing-rope-top'),
+        document.querySelector('#river-crossing-rope-middle'),
+        document.querySelector('#river-crossing-rope-bottom'),
+    ];
+    for (let i = 0; i < rope_containers.length; i++) {
+        initial_container.append(...rope_containers[i].childNodes);
+    }
+    for (let i = 0; i < hint_rope_lengths.length; i++) {
+        let rope_length = hint_rope_lengths[i];
+        let rope = document.querySelector(`#stage-river-crossing .rope[data-length="${rope_length}"]`);
+        rope_containers[i].append(rope);
+        rope.classList.remove('draggable');
+    }
+    hideUiElements(document.querySelector('#river-crossing-help-me'));
 }
 
 

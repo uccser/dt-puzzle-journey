@@ -1,7 +1,7 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { changeStage } from './utilities.mjs';
-import { playMusic } from './audio.mjs';
+import { playMusic, playFX } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';

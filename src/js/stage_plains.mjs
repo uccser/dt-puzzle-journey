@@ -179,7 +179,7 @@ function runInstructions() {
             }
             timeline.add(Object.assign(
                 {
-                    background: ['#00ff0000', '#00ff00'],
+                    backgroundColor: ['#00ff0000', '#00ff00'],
                 },
                 fade_options
             ));
@@ -200,7 +200,7 @@ function runInstructions() {
             }
             timeline.add(Object.assign(
                 {
-                    background: ['#00ff00', '#00ff0000'],
+                    backgroundColor: ['#00ff00', '#00ff0000'],
                 },
                 fade_options
             ));

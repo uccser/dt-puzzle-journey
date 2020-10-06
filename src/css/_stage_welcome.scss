@@ -4,8 +4,8 @@
     #welcome-ui {
         background-color: $background-color;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto 2fr auto 1fr;
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 30% 30% 20% 20%;
         grid-template-areas:
             "header header"
             "notice-1-icon notice-2-icon"
@@ -27,8 +27,9 @@
             }
         }
         .notice-icon {
-            height: 100%;
+            object-fit: contain;
             width: 100%;
+            max-height: 100%;
         }
         #notice-1-icon {
             grid-area: notice-1-icon;
@@ -94,7 +95,7 @@
                 "footer footer";
         }
         #notice-1, #notice-1-icon {
-            display: none;
+            display: none !important;
         }
 
     }

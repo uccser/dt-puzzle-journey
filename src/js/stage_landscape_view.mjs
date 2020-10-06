@@ -15,6 +15,7 @@ const TEXT_DURATION = 4000;
 const INITIAL_ZOOM = 18;
 const INITIAL_ZOOM_DELAY = (TEXT_FADE_DURATION * 2) + 3000;
 
+
 function start() {
     $('#stage-landscape-view').removeClass('hidden');
 

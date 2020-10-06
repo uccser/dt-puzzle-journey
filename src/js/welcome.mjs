@@ -3,12 +3,16 @@ import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { changeStage } from './utilities.mjs';
 import { playFX } from './audio.mjs';
 
+// Import third party libraries
+import anime from 'animejs/lib/anime.es.js';
+
 
 function start(next_level_id, stage_data, autostart=false) {
     if (DEBUG) {
         console.log('Displaying Welcome UI.');
     }
     $('#welcome-ui').removeClass('hidden');
+    animateIcons();
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
 
     $('#welcome-end').on('click', function () { end(next_level_id); });
@@ -97,11 +101,60 @@ function checkAssetIsReady(svg_id) {
 }
 
 
+function animateIcons() {
+    let landscape_icon = document.querySelector('#landscape-icon');
+    anime.timeline({
+        loop: true,
+    }).add({
+        targets: landscape_icon,
+        duration: 500,
+        opacity: [0, 1],
+        easing: 'linear',
+    }).add({
+        targets: landscape_icon,
+        duration: 1000,
+        endDelay: 1000,
+        rotate: ['0deg', '-90deg'],
+        easing: 'easeInOutSine',
+    }).add({
+        targets: landscape_icon,
+        duration: 500,
+        endDelay: 500,
+        opacity: [1, 0],
+        easing: 'linear',
+    });
+
+    let sound_icon = document.querySelector('#sound-icon');
+    anime.timeline({
+        loop: true,
+    }).add({
+        targets: sound_icon,
+        duration: 2000,
+        endDelay: 500,
+        scale: [0.7, 1],
+        opacity: [0, 1],
+        easing: 'easeOutCirc',
+    }).add({
+        targets: sound_icon,
+        opacity: [1, 0],
+        easing: 'linear',
+        duration: 500,
+        endDelay: 500,
+    });
+}
+
+
+function cleanUp() {
+    document.getElementById('welcome-ui').innerHTML = '';
+}
+
+
 function end(next_level_id) {
     playFX('change-stage');
     $('.stage').addClass('hidden');
     $('#animation-blindfold').fadeIn(BLINDFOLD_FADE_DURATION, function () {
         $('#welcome-ui').addClass('hidden');
+        cleanUp();
         changeStage(next_level_id);
     });
 }

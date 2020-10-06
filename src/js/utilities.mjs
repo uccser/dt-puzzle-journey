@@ -1,4 +1,9 @@
-import { DEBUG, UI_FADE_DURATION } from './constants.mjs';
+import {
+    DEBUG,
+    UI_FADE_DURATION,
+    SMOKE_FAST_DURATION,
+    SMOKE_SLOW_DURATION,
+} from './constants.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -79,6 +84,28 @@ export function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+
+export function animateSmoke(fast_smoke, slow_smoke) {
+    fast_smoke.forEach(function (smoke_element) {
+        anime({
+            targets: smoke_element,
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'linear',
+            duration: SMOKE_FAST_DURATION,
+            loop: true
+        });
+    });
+    slow_smoke.forEach(function (smoke_element) {
+        anime({
+            targets: smoke_element,
+            strokeDashoffset: [anime.setDashoffset, 0],
+            easing: 'linear',
+            duration: SMOKE_SLOW_DURATION,
+            loop: true
+        });
+    });
 }
 
 

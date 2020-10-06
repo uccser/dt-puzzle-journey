@@ -813,13 +813,13 @@ function end() {
     $('#animation-blindfold').fadeIn(
         BLINDFOLD_FADE_DURATION,
         function () {
+            cleanUp();
             if (plains_substage_num + 1 in SUBSTAGE_DATA) {
-                cleanUp();
                 changeStage(`plains-${plains_substage_num + 1}`);
             } else {
                 stopMusic('plains');
-                // Completed all stages
-                location.assign("./complete/index.html");
+                $('#stage-plains').addClass('hidden');
+                changeStage('before-pa');
             }
         }
     );

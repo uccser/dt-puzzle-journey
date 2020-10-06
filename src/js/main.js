@@ -36,6 +36,7 @@ import { start as stageBeforeRiverStart } from './stage_before_river.mjs';
 import { start as stageRiverCrossingStart } from './stage_river_crossing.mjs';
 import { start as stageBeforePlainsStart } from './stage_before_plains.mjs';
 import { start as stagePlainsStart } from './stage_plains.mjs';
+import { start as stageBeforePaStart } from './stage_before_pa.mjs';
 
 console.log('DEBUG is set to ' + DEBUG + '.');
 
@@ -82,6 +83,10 @@ const STAGES = {
         button_text: 'Start on the plains',
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 3},
+    },
+    'before-pa': {
+        button_text: 'Start at the pā',
+        initial_function: stageBeforePaStart,
     },
 };
 var default_stage = 'landscape-view';

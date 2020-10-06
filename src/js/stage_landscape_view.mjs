@@ -1,14 +1,13 @@
 // Import modules
-import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage } from './utilities.mjs';
+import { DEBUG, BLINDFOLD_FADE_DURATION, BLINDFOLD_SLOW_FADE_DURATION } from './constants.mjs';
+import { getSvg, changeStage, animateSmoke } from './utilities.mjs';
 import { playMusic, playFX } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
 const ZOOM_DURATION = 30000;
-const SMOKE_FAST_DURATION = 40000;
-const SMOKE_SLOW_DURATION = 60000;
+
 const TEXT_FADE_DURATION = 1000;
 const TEXT_GAP_DURATION = 1000;
 const TEXT_DURATION = 4000;
@@ -24,7 +23,7 @@ function start() {
     });
     setup();
     $('#animation-blindfold').fadeOut(
-        BLINDFOLD_FADE_DURATION * 5,
+        BLINDFOLD_SLOW_FADE_DURATION,
         animateLandscapeView
     );
 }
@@ -33,10 +32,20 @@ function start() {
 function setup() {
     playMusic('forest');
     playMusic('opening');
-    var svg_container = document.getElementById('landscape-view');
+    var svg_container = document.getElementById('landscape-view-svg');
     svg_container.style.transform = `scale(${INITIAL_ZOOM})`;
-    var svg = getSvg('landscape-view');
-    animateSmoke(svg);
+
+    // Animate smoke
+    var svg = getSvg('landscape-view-svg');
+    var fast_smoke = [
+        svg.querySelector('#lv-smoke-left-fast'),
+        svg.querySelector('#lv-smoke-right-fast'),
+    ];
+    var slow_smoke = [
+        svg.querySelector('#lv-smoke-left-slow'),
+        svg.querySelector('#lv-smoke-right-slow'),
+    ];
+    animateSmoke(fast_smoke, slow_smoke);
 }
 
 
@@ -44,7 +53,7 @@ function animateLandscapeView() {
     if (DEBUG) {
         console.log('Landscape view loaded.');
     }
-    var svg_container = document.getElementById('landscape-view');
+    var svg_container = document.getElementById('landscape-view-svg');
     var text_container = document.getElementById('landscape-ui-narrative-text');
     var next_stage_button = document.getElementById('landscape-view-next-stage');
     setText('It is time to return home to my whānau after a long time away...');
@@ -133,42 +142,6 @@ function animateLandscapeView() {
 function setText(string) {
     var text_container = document.getElementById('landscape-ui-narrative-text');
     text_container.innerText = string;
-}
-
-
-function animateSmoke(svg) {
-    var smoke_left_fast = svg.querySelector('#lv-smoke-left-fast');
-    var smoke_right_fast = svg.querySelector('#lv-smoke-right-fast');
-    var smoke_left_slow = svg.querySelector('#lv-smoke-left-slow');
-    var smoke_right_slow = svg.querySelector('#lv-smoke-right-slow');
-    anime({
-        targets: smoke_left_fast,
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'linear',
-        duration: SMOKE_FAST_DURATION,
-        loop: true
-    });
-    anime({
-        targets: smoke_right_fast,
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'linear',
-        duration: SMOKE_FAST_DURATION,
-        loop: true
-    });
-    anime({
-        targets: smoke_left_slow,
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'linear',
-        duration: SMOKE_SLOW_DURATION,
-        loop: true
-    });
-    anime({
-        targets: smoke_right_slow,
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'linear',
-        duration: SMOKE_SLOW_DURATION,
-        loop: true
-    });
 }
 
 

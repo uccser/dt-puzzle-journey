@@ -276,16 +276,16 @@ function checkValues() {
         easing: 'linear',
         background: function (element) {
             if (element.dataset.valid == 'true') {
-                return '#acd890';
+                return ['#deded1', '#acd890'];
             } else {
-                return '#e28686'
+                return ['#deded1', '#e28686'];
             }
         },
         borderColor: function (element) {
             if (element.dataset.valid == 'true') {
                 return '#4ba512';
             } else {
-                return '#ce1919'
+                return '#ce1919';
             }
         },
         begin: function() {

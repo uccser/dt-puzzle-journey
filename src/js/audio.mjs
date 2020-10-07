@@ -6,83 +6,143 @@ const FADE_DURATION = 2000;
 const MUSIC_VOLUME = 0.8;
 const AUDIO_FX = {
     'change-stage': new Howl({
-        src: [require('../audio/fx-stage-change-2.wav')],
+        src: [
+            require('../audio/fx-stage-change-2.mp3'),
+            require('../audio/fx-stage-change-2.wav'),
+        ],
     }),
     'click': new Howl({
-        src: [require('../audio/fx-click.wav')],
+        src: [
+            require('../audio/fx-click.mp3'),
+            require('../audio/fx-click.wav'),
+        ],
     }),
     'incorrect': new Howl({
-        src: [require('../audio/fx-click.wav')],
+        src: [
+            require('../audio/fx-incorrect.mp3'),
+            require('../audio/fx-click.wav'),
+        ],
     }),
     'fern-flip': [
         new Howl({
-            src: [require('../audio/fx-fern-flip-1.wav')],
+            src: [
+                require('../audio/fx-fern-flip-1.mp3'),
+                require('../audio/fx-fern-flip-1.wav'),
+            ],
         }),
         new Howl({
-            src: [require('../audio/fx-fern-flip-2.wav')],
+            src: [
+                require('../audio/fx-fern-flip-2.mp3'),
+                require('../audio/fx-fern-flip-2.wav'),
+            ],
         }),
     ],
     'rope-creak': new Howl({
-        src: [require('../audio/fx-rope-creak.wav')],
+        src: [
+            require('../audio/fx-rope-creak.mp3'),
+            require('../audio/fx-rope-creak.wav'),
+        ],
     }),
     'rope-pickup': [
         new Howl({
-            src: [require('../audio/fx-rope-pickup-1.wav')],
+            src: [
+                require('../audio/fx-rope-pickup-1.mp3'),
+                require('../audio/fx-rope-pickup-1.wav'),
+            ],
             volume: 0.3,
         }),
         new Howl({
-            src: [require('../audio/fx-rope-pickup-2.wav')],
+            src: [
+                require('../audio/fx-rope-pickup-2.mp3'),
+                require('../audio/fx-rope-pickup-2.wav'),
+            ],
             volume: 0.3,
         }),
         new Howl({
-            src: [require('../audio/fx-rope-pickup-3.wav')],
+            src: [
+                require('../audio/fx-rope-pickup-3.mp3'),
+                require('../audio/fx-rope-pickup-3.wav'),
+            ],
             volume: 0.3,
         }),
     ],
     'steps': [
         new Howl({
-            src: [require('../audio/fx-steps-1.wav')],
+            src: [
+                require('../audio/fx-steps-1.mp3'),
+                require('../audio/fx-steps-1.wav'),
+            ],
         }),
         new Howl({
-            src: [require('../audio/fx-steps-2.wav')],
+            src: [
+                require('../audio/fx-steps-2.mp3'),
+                require('../audio/fx-steps-2.wav'),
+            ],
         }),
         new Howl({
-            src: [require('../audio/fx-steps-3.wav')],
+            src: [
+                require('../audio/fx-steps-3.mp3'),
+                require('../audio/fx-steps-3.wav'),
+            ],
         }),
         new Howl({
-            src: [require('../audio/fx-steps-4.wav')],
+            src: [
+                require('../audio/fx-steps-4.mp3'),
+                require('../audio/fx-steps-4.wav'),
+            ],
         }),
     ],
     'success': new Howl({
-        src: [require('../audio/fx-success.wav')],
+        src: [
+            require('../audio/fx-success.mp3'),
+            require('../audio/fx-success.wav'),
+        ],
     }),
     'writing': new Howl({
-        src: [require('../audio/fx-writing.wav')],
+        src: [
+            require('../audio/fx-writing.mp3'),
+            require('../audio/fx-writing.wav'),
+        ],
     }),
 };
 const AUDIO_MUSIC = {
     'forest': new Howl({
-        src: [require('../audio/ambience-forest.wav')],
+        src: [
+            require('../audio/ambience-forest.mp3'),
+            require('../audio/ambience-forest.wav'),
+        ],
         loop: true,
         volume: 0,
     }),
     'river': new Howl({
-        src: [require('../audio/ambience-river.wav')],
+        src: [
+            require('../audio/ambience-river.mp3'),
+            require('../audio/ambience-river.wav'),
+        ],
         loop: true,
         volume: 0,
     }),
     'plains': new Howl({
-        src: [require('../audio/ambience-plains.wav')],
+        src: [
+            require('../audio/ambience-plains.mp3'),
+            require('../audio/ambience-plains.wav'),
+        ],
         loop: true,
         volume: 0,
     }),
     'pa': new Howl({
-        src: [require('../audio/ambience-pa.wav')],
+        src: [
+            require('../audio/ambience-pa.mp3'),
+            require('../audio/ambience-pa.wav'),
+        ],
         loop: true,
         volume: 0,
     }),
     'opening': new Howl({
-        src: [require('../audio/music-opening.wav')],
+        src: [
+            require('../audio/music-opening.mp3'),
+            require('../audio/music-opening.wav'),
+        ],
         loop: false,
         volume: 1,
     }),

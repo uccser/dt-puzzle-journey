@@ -27,7 +27,7 @@ import queryString from 'query-string';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
-import { markAssetAsReady } from './utilities.mjs';
+import { markAssetAsReady, revealContentGuide } from './utilities.mjs';
 import { start as welcomeStart } from './welcome.mjs';
 import { start as stageLandscapeViewStart } from './stage_landscape_view.mjs';
 import { start as stageFernInteractiveStart } from './stage_fern_interactive.mjs';
@@ -115,6 +115,11 @@ $(document).ready(function () {
             console.log("Given stage value '" + parameters.stage + "' is not known, reverting to first stage.")
         }
     }
+
+    if ('content-guide' in parameters) {
+        revealContentGuide();
+    }
+
     var autostart = 'autostart' in parameters;
 
     animation_container.addEventListener('journey:change_stage', run_stage);

@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION, UI_FADE_DURATION, UI_STAGGER_DEFAULT } from './constants.mjs';
-import { getSvg, animateSmoke, showUiElements } from './utilities.mjs';
+import { getSvg, animateSmoke, showUiElements, revealContentGuide } from './utilities.mjs';
 import { playMusic } from './audio.mjs';
 
 // Import third party libraries
@@ -60,20 +60,6 @@ function revealUi() {
     }
     var ui_elements = Array.from(document.querySelector('#outside-pa-ui').children);
     showUiElements(ui_elements, UI_FADE_DURATION, UI_STAGGER_DEFAULT, revealContentGuide);
-}
-
-
-function revealContentGuide() {
-    var content_guide_container = document.getElementById('content-guide');
-    content_guide_container.classList.remove('hidden');
-    content_guide_container.style.visibility = 'visible';
-    content_guide_container.style.pointerEvents = 'auto';
-    anime({
-        targets: content_guide_container,
-        duration: UI_FADE_DURATION,
-        easing: 'linear',
-        opacity: [0, 1],
-    });
 }
 
 

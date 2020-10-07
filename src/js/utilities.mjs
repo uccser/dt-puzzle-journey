@@ -185,3 +185,17 @@ export function hideUiElements(ui_elements, duration=UI_FADE_DURATION, stagger_a
     });
     timeline.play();
 }
+
+
+export function revealContentGuide() {
+    var content_guide_container = document.getElementById('content-guide');
+    content_guide_container.classList.remove('hidden');
+    content_guide_container.style.visibility = 'visible';
+    content_guide_container.style.pointerEvents = 'auto';
+    anime({
+        targets: content_guide_container,
+        duration: UI_FADE_DURATION,
+        easing: 'linear',
+        opacity: [0, 1],
+    });
+}

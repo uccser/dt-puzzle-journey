@@ -9,6 +9,7 @@ import anime from 'animejs/lib/anime.es.js';
 
 var card_interactions = 0;
 var require_setup = true;
+var display_ui = true;
 var first_digit_ants_element, second_digit_ants_element;
 var ant_puzzle_data = {
     puzzles: [
@@ -56,7 +57,7 @@ function start() {
         require_setup = false;
     }
     if (isFMSetup()) {
-        showNextStageButton();
+        showUiElements(document.getElementById('fern-interactive-next-stage'));
     }
     $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION, displayUi);
 }
@@ -93,11 +94,14 @@ function setup() {
 
 
 function displayUi() {
-    if (DEBUG) {
-        console.log('Displaying Fern Interactive UI.');
+    if (display_ui) {
+        if (DEBUG) {
+            console.log('Displaying Fern Interactive UI.');
+        }
+        var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-1 p'));
+        showUiElements(ui_elements);
+        display_ui = false;
     }
-    var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-1 p'));
-    showUiElements(ui_elements);
 }
 
 

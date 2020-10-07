@@ -94,6 +94,7 @@ const SECONDARY_TEXT_START = 75000;
 var message_word = '';
 var message_values = [];
 var fm_require_setup = true;
+var display_ui = true;
 
 function start() {
     $('#stage-fern-message').removeClass('hidden');
@@ -146,25 +147,28 @@ function isFMSetup() {
 
 
 function displayUi() {
-    if (DEBUG) {
-        console.log('Displaying Fern Message UI.');
+    if (display_ui) {
+        if (DEBUG) {
+            console.log('Displaying Fern Message UI.');
+        }
+        // Setup text for later
+        document.querySelector('#fern-message-word').textContent = message_word;
+        let word_translation = WORD_TRANSLATIONS[message_word]
+        document.querySelector('#fern-message-word-translation').textContent = word_translation;
+        document.querySelector('#fern-message-word-sentence').textContent = word_translation;
+
+        // Reveal UI elements
+        var ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .initial-text'));
+        var secondary_ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .secondary-text'));
+
+        showUiElements(ui_elements, UI_FADE_DURATION, UI_STAGGER_DEFAULT, displayControls);
+        setTimeout(function () {
+            hideUiElements(ui_elements, UI_FADE_DURATION, -500, function () {
+                showUiElements(secondary_ui_elements);
+            });
+        }, SECONDARY_TEXT_START);
+        display_ui = false;
     }
-    // Setup text for later
-    document.querySelector('#fern-message-word').textContent = message_word;
-    let word_translation = WORD_TRANSLATIONS[message_word]
-    document.querySelector('#fern-message-word-translation').textContent = word_translation;
-    document.querySelector('#fern-message-word-sentence').textContent = word_translation;
-
-    // Reveal UI elements
-    var ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .initial-text'));
-    var secondary_ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .secondary-text'));
-
-    showUiElements(ui_elements, UI_FADE_DURATION, UI_STAGGER_DEFAULT, displayControls);
-    setTimeout(function () {
-        hideUiElements(ui_elements, UI_FADE_DURATION, -500, function () {
-            showUiElements(secondary_ui_elements);
-        });
-    }, SECONDARY_TEXT_START);
 }
 
 

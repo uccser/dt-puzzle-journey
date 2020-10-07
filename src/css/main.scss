@@ -73,14 +73,13 @@ h2 {
     @extend .hidden-ui;
 }
 
-$text-opacity: 0.9;
 .instruction-text {
-    background-color: rgba(#0e5090, $text-opacity);
+    background-color: rgba(#0e5090, 0.9);
     font-style: italic;
 }
 
 .narrative-text {
-    background-color: rgba(#202020, $text-opacity);
+    background-color: rgba(#202020, 0.95);
 }
 
 .button {

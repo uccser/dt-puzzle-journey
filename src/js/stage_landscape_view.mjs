@@ -85,8 +85,8 @@ function animateLandscapeView() {
     });
 
     var line_allocated_time = ZOOM_DURATION / text_lines.length;
-    var line_fade = line_allocated_time * 0.2;
-    var line_duration = line_allocated_time * 0.6;
+    var line_fade = line_allocated_time * 0.1;
+    var line_duration = line_allocated_time * 0.8;
     revealLine(0, line_fade, line_duration);
 }
 

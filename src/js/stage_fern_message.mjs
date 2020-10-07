@@ -157,10 +157,7 @@ function displayUi() {
 
     // Reveal UI elements
     var ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .initial-text'));
-    ui_elements.push(document.querySelector('#fern-message-narrative-text .instruction-text'));
-    var secondary_ui_elements = Array.from(document.querySelector('#fern-message-narrative-text-final').children);
-    console.log(ui_elements);
-    console.log(secondary_ui_elements);
+    var secondary_ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .secondary-text'));
 
     showUiElements(ui_elements, UI_FADE_DURATION, UI_STAGGER_DEFAULT, displayControls);
     setTimeout(function () {
@@ -169,6 +166,7 @@ function displayUi() {
         });
     }, SECONDARY_TEXT_START);
 }
+
 
 function displayControls() {
     var ui_elements = Array.from(document.querySelector('#fern-message-value-container').children);
@@ -287,31 +285,19 @@ function checkValues() {
             var error_text = document.querySelector('#fern-message-feedback-error-text');
             if (values_correct) {
                 // TODO: Use timeline to stagger these, including words in success text
-                anime({
-                    targets: success_text,
-                    opacity: 1,
-                    duration: 500,
-                    easing: 'linear',
-                });
-                anime({
-                    targets: error_text,
-                    opacity: 0,
-                    duration: 500,
-                    easing: 'linear',
-                });
+                showUiElements(
+                    success_text,
+                    UI_FADE_DURATION,
+                    UI_STAGGER_DEFAULT,
+                    displayContinueUi,
+                );
+                hideUiElements(error_text);
             } else {
-                anime({
-                    targets: error_text,
-                    opacity: 1,
-                    duration: 500,
-                    easing: 'linear',
-                });
+                showUiElements(error_text);
             }
         },
         complete: function () {
-            if (values_correct) {
-                displayContinueUi();
-            } else {
+            if (!values_correct) {
                 check_button.removeAttribute('disabled');
             }
         }
@@ -322,9 +308,10 @@ function checkValues() {
 function displayContinueUi() {
     // Hide text, then display final text.
     var ui_elements_to_hide = Array.from(document.querySelectorAll('#fern-message-narrative-text'));
-    var ui_elements_to_show = Array.from(document.querySelectorAll('#fern-message-narrative-text-final'));
+    var ui_elements_to_show = Array.from(document.getElementById('fern-message-narrative-text-final').children);
+    console.log(ui_elements_to_show);
     ui_elements_to_show.push(document.getElementById('fern-message-next-stage'));
-    hideUiElements(ui_elements_to_hide, UI_FADE_DURATION, function () {
+    hideUiElements(ui_elements_to_hide, UI_FADE_DURATION, UI_STAGGER_DEFAULT,function () {
         showUiElements(ui_elements_to_show);
     });
 }

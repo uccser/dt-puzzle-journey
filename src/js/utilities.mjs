@@ -1,9 +1,11 @@
 import {
     DEBUG,
     UI_FADE_DURATION,
+    UI_STAGGER_DEFAULT,
     SMOKE_FAST_DURATION,
     SMOKE_SLOW_DURATION,
 } from './constants.mjs';
+import { playFX } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -109,21 +111,77 @@ export function animateSmoke(fast_smoke, slow_smoke) {
 }
 
 
-export function showUiElements(ui_elements) {
+export function showUiElements(ui_elements, duration=UI_FADE_DURATION,  stagger_amount=UI_STAGGER_DEFAULT, complete) {
     // Fade UI elements from white to colour, also with scaling.
-
+    if (!Array.isArray(ui_elements)) {
+        ui_elements = [ui_elements];
+    }
+    var timeline = anime.timeline({
+        duration: duration,
+        easing: 'easeOutCubic',
+        autoplay: false,
+        complete: complete,
+    });
+    var stagger_operator = '+';
+    if (stagger_amount < 0) {
+        stagger_operator = '-'
+        stagger_amount *= -1;
+    }
+    ui_elements.forEach(function (ui_element, index) {
+        // Setup animation options
+        let options = {
+            targets: ui_element,
+            opacity: [0, 1],
+            scale: [1.3, 1],
+            begin: function () {
+                ui_element.style.visibility = 'visible';
+                ui_element.style.pointerEvents = 'auto';
+                if (ui_element.classList.contains('ui-text')) {
+                    playFX('writing');
+                }
+            },
+        };
+        if (index == 0) {
+            timeline.add(options);
+        } else {
+            timeline.add(options, `${stagger_operator}=${stagger_amount}`);
+        }
+    });
+    timeline.play();
 }
 
 
-export function hideUiElements(ui_elements) {
+export function hideUiElements(ui_elements, duration=UI_FADE_DURATION, stagger_amount=UI_STAGGER_DEFAULT, complete) {
     // Fade UI elements until hidden
-    if (typeof ui_elements != Array) {
+    if (!Array.isArray(ui_elements)) {
         ui_elements = [ui_elements];
     }
-    anime({
-        targets: ui_elements,
-        duration: UI_FADE_DURATION,
-        easing: 'linear',
-        opacity: [1, 0],
-    })
+    var timeline = anime.timeline({
+        duration: duration,
+        easing: 'easeOutCubic',
+        autoplay: false,
+        complete: complete,
+    });
+    var stagger_operator = '+';
+    if (stagger_amount < 0) {
+        stagger_operator = '-'
+        stagger_amount *= -1;
+    }
+    ui_elements.forEach(function (ui_element, index) {
+        let options = {
+            targets: ui_element,
+            opacity: [1, 0],
+            scale: [1, 0.7],
+            complete: function () {
+                ui_element.style.visibility = 'hidden';
+                ui_element.style.pointerEvents = 'none';
+            }
+        };
+        if (index == 0) {
+            timeline.add(options);
+        } else {
+            timeline.add(options, `${stagger_operator}=${stagger_amount}`);
+        }
+    });
+    timeline.play();
 }

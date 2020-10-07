@@ -1,12 +1,10 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage, setSvgElementAnchor } from './utilities.mjs';
+import { getSvg, changeStage, setSvgElementAnchor, showUiElements } from './utilities.mjs';
 import { playFX, playMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
-
-var require_setup = true;
 
 
 function start() {
@@ -14,11 +12,8 @@ function start() {
     if (DEBUG) {
         console.log('Before river loaded.');
     }
-    if (require_setup) {
-        setup();
-        require_setup = false;
-    }
-    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    setup();
+    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION, revealUi);
 }
 
 
@@ -27,18 +22,6 @@ function setup() {
 
     // Setup buttons
     $('#stage-before-river #before-river-next-stage').on('click', end);
-    if (DEBUG) {
-        console.log('Displaying Before River UI.');
-    }
-    var ui_elements = Array.from(document.querySelector('#before-river-ui').children);
-    anime({
-        targets: ui_elements,
-        opacity: 1,
-        duration: 1000,
-        delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
-        easing: 'linear',
-        complete: displayContinueUi,
-    });
 
     // Get SVG
     var svg = getSvg('before-river-svg');
@@ -80,8 +63,14 @@ function setup() {
 }
 
 
-function displayContinueUi() {
-    $('#stage-before-river #before-river-next-stage').fadeIn();
+
+function revealUi() {
+    if (DEBUG) {
+        console.log('Displaying Before River UI.');
+    }
+    var ui_elements = Array.from(document.querySelector('#before-river-ui').children)
+    ui_elements.push(document.getElementById('before-river-next-stage'));
+    showUiElements(ui_elements);
 }
 
 

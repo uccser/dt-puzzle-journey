@@ -16,11 +16,6 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
-
-        // Hide direct descendants
-        & > * {
-            opacity: 0;
-        }
     }
     #before-river-next-stage {
         position: absolute;

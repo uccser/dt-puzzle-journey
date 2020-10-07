@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage, getRandomInt } from './utilities.mjs';
+import { getSvg, changeStage, getRandomInt, showUiElements } from './utilities.mjs';
 import { isFMSetup } from './stage_fern_message.mjs';
 import { playFX, playMusic } from './audio.mjs';
 
@@ -53,13 +53,12 @@ function start() {
     }
     if (require_setup) {
         setup();
-        displayUi();
         require_setup = false;
     }
     if (isFMSetup()) {
         showNextStageButton();
     }
-    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION, displayUi);
 }
 
 
@@ -89,7 +88,7 @@ function setup() {
             }
         }
     });
-    $('#fern-next-stage').on('click', end);
+    $('#fern-interactive-next-stage').on('click', end);
 }
 
 
@@ -98,13 +97,7 @@ function displayUi() {
         console.log('Displaying Fern Interactive UI.');
     }
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-1 p'));
-    anime({
-        targets: ui_elements,
-        opacity: 1,
-        duration: 1000,
-        delay: anime.stagger(2500, { start: BLINDFOLD_FADE_DURATION }),
-        easing: 'linear',
-    });
+    showUiElements(ui_elements);
 }
 
 
@@ -115,13 +108,7 @@ function runAntPuzzlesPart1() {
     }
     document.getElementById('ant-puzzle-1-goal').innerText = ant_puzzle_data.current_goal;
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-1'));
-    anime({
-        targets: ui_elements,
-        opacity: 1,
-        duration: 1000,
-        delay: anime.stagger(2500),
-        easing: 'linear',
-    });
+    showUiElements(ui_elements);
 }
 
 
@@ -135,40 +122,15 @@ function runAntPuzzlesPart2() {
     }
     document.getElementById('ant-puzzle-2-goal').innerText = ant_puzzle_data.current_goal;
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-2'));
-    anime({
-        targets: ui_elements,
-        opacity: 1,
-        duration: 1000,
-        delay: anime.stagger(2000, { start: DIGIT_ANT_TRANSITION * 0.1 }),
-        easing: 'linear',
-    });
+    showUiElements(ui_elements);
 }
 
 
 function runAntPuzzlesPart3() {
     ant_puzzle_data.completed = true;
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-3'));
-    anime({
-        targets: ui_elements,
-        opacity: 1,
-        duration: 1000,
-        delay: DIGIT_ANT_TRANSITION * 0.1,
-        easing: 'linear',
-        complete: showNextStageButton,
-    });
-}
-
-
-function showNextStageButton() {
-    var ui_elements = document.querySelector('#stage-fern-interactive #fern-next-stage');
-    $(ui_elements).css('visibility', 'visible');
-    anime({
-        targets: ui_elements,
-        opacity: 1,
-        duration: 1000,
-        delay: anime.stagger(3000),
-        easing: 'linear',
-    });
+    ui_elements.push(document.getElementById('fern-interactive-next-stage'));
+    showUiElements(ui_elements);
 }
 
 

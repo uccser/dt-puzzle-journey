@@ -87,7 +87,7 @@
         background-color: #cc9966;
         height: 100%;
         cursor: grab;
-        display: inline;
+        display: inline-block;
         border-radius: 10%;
         background-image: url('../img/flax-rope-asset.svg');
         background-repeat: repeat-x;
@@ -98,7 +98,6 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -55%);
-            // opacity: 0;
         }
     }
     .rope-value {
@@ -123,16 +122,6 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
-
-        .secondary-text {
-            position: absolute;
-            top: 0;
-        }
-
-        // Hide direct descendants
-        & > * {
-            opacity: 0;
-        }
     }
     #river-crossing-narrative-text-final {
         position: absolute;
@@ -143,7 +132,6 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
-        opacity: 0;
     }
     #river-crossing-next-stage {
         position: absolute;

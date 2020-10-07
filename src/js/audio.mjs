@@ -28,12 +28,15 @@ const AUDIO_FX = {
     'rope-pickup': [
         new Howl({
             src: [require('../audio/fx-rope-pickup-1.wav')],
+            volume: 0.3,
         }),
         new Howl({
             src: [require('../audio/fx-rope-pickup-2.wav')],
+            volume: 0.3,
         }),
         new Howl({
             src: [require('../audio/fx-rope-pickup-3.wav')],
+            volume: 0.3,
         }),
     ],
     'steps': [

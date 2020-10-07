@@ -1,6 +1,6 @@
 // Import modules
 import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { changeStage, getRandomInt } from './utilities.mjs';
+import { changeStage, getRandomInt, showUiElements } from './utilities.mjs';
 import { playFX, playMusic, stopMusic } from './audio.mjs';
 
 // Import third party libraries
@@ -9,7 +9,7 @@ import pathfinder from 'pathfinding';
 import dragula from 'dragula/dragula.js';
 
 var setup_events = true;
-var setup_initial_text = true;
+var setup_initial_ui = true;
 var plains_substage_num, grid_data;
 const INSTRUCTION_ANIMATION_DURATION = 800;
 const INSTRUCTION_FADE = 350;
@@ -62,8 +62,7 @@ function start(additional_parameters) {
     }
     plains_substage_num = additional_parameters.substage || 1;
     setup(plains_substage_num);
-    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
-    displayUi();
+    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION, displayUi);
 }
 
 function setup(substage_num) {
@@ -81,22 +80,19 @@ function displayUi() {
     }
     // Reveal UI elements
     var ui_elements = [];
-    if (setup_initial_text) {
-        ui_elements.push(Array.from(document.querySelectorAll('#plains-narrative-text .initial-text')));
-        ui_elements.push(Array.from(document.querySelectorAll('#plains-narrative-text .instruction-text')));
-        setup_initial_text = false;
+    if (setup_initial_ui) {
+        ui_elements = ui_elements.concat(Array.from(document.querySelectorAll('#plains-narrative-text .initial-text')));
+        ui_elements.push(document.getElementById('plains-run-button'));
+        setup_initial_ui = false;
     }
     if (plains_substage_num == 3) {
-        ui_elements.push(document.getElementById('kea-text-1'));
+        let kea_text_1 = document.getElementById('kea-text-1');
+        kea_text_1.classList.remove('hidden');
+        ui_elements.push(kea_text_1);
+        let kea_text_2 = document.getElementById('kea-text-2');
+        kea_text_2.classList.remove('hidden');
     }
-    ui_elements.push(document.querySelector('#plains-instruction-buttons'));
-    anime({
-        targets: ui_elements,
-        duration: 1000,
-        opacity: 1,
-        easing: 'linear',
-        delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
-    });
+    showUiElements(ui_elements);
 }
 
 
@@ -432,13 +428,7 @@ function setupInstructionBlocks() {
 
 
 function showKeaHint() {
-    anime({
-        targets: document.getElementById('kea-text-2'),
-        duration: 1000,
-        opacity: 1,
-        easing: 'linear',
-        delay: anime.stagger(3000),
-    });
+    showUiElements(document.getElementById('kea-text-2'));
 }
 
 
@@ -789,7 +779,8 @@ function createGridCells(grid_size) {
 
 function displayContinueUi() {
     // TODO: Display narrative text, then reveal button.
-    $('#stage-plains #plains-next-stage').fadeIn();
+    var ui_elements = document.getElementById('plains-next-stage');
+    showUiElements(ui_elements);
 }
 
 
@@ -801,7 +792,7 @@ function cleanUp() {
     document.getElementById('plains-user-instructions').innerHTML = '';
     document.getElementById('plains-run-button').removeAttribute('disabled');
     document.querySelectorAll('#stage-plains .to-cleanup').forEach(el => el.remove());
-    var elements = document.querySelectorAll('#plains-narrative-text .initial-text');
+    var elements = document.querySelectorAll('#plains-narrative-text .initial-text.narrative-text');
     for (let i = 0; i < elements.length; i++) {
         elements[i].classList.add('hidden');
     }

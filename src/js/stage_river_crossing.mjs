@@ -1,16 +1,22 @@
 // Import modules
-import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage, hideUiElements, setSvgElementAnchor } from './utilities.mjs';
+import { DEBUG, BLINDFOLD_FADE_DURATION, UI_FADE_DURATION } from './constants.mjs';
+import {
+    getSvg,
+    changeStage,
+    showUiElements,
+    hideUiElements,
+    setSvgElementAnchor
+} from './utilities.mjs';
 import { playFX, playMusic, stopMusic } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 import dragula from 'dragula/dragula.js';
 
-var rope_data;
+var rope_data, hint_timeout;
 var require_setup = true;
+const HINT_DELAY = 20000;
 const EEL_SPEED = 35000;
-
 
 function start() {
     $('#stage-river-crossing').removeClass('hidden');
@@ -21,8 +27,7 @@ function start() {
         setup();
         require_setup = false;
     }
-    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
-    displayUi();
+    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION, displayUi);
 }
 
 
@@ -70,7 +75,7 @@ function setup() {
     // Animate eel
     let eel_container = svg.querySelector('#rc-eel');
     let eel = eel_container.querySelector('path');
-    let eel_length = 12;
+    let eel_length = 9;
     let eel_path_length = eel.getTotalLength();
     eel.style.strokeDasharray = `${eel_length}%,${(1 - (eel_length / 100)) * eel_path_length}`;
     anime({
@@ -141,15 +146,12 @@ function displayUi() {
     }
     // Reveal UI elements
     var ui_elements = Array.from(document.querySelector('#river-crossing-narrative-text').children);
-    anime({
-        targets: ui_elements,
-        duration: 1000,
-        opacity: 1,
-        easing: 'linear',
-        delay: anime.stagger(3000, { start: BLINDFOLD_FADE_DURATION }),
-    });
+    showUiElements(ui_elements);
+    hint_timeout = setTimeout(function () {
+        var hint_element = document.getElementById('river-crossing-help-me');
+        showUiElements(hint_element);
+    }, HINT_DELAY);
 }
-
 
 
 function checkBridgeComplete(el) {
@@ -201,7 +203,6 @@ function createRopes() {
 
         initial_container.appendChild(rope_element);
     }
-
 }
 
 
@@ -279,22 +280,14 @@ function hintRopes() {
 
 
 function displayContinueUi() {
+    clearTimeout(hint_timeout);
     // Hide text, then display final text.
-    var other_text = Array.from(document.querySelectorAll('#river-crossing-narrative-text'))
-    var final_text = Array.from(document.querySelectorAll('#river-crossing-narrative-text-final'))
-    anime.timeline({
-        duration: 1000,
-        opacity: 1,
-        easing: 'linear',
-        complete: function () {
-            $('#stage-river-crossing #river-crossing-next-stage').fadeIn();
-        },
-    }).add({
-        targets: other_text,
-        opacity: 0,
-    }).add({
-        targets: final_text,
-        opacity: 1,
+    var ui_elements_to_hide = Array.from(document.querySelector('#river-crossing-narrative-text').children);
+    ui_elements_to_hide.push(document.getElementById('river-crossing-help-me'));
+    var ui_elements_to_show = Array.from(document.querySelector('#river-crossing-narrative-text-final').children);
+    ui_elements_to_show.push(document.getElementById('river-crossing-next-stage'));
+    hideUiElements(ui_elements_to_hide, UI_FADE_DURATION, -500, function () {
+        showUiElements(ui_elements_to_show);
     });
 }
 

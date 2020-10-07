@@ -10,11 +10,6 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
-
-        // Hide direct descendants
-        & > * {
-            opacity: 0;
-        }
     }
     #before-plains-next-stage {
         position: absolute;

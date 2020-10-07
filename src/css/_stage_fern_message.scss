@@ -31,8 +31,8 @@
     }
     #fern-message-value-container {
         position: absolute;
-        top: 1%;
-        bottom: 35%;
+        top: 0%;
+        bottom: 28%;
         left: 74%;
         right: 18%;
         display: flex;
@@ -49,7 +49,6 @@
             box-shadow: 0px 0px 5px 0px rgb(0 0 0 / 46%);
             border-radius: 0.5vw;
             background: #deded1;
-            opacity: 0;
             animation: 0.5s;
             color: black;
         }
@@ -63,11 +62,6 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-
-        // Hide direct descendants
-        & > * {
-            opacity: 0;
-        }
 
         select:disabled {
             background: #ccc;
@@ -110,11 +104,6 @@
             position: absolute;
             top: 0;
         }
-
-        // Hide direct descendants
-        & > * {
-            opacity: 0;
-        }
     }
     #fern-message-narrative-text-final {
         position: absolute;
@@ -125,6 +114,5 @@
         display: flex;
         flex-direction: column;
         justify-content: start;
-        opacity: 0;
     }
 }

@@ -11,10 +11,5 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
-        // Hide direct descendants
-        & > * {
-            opacity: 0;
-        }
     }
 }

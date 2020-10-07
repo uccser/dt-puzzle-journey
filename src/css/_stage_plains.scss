@@ -157,11 +157,6 @@ $grid-container-border: 0.2rem solid black;
         display: flex;
         flex-direction: column;
         justify-content: start;
-
-        // Hide direct descendants
-        & > * {
-            opacity: 0;
-        }
     }
     #plains-instruction-buttons {
         position: absolute;
@@ -172,7 +167,6 @@ $grid-container-border: 0.2rem solid black;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        opacity: 0;
     }
     #plains-instruction-blocks {
         position: absolute;

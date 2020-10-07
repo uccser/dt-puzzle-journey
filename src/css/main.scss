@@ -68,17 +68,16 @@ h2 {
     border-radius: $text-font-size/2;
     font-size: $text-font-size;
     overflow-y: auto;
+    @extend .hidden-ui;
 }
 
 $text-opacity: 0.9;
 .instruction-text {
-    @extend .ui-text;
     background-color: rgba(#0e5090, $text-opacity);
     font-style: italic;
 }
 
 .narrative-text {
-    @extend .ui-text;
     background-color: rgba(#000000, $text-opacity);
 }
 
@@ -128,9 +127,11 @@ a:not(.button) {
 .d-none {
     display: none;
 }
-.opacity-0 {
-    opacity: 0;
-}
 .hidden {
   display: none !important;
+}
+.hidden-ui {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }

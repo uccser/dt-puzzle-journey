@@ -1,7 +1,14 @@
 // Import modules
-import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage, setSvgElementAnchor, addStylesToSvg } from './utilities.mjs';
-import { playMusic, stopMusic } from './audio.mjs';
+import { DEBUG, BLINDFOLD_FADE_DURATION, UI_FADE_DURATION, UI_STAGGER_DEFAULT } from './constants.mjs';
+import {
+    getSvg,
+    changeStage,
+    setSvgElementAnchor,
+    addStylesToSvg,
+    showUiElements,
+    hideUiElements,
+} from './utilities.mjs';
+import { playMusic, stopMusic, playFX } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -42,10 +49,9 @@ const POSSIBLE_WORDS = [
     'whitu',
     'waru',
     'tekau',
-    // Current program doesn't support words with 'ng' or 'wh'.
-    // 'whā',
     // Possibly too easy
-    // 'iwa',
+    // 'whā' as only 2 characters
+    // 'iwa' as only 3 characters
 ];
 
 const WORD_TRANSLATIONS = {
@@ -97,10 +103,9 @@ function start() {
     window.sessionStorage.setItem('fern-interactive-show-next', true);
     if (fm_require_setup) {
         setup();
-        displayUi();
         fm_require_setup = false;
     }
-    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION);
+    $('#animation-blindfold').fadeOut(BLINDFOLD_FADE_DURATION, displayUi);
 }
 
 
@@ -151,36 +156,25 @@ function displayUi() {
     document.querySelector('#fern-message-word-sentence').textContent = word_translation;
 
     // Reveal UI elements
-    var initial_text = Array.from(document.querySelectorAll('#fern-message-narrative-text .initial-text'))
-    var secondary_text = Array.from(document.querySelectorAll('#fern-message-narrative-text .secondary-text'))
-    var ui_elements_controls = [];
-    var ui_elements_text = initial_text.slice();
-    ui_elements_text.push(document.querySelector('#fern-message-narrative-text .instruction-text'));
-    ui_elements_controls.push(Array.from(document.querySelector('#fern-message-value-container').children));
-    ui_elements_controls.push(document.querySelector('#fern-message-check'));
+    var ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .initial-text'));
+    ui_elements.push(document.querySelector('#fern-message-narrative-text .instruction-text'));
+    var secondary_ui_elements = Array.from(document.querySelector('#fern-message-narrative-text-final').children);
+    console.log(ui_elements);
+    console.log(secondary_ui_elements);
 
-    $(ui_elements_text).css('visibility', 'visible');
-    $(ui_elements_controls).css('visibility', 'visible');
-    anime.timeline({
-        duration: 1000,
-        opacity: 1,
-        easing: 'linear',
-    }).add({
-        targets: ui_elements_text,
-        delay: anime.stagger(3000, {start: BLINDFOLD_FADE_DURATION}),
-        opacity: 1,
-    }).add({
-        targets: ui_elements_controls,
-        opacity: 1,
-        delay: anime.stagger(500),
-    }).add({
-        // Hide initial text, then display secondary text after timer.
-        targets: initial_text,
-        opacity: 0,
-    }, `+=${SECONDARY_TEXT_START}`).add({
-        targets: secondary_text,
-        opacity: 1,
-    });
+    showUiElements(ui_elements, UI_FADE_DURATION, UI_STAGGER_DEFAULT, displayControls);
+    setTimeout(function () {
+        hideUiElements(ui_elements, UI_FADE_DURATION, -500, function () {
+            showUiElements(secondary_ui_elements);
+        });
+    }, SECONDARY_TEXT_START);
+}
+
+function displayControls() {
+    var ui_elements = Array.from(document.querySelector('#fern-message-value-container').children);
+    ui_elements.push(document.querySelector('#fern-message-check'));
+    ui_elements.push(document.querySelector('#fern-message-previous-stage'));
+    showUiElements(ui_elements, 1000, -500);
 }
 
 
@@ -224,7 +218,6 @@ function createWordWithBranches(word) {
                 if (fern_back_count % 3 == 1) {
                     let binary_value_position = binary_string.length - 1 - j;
                     let value = Math.pow(2, binary_value_position);
-                    console.log(value);
                     image_path = LEAF_BACKS_WITH_DOTS[value];
                 } else {
                     image_path = LEAF_BACKS[Math.floor(Math.random() * LEAF_BACKS.length)];
@@ -237,6 +230,7 @@ function createWordWithBranches(word) {
         }
         // Create dropdown for letter
         var letter_select = document.createElement('select');
+        letter_select.classList.add('hidden-ui');
         for (let k = 0; k < DECIMAL_DICTIONARY.length; k++) {
             let letter_option = document.createElement('option');
             letter_option.text = DECIMAL_DICTIONARY[k];
@@ -327,21 +321,11 @@ function checkValues() {
 
 function displayContinueUi() {
     // Hide text, then display final text.
-    var other_text = Array.from(document.querySelectorAll('#fern-message-narrative-text'))
-    var final_text = Array.from(document.querySelectorAll('#fern-message-narrative-text-final'))
-    anime.timeline({
-        duration: 1000,
-        opacity: 1,
-        easing: 'linear',
-        complete: function () {
-            $('#stage-fern-message #fern-message-next-stage').fadeIn();
-        },
-    }).add({
-        targets: other_text,
-        opacity: 0,
-    }).add({
-        targets: final_text,
-        opacity: 1,
+    var ui_elements_to_hide = Array.from(document.querySelectorAll('#fern-message-narrative-text'));
+    var ui_elements_to_show = Array.from(document.querySelectorAll('#fern-message-narrative-text-final'));
+    ui_elements_to_show.push(document.getElementById('fern-message-next-stage'));
+    hideUiElements(ui_elements_to_hide, UI_FADE_DURATION, function () {
+        showUiElements(ui_elements_to_show);
     });
 }
 

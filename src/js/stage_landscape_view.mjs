@@ -27,12 +27,12 @@ const INITIAL_ZOOM_DELAY = 1000;
 const ZOOM_DURATION = 53000 - INITIAL_ZOOM_DELAY;
 var text_container = document.getElementById('landscape-ui-narrative-text');
 var text_lines = [
-    "After a long time away, I'll finally return home to my whanau.",
+    "After a long time away, I'll finally return home to my whānau.",
     "I've been travelling for days now, but the pā is just at the end of this valley.",
     "I'll need to cross the plains...",
     "...and a river...",
     "...but first I have to find the correct path through the forest.",
-    "My whanau told me I will come across a secret message: Which rimu tree to look for to find the river crossing.",
+    "My whānau told me I will come across a secret message: Which rimu tree to look for to find the river crossing.",
     "Not far to go now...",
 ];
 

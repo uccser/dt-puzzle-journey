@@ -133,7 +133,7 @@ function updateFontSizeVariable() {
     var font_size_value = Math.floor(animation_container.clientHeight / 40);
     document.documentElement.style.setProperty("--font-size", `${font_size_value}px`);
     if (DEBUG) {
-        console.log(`Setting animation size value to: ${font_size_value}.`);
+        console.log(`Setting animation size value to: ${font_size_value}px`);
     }
 }
 

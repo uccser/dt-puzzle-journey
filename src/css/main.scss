@@ -28,14 +28,13 @@ body {
     padding: 0;
 }
 
-h1 {
-    font-size: calc(var(--font-size) * 4);
-}
-h2 {
-    font-size: calc(var(--font-size) * 2);
-}
-
 #animation-container {
+    h1 {
+        font-size: calc(var(--font-size) * 4);
+    }
+    h2 {
+        font-size: calc(var(--font-size) * 2);
+    }
     cursor: default;
     user-select: none;
     $container-size: 98;  // % of lower screen dimension
@@ -116,10 +115,24 @@ h2 {
     }
 }
 
-.credits {
+#credits {
     @apply my-8;
     font-size: 0.8rem;
     color: #888;
+
+    #logos {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        a {
+            padding: 1rem;
+            flex: 0 0 0;
+            img {
+                max-width: 20rem;
+                height: auto;
+            }
+        }
+    }
 }
 a:not(.button) {
     text-decoration: underline;

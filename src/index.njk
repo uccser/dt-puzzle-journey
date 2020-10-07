@@ -67,9 +67,9 @@
         </div>
 
         <div id="content-guide" class="hidden hidden-ui">
-            <div class="container p-2">
-                <div class="grid grid-cols-3 gap-4 justify-items-center">
-                    <div class="puzzle-box col-span-3 md:col-span-2 lg:col-span-1">
+            <div class="container mx-auto p-2">
+                <div class="flex">
+                    <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
                         <h2 class="text-center mb-2">Forest Message</h2>
                         <img src="/img/screenshot-fern-message.png">
                         <p>
@@ -78,9 +78,11 @@
                         <p>
                             In the puzzle the two values were the green and silver side of the ferns, but on digital devices we often refer to the two values as the digits 0 and 1, and these are the “digits” that being digital is all about. Representing text (or pictures, or sound, or video, or anything else) using this idea is called “binary representation”, and you’ll find it in <a href="https://nzcurriculum.tki.org.nz/The-New-Zealand-Curriculum/Technology/Progress-outcomes#collapsible1" target="_blank">Progress Outcomes 3, 4, and 5 in Computational Thinking for Digital Technologies</a>.
                         </p>
-                        <a href="/index.njk?stage=fern-interactive&autostart" class="button" target="_blank">Link to fern puzzle</a>
+                        <a href="/index.njk?stage=fern-interactive" class="button" target="_blank">Link to fern puzzle</a>
                     </div>
-                    <div class="puzzle-box col-span-3 md:col-span-2 lg:col-span-1">
+                </div>
+                <div class="flex">
+                    <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
                         <h2 class="text-center mb-2">River Crossing</h2>
                         <img src="/img/screenshot-river-crossing.png">
                         <p>
@@ -92,9 +94,11 @@
                         <p>
                             There are hundreds of problems like this that are referred to as “intractable” - they take too long for computers to solve. You’ll find the topic of tractability in <a href="https://nzcurriculum.tki.org.nz/The-New-Zealand-Curriculum/Technology/Progress-outcomes#collapsible1" target="_blank">Progress Outcome 7 in Computational Thinking for Digital Technologies</a> - it’s usually explored in NCEA level 2.
                         </p>
-                        <a href="/index.njk?stage=river-crossing&autostart" class="button" target="_blank">Link to river crossing puzzle</a>
+                        <a href="/index.njk?stage=river-crossing" class="button" target="_blank">Link to river crossing puzzle</a>
                     </div>
-                    <div class="puzzle-box col-span-3 md:col-span-2 lg:col-span-1">
+                </div>
+                <div class="flex">
+                    <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
                         <h2 class="text-center mb-2">Navigating Plains</h2>
                         <img src="/img/screenshot-plains.png">
                         <p>
@@ -103,19 +107,27 @@
                         <p>
                             When the instructions don’t do what was intended, students need to develop the resilience to track down what is wrong (a “bug”), and try again with revised instructions. The idea of breaking “simple non-computerised tasks into precise, unambiguous, step-by-step instructions” and “simple debugging” comes from <a href="https://nzcurriculum.tki.org.nz/The-New-Zealand-Curriculum/Technology/Progress-outcomes#collapsible1" target="_blank">Progress Outcome 1 in Computational Thinking for Digital Technologies</a>.
                         </p>
-                        <a href="/index.njk?stage=plains-1&autostart" class="button" target="_blank">Link to plains puzzle</a>
+                        <a href="/index.njk?stage=plains-1" class="button" target="_blank">Link to plains puzzle</a>
                     </div>
-                    <div class="col-span-3">
-                        <p class="text-center">
-                            Thanks for joining us on this digital journey.<br>
-                            If you solved the puzzles, then you’ve engaged with some of the biggest ideas in computing!
-                        </p>
-                    </div>
+                </div>
+                <div>
+                    <p class="text-center">
+                        Thanks for joining us on this digital journey.<br>
+                        If you solved the puzzles, then you’ve engaged with some of the biggest ideas in computing!
+                    </p>
                 </div>
             </div>
         </div>
 
-        <div class="container mx-auto text-center credits">
+        <div id="credits" class="container mx-auto text-center">
+            <div id="logos">
+                <a href="https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/">
+                    <img src="/img/logos/ktam-logo-white.svg">
+                </a>
+                <a href="https://kiatakatu.ac.nz/">
+                    <img src="/img/logos/uccser-logo-white.png">
+                </a>
+            </div>
             <p>
                 This website was produced through funding from the <a href="https://www.education.govt.nz/">Ministry of Education</a> for the National Digital Readiness Programme, <a href="https://kiatakatu.ac.nz/">Kia Takatū ā-Matihiko</a>.
                 It is hosted and maintained by the <a href="https://www.canterbury.ac.nz/">University of Canterbury</a>, <a href="https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/">Computer Science Education Group</a>.

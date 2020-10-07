@@ -1,18 +1,40 @@
 // Import modules
-import { DEBUG, BLINDFOLD_FADE_DURATION, BLINDFOLD_SLOW_FADE_DURATION } from './constants.mjs';
-import { getSvg, changeStage, animateSmoke } from './utilities.mjs';
+import {
+    DEBUG,
+    UI_FADE_DURATION,
+    UI_STAGGER_DEFAULT,
+    BLINDFOLD_FADE_DURATION,
+    BLINDFOLD_SLOW_FADE_DURATION,
+} from './constants.mjs';
+import {
+    getSvg,
+    changeStage,
+    animateSmoke,
+    showUiElements,
+    hideUiElements,
+} from './utilities.mjs';
 import { playMusic, playFX } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
-const ZOOM_DURATION = 30000;
 
 const TEXT_FADE_DURATION = 1000;
 const TEXT_GAP_DURATION = 1000;
 const TEXT_DURATION = 4000;
 const INITIAL_ZOOM = 18;
-const INITIAL_ZOOM_DELAY = (TEXT_FADE_DURATION * 2) + 3000;
+const INITIAL_ZOOM_DELAY = 1000;
+const ZOOM_DURATION = 53000 - INITIAL_ZOOM_DELAY;
+var text_container = document.getElementById('landscape-ui-narrative-text');
+var text_lines = [
+    "After a long time away, I'll finally return home to my whanau.",
+    "I've been travelling for days now, but the pā is just at the end of this valley.",
+    "I'll need to cross the plains...",
+    "...and a river...",
+    "...but first I have to find the correct path through the forest.",
+    "My whanau told me I will come across a secret message: Which rimu tree to look for to find the river crossing.",
+    "Not far to go now...",
+];
 
 
 function start() {
@@ -54,9 +76,6 @@ function animateLandscapeView() {
         console.log('Landscape view loaded.');
     }
     var svg_container = document.getElementById('landscape-view-svg');
-    var text_container = document.getElementById('landscape-ui-narrative-text');
-    var next_stage_button = document.getElementById('landscape-view-next-stage');
-    setText('It is time to return home to my whānau after a long time away...');
     anime({
         targets: svg_container,
         scale: [INITIAL_ZOOM, 1],
@@ -64,83 +83,44 @@ function animateLandscapeView() {
         duration: ZOOM_DURATION,
         delay: INITIAL_ZOOM_DELAY,
     });
-    anime.timeline({
-        easing: 'linear',
-        duration: TEXT_FADE_DURATION,
-    }).add({
-        // Show text "It's is time to return home..."
-        targets: text_container,
-        opacity: [0, 1],
-    }).add({
-        targets: text_container,
-        opacity: [1, 0],
-        complete: function () {
-            setText("I've been travelling for days now, but the pā is just at the end of this valley.");
-        },
-    }, `+=${TEXT_DURATION}`).add({
-        // Show text "I've been travelling..."
-        targets: text_container,
-        opacity: [0, 1],
-    }, `+=${TEXT_GAP_DURATION}`).add({
-        targets: text_container,
-        opacity: [1, 0],
-        complete: function () {
-            setText("I'll need to cross the plains...");
-        },
-    }, `+=${TEXT_DURATION}`).add({
-        // Show text "I'll need to cross..."
-        targets: text_container,
-        opacity: [0, 1],
-    }, `+=${TEXT_GAP_DURATION * 5}`).add({
-        targets: text_container,
-        opacity: [1, 0],
-        complete: function () {
-            setText("...a river...");
-        },
-    }, `+=${TEXT_DURATION * 0.8}`).add({
-        // Show text "...a river..."
-        targets: text_container,
-        opacity: [0, 1],
-    }, `+=${TEXT_GAP_DURATION}`).add({
-        targets: text_container,
-        opacity: [1, 0],
-        complete: function () {
-            setText("...but first I have to find the correct path through the forest.");
-        },
-    }, `+=${TEXT_DURATION * 0.5}`).add({
-        // Show text "...but first I have..."
-        targets: text_container,
-        opacity: [0, 1],
-    }, `+=${TEXT_GAP_DURATION}`).add({
-        targets: text_container,
-        opacity: [1, 0],
-        complete: function () {
-            setText("My whānau told me that I will come across a secret message informing me which rimu tree to look for to find the river crossing.");
-        },
-    }, `+=${TEXT_DURATION * 0.8}`).add({
-        // Show text "My whānau told me..."
-        targets: text_container,
-        opacity: [0, 1],
-    }, `+=${TEXT_GAP_DURATION}`).add({
-        targets: text_container,
-        opacity: [1, 0],
-        complete: function () {
-            setText("Not far to go now...");
-            next_stage_button.style.display = 'block';
-        },
-    }, `+=${TEXT_DURATION * 1.6}`).add({
-        // Show text "Not far to go now..."
-        targets: text_container,
-        opacity: [0, 1],
-    }, `+=${TEXT_GAP_DURATION}`).add({
-        targets: next_stage_button,
-        opacity: [0, 1],
-    });
+
+    var line_allocated_time = ZOOM_DURATION / text_lines.length;
+    var line_fade = line_allocated_time * 0.2;
+    var line_duration = line_allocated_time * 0.6;
+    revealLine(0, line_fade, line_duration);
+}
+
+
+function revealLine(i, line_fade, line_duration) {
+    setText(text_lines[i]);
+    showUiElements(
+        text_container,
+        line_fade,
+        0,
+        function () {
+            if (i < text_lines.length - 1) {
+                setTimeout( function () {
+                    hideUiElements(
+                        text_container,
+                        line_fade,
+                        0,
+                        function () {
+                            revealLine(i + 1, line_fade, line_duration);
+                        }
+                    );
+                }, line_duration);
+            } else {
+                setTimeout(function () {
+                    var next_stage_button = document.getElementById('landscape-view-next-stage');
+                    showUiElements(next_stage_button);
+                }, line_duration);
+            }
+        }
+    );
 }
 
 
 function setText(string) {
-    var text_container = document.getElementById('landscape-ui-narrative-text');
     text_container.innerText = string;
 }
 

@@ -89,8 +89,6 @@ function displayUi() {
         let kea_text_1 = document.getElementById('kea-text-1');
         kea_text_1.classList.remove('hidden');
         ui_elements.push(kea_text_1);
-        let kea_text_2 = document.getElementById('kea-text-2');
-        kea_text_2.classList.remove('hidden');
     }
     showUiElements(ui_elements);
 }

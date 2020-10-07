@@ -151,9 +151,19 @@ $grid-container-border: calc(var(--font-size) * .2) solid black;
     #plains-narrative-text {
         position: absolute;
         top: $container-padding;
-        bottom: 46%;
-        left: 69.6%;
+        bottom: 44%;
+        left: 69.2%;
         right: $container-padding;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+    }
+    #plains-kea-hint {
+        position: absolute;
+        top: $container-padding;
+        bottom: 72%;
+        left: $container-padding;
+        right: 70%;
         display: flex;
         flex-direction: column;
         justify-content: start;

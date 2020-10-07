@@ -89,7 +89,7 @@ const DOUBLE_LETTER_DICTIONARY = [
     'ng',
     'wh',
 ]
-const SECONDARY_TEXT_START = 30000;
+const SECONDARY_TEXT_START = 75000;
 
 var message_word = '';
 var message_values = [];

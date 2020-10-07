@@ -13,11 +13,13 @@
 @import 'stage_before_plains';
 @import 'stage_plains';
 @import 'stage_before_pa';
-@import 'complete';
+@import 'stage_outside_pa';
+@import 'content_guide';
 
 html, body {
     margin: 0;
     font-family: 'Noto Sans', sans-serif;
+    overflow-x: hidden;
 }
 
 body {

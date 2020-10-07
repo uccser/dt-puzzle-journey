@@ -1,10 +1,7 @@
 // Import modules
-import { DEBUG, BLINDFOLD_FADE_DURATION, BLINDFOLD_SLOW_FADE_DURATION } from './constants.mjs';
-import { getSvg, animateSmoke, showUiElements } from './utilities.mjs';
+import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
+import { changeStage, getSvg, animateSmoke, showUiElements } from './utilities.mjs';
 import { playMusic, playFX } from './audio.mjs';
-
-// Import third party libraries
-import anime from 'animejs/lib/anime.es.js';
 
 
 function start() {
@@ -53,12 +50,11 @@ function cleanUp() {
 function end() {
     playFX('change-stage');
     $('#animation-blindfold').fadeIn(
-        BLINDFOLD_SLOW_FADE_DURATION,
+        BLINDFOLD_FADE_DURATION,
         function () {
             cleanUp();
             $('#stage-before-pa').addClass('hidden');
-            // Completed all stages
-            location.assign("./complete/index.html");
+            changeStage('outside-pa');
         }
     );
 }

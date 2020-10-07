@@ -1,0 +1,19 @@
+#content-guide {
+    .puzzle-box {
+        @apply border;
+        @apply border-solid;
+        @apply border-white;
+        @apply rounded-lg;
+        @apply p-4;
+        @apply bg-black bg-opacity-25;
+
+        p {
+            @apply pb-4;
+        }
+
+        img {
+            @apply mx-auto;
+            @apply mb-4;
+        }
+    }
+}

@@ -796,7 +796,8 @@ function cleanUp() {
     for (let i = 0; i < elements.length; i++) {
         elements[i].classList.add('hidden');
     }
-    $('#plains-next-stage').hide();
+    document.getElementById('plains-next-stage').removeAttribute('style');
+
 }
 
 

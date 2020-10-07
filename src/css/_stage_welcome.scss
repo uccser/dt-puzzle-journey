@@ -5,25 +5,25 @@
         background-color: $background-color;
         display: grid;
         grid-template-columns: 50% 50%;
-        grid-template-rows: 30% 30% 20% 20%;
+        grid-template-rows: 40% 30% 10% 20%;
         grid-template-areas:
             "header header"
             "notice-1-icon notice-2-icon"
             "notice-1 notice-2"
             "footer footer";
         position: absolute;
-        grid-gap: 1vw;
+        grid-gap: calc(var(--font-size));
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
-        padding: 1rem;
+        padding: calc(var(--font-size));
         z-index: 900;
 
         #header {
             grid-area: header;
             h1 {
-                margin: 1vmin;
+                margin: calc(var(--font-size));
             }
         }
         .notice-icon {
@@ -61,16 +61,16 @@
         #setup-status-checks {
             display: flex;
             justify-content: center;
+            margin-top: calc(var(--font-size));
 
             .status-checkbox {
-                $checkbox-size: 1rem;
                 border: 1px solid white;
                 background-color: #333;
-                width: $checkbox-size;
-                height: $checkbox-size;
-                margin: 0 $checkbox-size/4;
+                width: calc(var(--font-size) * 1);
+                height: calc(var(--font-size) * 1);
+                margin: 0 calc(var(--font-size) * 0.25);
                 transition: background-color .3s;
-                border-radius: $checkbox-size/3;
+                border-radius: calc(var(--font-size) * 0.2);
 
                 &.success {
                     background-color: #31ad00;
@@ -80,9 +80,9 @@
 
         #load-error {
             background: white;
-            border-radius: .3rem;
+            border-radius: calc(var(--font-size) * 0.3);
             color: red;
-            padding: 0 1rem;
+            padding: 0 calc(var(--font-size));
         }
     }
     @media screen and (orientation:landscape) {
@@ -97,6 +97,5 @@
         #notice-1, #notice-1-icon {
             display: none !important;
         }
-
     }
 }

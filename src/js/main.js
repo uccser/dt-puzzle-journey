@@ -95,7 +95,7 @@ const STAGES = {
     },
 };
 var default_stage = 'landscape-view';
-
+var animation_container = document.getElementById('animation-container');
 
 $(document).ready(function () {
     // Setup asset tracking for loader checks
@@ -116,10 +116,21 @@ $(document).ready(function () {
         }
     }
     var autostart = 'autostart' in parameters;
-    var animation_container = document.getElementById('animation-container');
+
     animation_container.addEventListener('journey:change_stage', run_stage);
+    window.addEventListener('resize', updateFontSizeVariable);
+    updateFontSizeVariable();
     welcomeStart(stage_value, STAGES, autostart);
 });
+
+
+function updateFontSizeVariable() {
+    var font_size_value = Math.floor(animation_container.clientHeight / 40);
+    document.documentElement.style.setProperty("--font-size", `${font_size_value}px`);
+    if (DEBUG) {
+        console.log(`Setting animation size value to: ${font_size_value}.`);
+    }
+}
 
 
 function run_stage(event) {

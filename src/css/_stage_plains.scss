@@ -1,8 +1,8 @@
 @import '_constants';
 
-$cell-border: 0.12rem dashed darken(#9b955d, 10%);
-$container-padding: 0.5rem;
-$grid-container-border: 0.2rem solid black;
+$cell-border: calc(var(--font-size) * .05) dashed darken(#9b955d, 10%);
+$container-padding: calc(var(--font-size) * 0.5);
+$grid-container-border: calc(var(--font-size) * .2) solid black;
 
 #stage-plains {
     #plains-left-container {
@@ -135,8 +135,8 @@ $grid-container-border: 0.2rem solid black;
         }
         .instruction-user-defined {
             height: 100%;
-            border: 0.2rem dashed #000000a1;
-            border-radius: .5rem;
+            border: calc(var(--font-size) * 0.2) dashed #000000a1;
+            border-radius: calc(var(--font-size) * 0.5);
             touch-action: none;
             overflow: hidden;
             display: none;
@@ -212,8 +212,8 @@ $grid-container-border: 0.2rem solid black;
 
     #plains-next-stage {
         position: absolute;
-        bottom: 1rem;
-        right: 1rem;
+        bottom: 1%;
+        right: 1%;
     }
     .gu-mirror {
         cursor: grabbing;

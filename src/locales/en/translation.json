@@ -1,0 +1,37 @@
+{
+    "before-pa": {
+        "narrative-text-1": "I've made it just as the sun is setting.",
+        "narrative-text-2": "I can see my whānau.",
+        "narrative-text-3": "I can smell the kai.",
+        "narrative-text-4": "It's great to be home.",
+        "next-stage-button": "Approach the pā"
+    },
+    "landscape-view": {
+        "line-1": "After a long time away, I'll finally return home to my whānau.",
+        "line-2": "I've been travelling for days now, but the pā is just at the end of this valley.",
+        "line-3": "I'll need to cross the plains...",
+        "line-4": "...and a river...",
+        "line-5": "...but first I have to find the correct path through the forest.",
+        "line-6": "My whanau told me I will come across a secret message: Which rimu tree to look for to find the river crossing.",
+        "line-7": "Not far to go now...",
+        "next-message": "Step into the forest"
+    },
+    "main": {
+        "browser-note": "A Google Chrome or Mozilla Firefox browser is required.",
+        "browser-recommend": "Try using a browser such as Google Chrome or Firefox that is up to date.",
+        "credit": "This website was produced through funding from the Ministry of Education for the National Digital Readiness Programme, Kia Takatū ā-Matihiko. It is hosted and maintained by the University of Canterbury, Computer Science Education Group. This website content is available under Creative Commons BY-SA 4.0, and the interactive website is licensed under the MIT license. Any third party libraries used have their licenses listed in the GitHub repository. The Kia Takatū ā-Matihiko logo and project assets are under Crown copyright.",
+        "landscape": "Please use your device in landscape mode.",
+        "length": "This experience takes roughly 10 to 20 minutes to complete.",
+        "problem": "Sorry, but we've encountered a problem.",
+        "setup": "Getting everything setup...",
+        "sound": "We recommend turning sound on.",
+        "start-before-river": "Start at the river",
+        "start-fern-interactive": "Start at the fern leaves",
+        "start-fern-message": "Start at message in ferns leaves",
+        "start-landscape-view": "Start the journey",
+        "start-pa": "Start at the pā",
+        "start-plains": "Start at the plains",
+        "start-river": "Start at the river crossing",
+        "title": "A DT Puzzle Journey"
+    }
+}

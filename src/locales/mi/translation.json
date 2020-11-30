@@ -1,0 +1,37 @@
+{
+    "before-pa": {
+        "narrative-text-1": "Kua tae atu ahau i te tōnga o te rā.",
+        "narrative-text-2": "Kua kite ahau i tōku whānau.",
+        "narrative-text-3": "Te kakara pai o te kai.",
+        "narrative-text-4": "Inā te koa ki te hoki ki te kāinga.",
+        "next-stage-button": "Whakatata atu ki te pā"
+    },
+    "landscape-view": {
+        "line-1": "Taku roa ki wāhi kē, kua hoki rā anō ahau ki te kāinga, ki tōku whānau.",
+        "line-2": "Te maha o ngā rā o taku haerenga, nāwai rā, kei te pito o tēnei whārua te pā.",
+        "line-3": "Me whakawhiti ahau i ngā mānia...",
+        "line-4": "...me te awa...",
+        "line-5": "...engari, tuatahi, me kimi ahau i te ara tika kia puta i te ngāhere.",
+        "line-6": "Ko te kōrero o tōku whānau, ka kite ahau i te tohu muna: kei tēhea o ngā rākau rimu te whakawhitinga awa.",
+        "line-7": "Kāore i te roa ināianei...",
+        "next-message": "Uru ki te ngahere"
+    },
+    "main": {
+        "browser-note": "",
+        "browser-recommend": "Whakamātauria tētahi pūtirotiro kē, pērā ki te Google Chrome, te Firefox rānei kua whakahoungia.",
+        "credit": "I whakaputaina tēnei paetukutuku nā te pūtea a te Tāhuhu o te Mātauranga, mō te National Digital Readiness Programme, Kia Takatū ā-Matihiko. Kua purutia, kua whakahaerehia e te University of Canterbury, Computer Science Education Group. E tukuna ai ngā ihirangi o te paetukutuku kei raro i te Creative Commons BY-SA 4.0, ā, ko te paetukutuku pāhekoheko nei kei raro i te raihana MIT. Ka kitea hoki ngā raihana o ngā putunga tuhiwaehere o te tangata kē kei roto i te putunga GitHub. Ka noho te waitohu o Kia Takatū ā-Matihiko me ngā rauemi o te kaupapa nei kei raro i te manatārua a te Karauna.",
+        "landscape": "Tēnā whakamahi i tāu pūrere kia nohopae.",
+        "length": "",
+        "problem": "Aroha atu! Kua puta mai he raru.",
+        "setup": "Kei te whakariterite...",
+        "sound": "",
+        "start-before-river": "Tīmatahia mai i te awa",
+        "start-fern-interactive": "Tīmatahia mai i ngā rau huruwhenua",
+        "start-fern-message": "Tīmatahia mai i te karere ā-rau huruwhenua",
+        "start-landscape-view": "Tīmatahia te haerenga",
+        "start-pa": "",
+        "start-plains": "Tīmatahia mai i ngā mānia",
+        "start-river": "Tīmatahia mai i te whakawhitinga awa",
+        "title": "He Haerenga Panga HM"
+    }
+}

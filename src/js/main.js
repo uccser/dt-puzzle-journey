@@ -27,6 +27,7 @@ import queryString from 'query-string';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
+import { i18n, loci18n } from './i18n.mjs';
 import { markAssetAsReady, revealContentGuide } from './utilities.mjs';
 import { start as welcomeStart } from './welcome.mjs';
 import { start as stageLandscapeViewStart } from './stage_landscape_view.mjs';
@@ -40,6 +41,7 @@ import { start as stageBeforePaStart } from './stage_before_pa.mjs';
 import { start as stageOutsidePaStart } from './stage_outside_pa.mjs';
 
 console.log('DEBUG is set to ' + DEBUG + '.');
+loci18n('body');
 
 // Create global variable to track ready assets
 window.ready_assets = new Set();
@@ -47,50 +49,50 @@ window.unchecked_assets = new Set();
 
 const STAGES = {
     'landscape-view': {
-        button_text: 'Start the journey',
+        button_text: i18n('main.start-landscape-view'),
         initial_function: stageLandscapeViewStart,
     },
     'fern-interactive': {
-        button_text: 'Start at the fern leaves',
+        button_text: i18n('main.start-fern-interactive'),
         initial_function: stageFernInteractiveStart,
     },
     'fern-message': {
-        button_text: 'Start at message in ferns leaves',
+        button_text: i18n('main.start-fern-message'),
         initial_function: stageFernMessageStart,
     },
     'before-river': {
-        button_text: 'Start at the river',
+        button_text: i18n('main.start-before-river'),
         initial_function: stageBeforeRiverStart,
     },
     'river-crossing': {
-        button_text: 'Start at the river crossing',
+        button_text: i18n('main.start-river'),
         initial_function: stageRiverCrossingStart,
     },
     'before-plains': {
-        button_text: 'Start at the plains',
+        button_text: i18n('main.start-plains'),
         initial_function: stageBeforePlainsStart,
     },
     'plains-1': {
-        button_text: 'Start at the plains',
+        button_text: i18n('main.start-plains'),
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 1},
     },
     'plains-2': {
-        button_text: 'Start on the plains',
+        button_text: i18n('main.start-plains'),
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 2},
     },
     'plains-3': {
-        button_text: 'Start on the plains',
+        button_text: i18n('main.start-plains'),
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 3},
     },
     'before-pa': {
-        button_text: 'Start at the pā',
+        button_text: i18n('main.start-pa'),
         initial_function: stageBeforePaStart,
     },
     'outside-pa': {
-        button_text: 'Start at the pā',
+        button_text: i18n('main.start-pa'),
         initial_function: stageOutsidePaStart,
     },
 };

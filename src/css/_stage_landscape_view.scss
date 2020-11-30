@@ -2,15 +2,16 @@
     #landscape-view-svg {
         transform-origin: 82% 42.5%;
     }
-    #landscape-ui {
+    #landscape-ui-narrative-text {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 30%;
-        right: 30%;
+        top: 1%;
+        bottom: 1%;
+        left: 1%;
+        right: 70%;
     }
     #landscape-view-next-stage {
         position: absolute;

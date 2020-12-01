@@ -15,7 +15,7 @@ import dragula from 'dragula/dragula.js';
 
 var rope_data, hint_timeout;
 var require_setup = true;
-const HINT_DELAY = 20000;
+const HINT_DELAY = 60000;
 const EEL_SPEED = 35000;
 
 function start() {

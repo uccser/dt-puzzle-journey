@@ -116,15 +116,32 @@ body {
 }
 
 #controls {
+    opacity: 0.7;
+    transition: opacity .1s ease-in-out;
+    &:hover {
+        opacity: 1;
+    }
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.5rem;
+    padding: 1rem;
     button {
-        $background-color: #4c5772;
+        font-size: var(--font-size);
+        padding: 0.2rem 0.4rem;
+        $background-color: #576077;
         background-color: $background-color;
         &:hover {
             background-color: darken($background-color, 8%);
+        }
+    }
+    #volume-control {
+        display: flex;
+        align-items: center;
+        font-size: var(--font-size);
+        font-weight: bold;
+        input {
+            cursor: pointer;
         }
     }
 }

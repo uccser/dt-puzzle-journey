@@ -1,6 +1,6 @@
 import { DEBUG } from './constants.mjs';
 import { getRandomInt } from './utilities.mjs';
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 
 const FADE_DURATION = 2000;
 const MUSIC_VOLUME = 0.8;

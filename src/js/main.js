@@ -24,6 +24,7 @@
 import jQuery from 'jquery';
 window.$ = jQuery;
 import queryString from 'query-string';
+import { Howler } from 'howler';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
@@ -99,6 +100,7 @@ const STAGES = {
 var default_stage = 'landscape-view';
 var animation_container = document.getElementById('animation-container');
 
+
 $(document).ready(function () {
     // Setup language switcher
     $('#toggle-language').on('click', function () {
@@ -111,6 +113,10 @@ $(document).ready(function () {
         if (DEBUG) {
             console.log(`Language is now set to ${i18next.language}`);
         }
+    });
+
+    $('#volume-slider').on('input change', function () {
+        updateVolume(this.value / 100);
     });
 
     // Setup asset tracking for loader checks
@@ -142,6 +148,14 @@ $(document).ready(function () {
     updateFontSizeVariable();
     welcomeStart(stage_value, STAGES, autostart);
 });
+
+
+function updateVolume(value) {
+    Howler.volume(value);
+    if (DEBUG) {
+        console.log(`Volume is now set to ${value}`);
+    }
+}
 
 
 function updateFontSizeVariable() {

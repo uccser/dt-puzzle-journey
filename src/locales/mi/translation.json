@@ -45,6 +45,13 @@
         "initial-text-3": "Arā ētahi pōkai taura, engari he poto rawa te roa o tēnā, o tēnā mō te whānui o te awa. Me honohono ahau i ngā taura.",
         "next-stage-button": "Tīmata ki te hanga i te arawhiti"
     },
+    "river-crossing": {
+        "initial-text": "Me honohono ahau i enei pōkai taura. Ko ēhea o ēnei taura hei whakahono ki te tārai i ngā whakawhitinga e 3 e tika ana te roa?",
+        "instruction-text": "Tōia ngā pōkai taura ki te awa. Kia tūpato kei roa rawa, kei poto rawa rānei te taura. Tōia anō ki te whakahoki i ngā taura ki te taha awa mēnā kāore i te tika.",
+        "final-text": "I tārai ahau i ngā taura e toru e tika ana te roa mō te arawhiti. Kāore e roa ināianei, ka rongo ahau i te kakara o ngā ahikā o te kāinga.",
+        "hint-button": "Help! Start the bridges for me... (translation in QA)",
+        "next-stage-button": "Whakawhiti i te awa"
+    },
     "main": {
         "browser-note": "Me whakamahi tētahi o ngā pūtirotiro nei: te Google Chrome, te Mozilla Firefox rānei.",
         "browser-recommend": "Whakamātauria tētahi pūtirotiro kē, pērā ki te Google Chrome, te Firefox rānei kua whakahoungia.",

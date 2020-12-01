@@ -11,7 +11,6 @@ import translationMI from '../locales/mi/translation.json';
 
 // Setup internationalisation (i18n)
 i18next.use(LanguageDetector).init({
-    lng: 'mi',
     fallbackLng: 'en',
     debug: DEBUG,
     resources: {

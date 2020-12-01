@@ -39,6 +39,12 @@
         "final-text": "Ah! Since the number has appeared on a rimu tree, I will continue down the track until I pass {{word}} rimu. I can head downhill to the river at that point, and I should find the river crossing.",
         "next-stage-button": "Head down the valley"
     },
+    "before-river": {
+        "initial-text-1": "Whew! I'm glad to have figured out that message left for me by my whānau. I have successfully found the secret path and made it to the river.",
+        "initial-text-2": "That storm last week has washed away the crossing. The river is too swift to cross, so I'm going to have to make a new bridge. At least by rebuilding the bridge, other people will be able to use it too.",
+        "initial-text-3": "I can see some spare coils of rope, but the individual lengths are too short to span the river. I'm going to have to join them together.",
+        "next-stage-button": "Start assembling the bridge"
+    },
     "main": {
         "browser-note": "A Google Chrome or Mozilla Firefox browser is required.",
         "browser-recommend": "Try using a browser such as Google Chrome or Firefox that is up to date.",

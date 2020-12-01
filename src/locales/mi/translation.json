@@ -39,6 +39,12 @@
         "final-text": "Ka pai! Nā te mea kua puta te nama ki runga i te rimu, ka haere tonu ahau i te ara kia whakawhiti ahau i ngā rimu e {{word}}. Kātahi ka heke ahau ki te awa, kia kite ai ahau i te whakawhitinga awa.",
         "next-stage-button": "Heke ki raro ki te whārua"
     },
+    "before-river": {
+        "initial-text-1": "Inā te tikanga! Kua rapu ahau i te tikanga o taua karere i waihotia e tōku whānau māku. Kua kite ahau i te ara muna, ā, kua tae ahau ki te awa.",
+        "initial-text-2": "Aue! Nā te marangai i tērā wiki, kua riro te arawhiti i te wai. Nā te tere o te wai kāore e taea te kau atu, me hanga ahau i tētahi arawhiti hou. Ki te hanga ahau i te arawhiti ka taea hoki e te iwi te whakawhiti.",
+        "initial-text-3": "Arā ētahi pōkai taura, engari he poto rawa te roa o tēnā, o tēnā mō te whānui o te awa. Me honohono ahau i ngā taura.",
+        "next-stage-button": "Tīmata ki te hanga i te arawhiti"
+    },
     "main": {
         "browser-note": "Me whakamahi tētahi o ngā pūtirotiro nei: te Google Chrome, te Mozilla Firefox rānei.",
         "browser-recommend": "Whakamātauria tētahi pūtirotiro kē, pērā ki te Google Chrome, te Firefox rānei kua whakahoungia.",

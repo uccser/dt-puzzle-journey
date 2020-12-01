@@ -57,6 +57,14 @@
         "initial-text-2": "There are obstacles everywhere. I can see where some weka have built their nests, I don't want to disturb them either. How will I find my way through?",
         "next-stage-button": "Start walking"
     },
+    "plains": {
+        "initial-text": "My whānau have left instructions for me, but some of the instructions were lost in the storm. I can replace them from this pile of spares.",
+        "instruction-text": "Drag steps from the pile of spares, to create a set of instructions to reach the path at the top.",
+        "kea-text": "Oh no! That kea has taken all the right arrows! I'll have to complete the instructions without them. I have plenty of space for instructions, but I don't think I'll need to use them all.",
+        "hint-text": "There isn't enough room for all the instructions. There must be a quicker way to get through with the blocks I have. I wonder if I need to think creatively about how I use the arrows...",
+        "run-button": "Run instructions",
+        "next-stage-button": "Continue walking across the plains"
+    },
     "main": {
         "browser-note": "A Google Chrome or Mozilla Firefox browser is required.",
         "browser-recommend": "Try using a browser such as Google Chrome or Firefox that is up to date.",

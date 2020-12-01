@@ -64,8 +64,8 @@ body {
 
 .ui-text {
     display: inline-block;
-    padding: calc(var(--font-size) * 0.5) var(--font-size);
-    margin-bottom: calc(var(--font-size) * 0.5);
+    padding: calc(var(--font-size) * 0.3) calc(var(--font-size) * 0.6);
+    margin-bottom: calc(var(--font-size) * 0.3);
     border-radius: calc(var(--font-size) * 0.5);
     overflow-y: auto;
     @extend .hidden-ui;

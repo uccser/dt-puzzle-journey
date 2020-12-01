@@ -57,6 +57,14 @@
         "initial-text-2": "He maha ngā tauārai. Ka kite hoki ahau i ngā kōhanga weka, me kore ahau te whakararu i ngā kōhanga hoki. Me pēhea taku kimi i te ara mōku?",
         "next-stage-button": "Tīmatahia te hīkoi"
     },
+    "plains": {
+        "initial-text": "I waiho tōku whānau i ngā tohu mōku, engari kua ngaro ētahi o ngā tohutohu i te marangai. Ka whakakapi mai he tohu anō i tēnei kōputu.",
+        "instruction-text": "Tōia he takahanga mai i te hōputu takahanga, ki te hanga i ngā tohutohu kia tae ki te ara o runga.",
+        "kea-text": "Aue! Kua tāhae te kea i ngā tohu huri whakatematau katoa! Me whakaoti i ngā tohutohu me te korenga huringa whakatematau. He nui te wāhi mō te maha o ngā tohutohu, ka kore pea ahau e whakamahi i te katoa.",
+        "hint-text": "Kāore i te whai wāhi mō te maha o ngā tohutohu. Me kimi tētahi rautaki kē ki te whakamahi i ngā tohutohu nei. Me whai au i te auahatanga, whakamahi ai au ēnei pere...",
+        "run-button": "Whakahaerehia ngā tohutohu",
+        "next-stage-button": "Hīkoi tonu i ngā mānia"
+    },
     "main": {
         "browser-note": "Me whakamahi tētahi o ngā pūtirotiro nei: te Google Chrome, te Mozilla Firefox rānei.",
         "browser-recommend": "Whakamātauria tētahi pūtirotiro kē, pērā ki te Google Chrome, te Firefox rānei kua whakahoungia.",

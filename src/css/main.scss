@@ -115,6 +115,20 @@ body {
     }
 }
 
+#controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem;
+    button {
+        $background-color: #4c5772;
+        background-color: $background-color;
+        &:hover {
+            background-color: darken($background-color, 8%);
+        }
+    }
+}
+
 #credits {
     @apply my-8;
     font-size: 0.8rem;

@@ -6,6 +6,17 @@
         "narrative-text-4": "It's great to be home.",
         "next-stage-button": "Approach the pā"
     },
+    "fern-interactive": {
+        "intro-line-1": "A group of fern leaves has been laid upon a large rock.",
+        "intro-line-2": "This must be related to the secret message my whānau told me about to find the river crossing.",
+        "intro-line-3": "I should understand what is special about these leaves before continuing.",
+        "instruction-text": "Click on the fern leaves to interact with them.",
+        "ant-hint": "The ants are forming a number on the tree that seems to be connected to the leaves. I should understand how the numbers are formed.",
+        "task-1": "How do I make the number {{number}}?",
+        "task-2": "Ahh, that worked. What about the number {{number}}?",
+        "final-text": "I think it's time to head further down the path now.",
+        "next-message": "Continue down the path"
+    },
     "landscape-view": {
         "line-1": "After a long time away, I'll finally return home to my whānau.",
         "line-2": "I've been travelling for days now, but the pā is just at the end of this valley.",

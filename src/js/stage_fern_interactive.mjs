@@ -3,6 +3,7 @@ import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { getSvg, changeStage, getRandomInt, showUiElements } from './utilities.mjs';
 import { isFMSetup } from './stage_fern_message.mjs';
 import { playFX, playMusic } from './audio.mjs';
+import { i18n } from './i18n.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -110,7 +111,8 @@ function runAntPuzzlesPart1() {
     if (ant_puzzle_data.current_goal == getDotCount()) {
         ant_puzzle_data.current_goal++;
     }
-    document.getElementById('ant-puzzle-1-goal').innerText = ant_puzzle_data.current_goal;
+    var text = i18n('fern-interactive.task-1', { number: ant_puzzle_data.current_goal })
+    document.getElementById('ant-task-1').innerText = text;
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-1'));
     showUiElements(ui_elements);
 }
@@ -124,7 +126,8 @@ function runAntPuzzlesPart2() {
     if (ant_puzzle_data.current_goal == getDotCount()) {
         ant_puzzle_data.current_goal += 2;
     }
-    document.getElementById('ant-puzzle-2-goal').innerText = ant_puzzle_data.current_goal;
+    var text = i18n('fern-interactive.task-2', { number: ant_puzzle_data.current_goal })
+    document.getElementById('ant-task-2').innerText = text;
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-2'));
     showUiElements(ui_elements);
 }

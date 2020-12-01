@@ -52,6 +52,11 @@
         "hint-button": "Help! Start the bridges for me... (translation in QA)",
         "next-stage-button": "Whakawhiti i te awa"
     },
+    "before-plains": {
+        "initial-text-1": "Ka kite ahau i te pā kei tawhiti rā, engari me whakawhiti ahau i ngā mānia i te tuatahi.",
+        "initial-text-2": "He maha ngā tauārai. Ka kite hoki ahau i ngā kōhanga weka, me kore ahau te whakararu i ngā kōhanga hoki. Me pēhea taku kimi i te ara mōku?",
+        "next-stage-button": "Tīmatahia te hīkoi"
+    },
     "main": {
         "browser-note": "Me whakamahi tētahi o ngā pūtirotiro nei: te Google Chrome, te Mozilla Firefox rānei.",
         "browser-recommend": "Whakamātauria tētahi pūtirotiro kē, pērā ki te Google Chrome, te Firefox rānei kua whakahoungia.",

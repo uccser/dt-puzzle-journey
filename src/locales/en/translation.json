@@ -52,6 +52,11 @@
         "hint-button": "Help! Start the bridges for me...",
         "next-stage-button": "Cross the river"
     },
+    "before-plains": {
+        "initial-text-1": "I can see the pā in the distance, but I still need to cross the large grassy plains.",
+        "initial-text-2": "There are obstacles everywhere. I can see where some weka have built their nests, I don't want to disturb them either. How will I find my way through?",
+        "next-stage-button": "Start walking"
+    },
     "main": {
         "browser-note": "A Google Chrome or Mozilla Firefox browser is required.",
         "browser-recommend": "Try using a browser such as Google Chrome or Firefox that is up to date.",

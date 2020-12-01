@@ -68,6 +68,7 @@ body {
     margin-bottom: calc(var(--font-size) * 0.3);
     border-radius: calc(var(--font-size) * 0.5);
     overflow-y: auto;
+    white-space: pre-wrap;
     @extend .hidden-ui;
 }
 

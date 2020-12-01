@@ -66,9 +66,9 @@
             </div>
 
             <div id="controls" class="container mx-auto">
-                <button id="toggle-language" class="button">Switch language</button>
+                <button id="toggle-language" class="button" data-i18n="main.change-language"></button>
                 <div id="volume-control">
-                    <span class="pr-2">Volume</span>
+                    <span class="pr-2" data-i18n="main.volume"></span>
                     <input type="range" id="volume-slider" min="0" max="100" value="100">
                 </div>
             </div>
@@ -78,68 +78,39 @@
             <div class="container mx-auto p-2">
                 <div class="flex">
                     <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
-                        <h2 class="text-center">Forest Message</h2>
-                        <img src="/img/screenshot-fern-message.png">
-                        <p>
-                            The puzzle with the silver ferns gets to the heart of why use the word “digital” when talking about digital devices, digital photos, digital natives and so on! The activity shows how messages are stored or transmitted digitally using just two values.
-                        </p>
-                        <p>
-                            In the puzzle the two values were the green and silver side of the ferns, but on digital devices we often refer to the two values as the digits 0 and 1, and these are the “digits” that being digital is all about. Representing text (or pictures, or sound, or video, or anything else) using this idea is called “binary representation”, and you’ll find it in <a href="https://nzcurriculum.tki.org.nz/The-New-Zealand-Curriculum/Technology/Progress-outcomes#collapsible1" target="_blank">Progress Outcomes 3, 4, and 5 in Computational Thinking for Digital Technologies</a>.
-                        </p>
-                        <h3>Want to learn more about binary numbers?</h3>
-                        <ul>
-                            <li><a href="https://getready.iqualify.com/home">Kia Takatū ā-Matihiko - Pīkau 15</a></li>
-                            <li><a href="https://csfieldguide.org.nz/en/chapters/data-representation/numbers/">Computer Science Field Guide - Binary Numbers</a></li>
-                        </ul>
-                        <h3 class="my-4">Want to try the puzzle again?</h3>
-                        <a href="/index.njk?stage=fern-interactive" class="button" target="_blank">Link to fern puzzle</a>
+                        <h2 class="text-center" data-i18n="complete.forest-puzzle-heading"></h2>
+                        <img data-i18n="[src]complete.forest-image">
+                        <div data-i18n="[html]complete.forest-puzzle-text"></div>
+                        <h3 data-i18n="complete.forest-puzzle-resources-heading"></h3>
+                        <ul data-i18n="[html]complete.forest-puzzle-resources"></ul>
+                        <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
+                        <a href="/index.njk?stage=fern-interactive" class="button" target="_blank" data-i18n="complete.forest-puzzle-button"></a>
                     </div>
                 </div>
                 <div class="flex">
                     <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
-                        <h2 class="text-center">River Crossing</h2>
-                        <img src="/img/screenshot-river-crossing.png">
-                        <p>
-                            The river crossing puzzle where you joined rope lengths is an example of a common problem that computer scientists still haven’t figured out how to solve efficiently on a computer! For a small number of pieces of rope, a computer program can just try out lots of possibilities, but once you get a decent number of pieces, the time taken grows exponentially - even a fast computer can take thousands of years to try out all the possibilities.
-                        </p>
-                        <p>
-                            The general problem is called “bin packing”, and it comes up when we’re trying to load freight onto vehicles with a limited capacity, or cut up lengths of steel to particular sizes. You’d think someone could find a fast algorithm to work out the best solution, but no-one has, even though there’s a million dollar prize for finding a solution.
-                        </p>
-                        <p>
-                            There are hundreds of problems like this that are referred to as “intractable” - they take too long for computers to solve. You’ll find the topic of tractability in <a href="https://nzcurriculum.tki.org.nz/The-New-Zealand-Curriculum/Technology/Progress-outcomes#collapsible1" target="_blank">Progress Outcome 7 in Computational Thinking for Digital Technologies</a> - it’s usually explored in NCEA level 2.
-                        </p>
-                        <h3>Want to learn more about bin packing?</h3>
-                        <ul>
-                            <li><a href="https://getready.iqualify.com/home">Kia Takatū ā-Matihiko - Pīkau 17</a></li>
-                            <li><a href="https://csfieldguide.org.nz/en/chapters/complexity-and-tractability/bin-packing-problem/">Computer Science Field Guide - Bin packing problem</a></li>
-                        </ul>
-                        <h3 class="my-4">Want to try the puzzle again?</h3>
-                        <a href="/index.njk?stage=river-crossing" class="button" target="_blank">Link to river crossing puzzle</a>
+                        <h2 class="text-center" data-i18n="complete.river-puzzle-heading"></h2>
+                        <img data-i18n="[src]complete.river-image">
+                        <div data-i18n="[html]complete.river-puzzle-text"></div>
+                        <h3 data-i18n="complete.river-puzzle-resources-heading"></h3>
+                        <ul data-i18n="[html]complete.river-puzzle-resources"></ul>
+                        <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
+                        <a href="/index.njk?stage=river-crossing" class="button" target="_blank" data-i18n="complete.river-puzzle-button"></a>
                     </div>
                 </div>
                 <div class="flex">
                     <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
-                        <h2 class="text-center">Navigating Plains</h2>
-                        <img src="/img/screenshot-plains.png">
-                        <p>
-                            The final puzzle, moving around on the grid using simple forward/left/right commands, is a popular way to introduce the idea of computer programming (or “coding” as it’s sometimes referred to). While moving on a grid isn’t a proper programming language, it provides a vocabulary of unambiguous instructions that gives students experience giving commands that will be followed precisely, and allows them to test if they work correctly.
-                        </p>
-                        <p>
-                            When the instructions don’t do what was intended, students need to develop the resilience to track down what is wrong (a “bug”), and try again with revised instructions. The idea of breaking “simple non-computerised tasks into precise, unambiguous, step-by-step instructions” and “simple debugging” comes from <a href="https://nzcurriculum.tki.org.nz/The-New-Zealand-Curriculum/Technology/Progress-outcomes#collapsible1" target="_blank">Progress Outcome 1 in Computational Thinking for Digital Technologies</a>.
-                        </p>
-                        <h3>Want to learn more about coding and kidbots?</h3>
-                        <ul>
-                            <li><a href="https://getready.iqualify.com/home">Kia Takatū ā-Matihiko - Pīkau 5, 6, and 7</a></li>
-                            <li><a href="https://csunplugged.org/en/topics/binary-numbers/unit-plan/">CS Unplugged - Kidbots</a></li>
-                        </ul>
-                        <h3 class="my-4">Want to try the puzzle again?</h3>
-                        <a href="/index.njk?stage=plains-1" class="button" target="_blank">Link to plains puzzle</a>
+                        <h2 class="text-center" data-i18n="complete.plains-puzzle-heading"></h2>
+                        <img data-i18n="[src]complete.plains-image">
+                        <div data-i18n="[html]complete.plains-puzzle-text"></div>
+                        <h3 data-i18n="complete.plains-puzzle-resources-heading"></h3>
+                        <ul data-i18n="[html]complete.plains-puzzle-resources"></ul>
+                        <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
+                        <a href="/index.njk?stage=plains-1" class="button" target="_blank" data-i18n="complete.plains-puzzle-button"></a>
                     </div>
                 </div>
                 <div>
-                    <p class="text-center">
-                        Thanks for joining us on this digital journey.<br>
-                        If you solved the puzzles, then you’ve engaged with some of the biggest ideas in computing!
+                    <p class="text-center" data-i18n="[html]complete.thanks">
                     </p>
                 </div>
             </div>
@@ -147,20 +118,14 @@
 
         <div id="credits" class="container mx-auto text-center">
             <div id="logos">
-                <a href="https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/" target="_blank">
+                <a href="https://kiatakatu.ac.nz/" target="_blank">
                     <img src="/img/logos/ktam-logo-white.svg">
                 </a>
-                <a href="https://kiatakatu.ac.nz/" target="_blank">
+                <a href="https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/" target="_blank">
                     <img src="/img/logos/uccser-logo-white.png">
                 </a>
             </div>
-            <p data-i18n="main.credit">
-                This website was produced through funding from the <a href="https://www.education.govt.nz/" target="_blank">Ministry of Education</a> for the National Digital Readiness Programme, <a href="https://kiatakatu.ac.nz/" target="_blank">Kia Takatū ā-Matihiko</a>.
-                It is hosted and maintained by the <a href="https://www.canterbury.ac.nz/">University of Canterbury</a>, <a href="https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/" target="_blank">Computer Science Education Group</a>.
-                This website content is available under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons BY-SA 4.0</a>, and the interactive website is licensed under the <a href="https://tldrlegal.com/license/mit-license" target="_blank">MIT license</a>.
-                Any third party libraries used have their licenses listed in the <a href="https://github.com/uccser/dt-puzzle-journey" target="_blank">GitHub repository</a>.
-                The Kia Takatū ā-Matihiko logo is under <a href="https://www.iponz.govt.nz/about-ip/copyright/crown-copyright/" target="_blank">New Zealand Crown copyright</a>.
-            </p>
+            <p data-i18n="[html]main.credit"></p>
         </div>
 
         <script src="/js/vendor/modernizr-3.11.2.min.js"></script>

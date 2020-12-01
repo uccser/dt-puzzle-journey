@@ -7,6 +7,7 @@ import { i18n } from './i18n.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
+import { refreshI18n } from './i18n.mjs';
 
 var card_interactions = 0;
 var require_setup = true;
@@ -111,9 +112,10 @@ function runAntPuzzlesPart1() {
     if (ant_puzzle_data.current_goal == getDotCount()) {
         ant_puzzle_data.current_goal++;
     }
-    var text = i18n('fern-interactive.task-1', { number: ant_puzzle_data.current_goal })
-    document.getElementById('ant-task-1').innerText = text;
+    var task_element = document.getElementById('ant-task-1');
+    task_element.dataset.i18nOptions=`{ 'number': '${ant_puzzle_data.current_goal}' }`
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-1'));
+    refreshI18n();
     showUiElements(ui_elements);
 }
 
@@ -126,9 +128,10 @@ function runAntPuzzlesPart2() {
     if (ant_puzzle_data.current_goal == getDotCount()) {
         ant_puzzle_data.current_goal += 2;
     }
-    var text = i18n('fern-interactive.task-2', { number: ant_puzzle_data.current_goal })
-    document.getElementById('ant-task-2').innerText = text;
+    var task_element = document.getElementById('ant-task-2');
+    task_element.dataset.i18nOptions = `{ 'number': '${ant_puzzle_data.current_goal}' }`;
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-2'));
+    refreshI18n();
     showUiElements(ui_elements);
 }
 

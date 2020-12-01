@@ -32,8 +32,13 @@ const localise = locI18next.init(i18next, {
 });
 
 
+function refreshI18n() {
+    localise('body');
+}
+
+
 function i18n(key, options) {
     return i18next.t(key, options);
 };
 
-export { localise as loci18n, i18n }
+export { refreshI18n, i18n, i18next}

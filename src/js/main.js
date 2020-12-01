@@ -27,7 +27,7 @@ import queryString from 'query-string';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
-import { i18n, loci18n } from './i18n.mjs';
+import { i18n, i18next, refreshI18n } from './i18n.mjs';
 import { markAssetAsReady, revealContentGuide } from './utilities.mjs';
 import { start as welcomeStart } from './welcome.mjs';
 import { start as stageLandscapeViewStart } from './stage_landscape_view.mjs';
@@ -41,7 +41,7 @@ import { start as stageBeforePaStart } from './stage_before_pa.mjs';
 import { start as stageOutsidePaStart } from './stage_outside_pa.mjs';
 
 console.log('DEBUG is set to ' + DEBUG + '.');
-loci18n('body');
+refreshI18n();
 
 // Create global variable to track ready assets
 window.ready_assets = new Set();
@@ -49,50 +49,50 @@ window.unchecked_assets = new Set();
 
 const STAGES = {
     'landscape-view': {
-        button_text: i18n('main.start-landscape-view'),
+        text_key: 'main.start-landscape-view',
         initial_function: stageLandscapeViewStart,
     },
     'fern-interactive': {
-        button_text: i18n('main.start-fern-interactive'),
+        text_key: 'main.start-fern-interactive',
         initial_function: stageFernInteractiveStart,
     },
     'fern-message': {
-        button_text: i18n('main.start-fern-message'),
+        text_key: 'main.start-fern-message',
         initial_function: stageFernMessageStart,
     },
     'before-river': {
-        button_text: i18n('main.start-before-river'),
+        text_key: 'main.start-before-river',
         initial_function: stageBeforeRiverStart,
     },
     'river-crossing': {
-        button_text: i18n('main.start-river'),
+        text_key: 'main.start-river',
         initial_function: stageRiverCrossingStart,
     },
     'before-plains': {
-        button_text: i18n('main.start-plains'),
+        text_key: 'main.start-plains',
         initial_function: stageBeforePlainsStart,
     },
     'plains-1': {
-        button_text: i18n('main.start-plains'),
+        text_key: 'main.start-plains',
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 1},
     },
     'plains-2': {
-        button_text: i18n('main.start-plains'),
+        text_key: 'main.start-plains',
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 2},
     },
     'plains-3': {
-        button_text: i18n('main.start-plains'),
+        text_key: 'main.start-plains',
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 3},
     },
     'before-pa': {
-        button_text: i18n('main.start-pa'),
+        text_key: 'main.start-pa',
         initial_function: stageBeforePaStart,
     },
     'outside-pa': {
-        button_text: i18n('main.start-pa'),
+        text_key: 'main.start-pa',
         initial_function: stageOutsidePaStart,
     },
 };
@@ -100,6 +100,19 @@ var default_stage = 'landscape-view';
 var animation_container = document.getElementById('animation-container');
 
 $(document).ready(function () {
+    // Setup language switcher
+    $('#toggle-language').on('click', function () {
+        if (i18next.language == 'en') {
+            i18next.changeLanguage('mi');
+        } else {
+            i18next.changeLanguage('en');
+        }
+        refreshI18n();
+        if (DEBUG) {
+            console.log(`Language is now set to ${i18next.language}`);
+        }
+    });
+
     // Setup asset tracking for loader checks
     $('object.svg').each(function () {
         window.unchecked_assets.add(this.id);

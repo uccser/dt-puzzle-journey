@@ -14,7 +14,7 @@
         "line-5": "...engari, tuatahi, me kimi ahau i te ara tika kia puta i te ngāhere.",
         "line-6": "Ko te kōrero o tōku whānau, ka kite ahau i te tohu muna: kei tēhea o ngā rākau rimu te whakawhitinga awa.",
         "line-7": "Kāore i te roa ināianei...",
-        "next-message": "Uru ki te ngahere"
+        "next-stage-button": "Uru ki te ngahere"
     },
     "fern-interactive": {
         "intro-line-1": "Kua takoto tētahi huinga rau huruwhenua ki runga i tētahi toka.",
@@ -25,7 +25,19 @@
         "task-1": "Me pēhea ahau te nama {{number}} e hanga?",
         "task-2": "Ka pai tērā. Pēhea te nama {{number}}?",
         "final-text": "Kua rite ināianei kia haere tonu atu i te ara.",
-        "next-message": "Whāia tonutia te ara"
+        "next-stage-button": "Whāia tonutia te ara"
+    },
+    "fern-message": {
+        "previous-stage-button": "Me hoki anō mā te ara",
+        "check-button": "Āta tirotirohia ngā reta",
+        "initial-text-1": "Kua kite ahau i te karere muna, e iri ana i te tīwai rimu. Kua ūkuia ētahi o ngā ira i ngā rau, kua uaua ināianei te whakamatara he aha te tikanga.",
+        "initial-text-2": "Me kimi au i te tikanga o te kupu, kia mōhio ai au ko tēhea te ara tika whakararo ki te whārua, ki te whakawhitinga awa.",
+        "initial-text-3": "Ka kimi ahau i te tikanga o ngā reta – kua whakaaturia ki ngā rau huruwhenua – mā te whakamahi i ngā tohu kei runga i te poro rākau e takoto nei. Mā te kupu ka whākina mai au e mōhio ko tēhea te ara.",
+        "hint-text": "Ki te kore ahau e mārama ana ki tēnei waehere, tērā pea me hoki ahau i te ara. Mā ngā rau huruwhenua me ngā nama i hangaia e ngā popokorua pea au e āwhina.",
+        "correct-text": "{{word}}",
+        "incorrect-text": "Kāore anō kia tika. Ka whakamātau anō ahau.",
+        "final-text": "Ka pai! Nā te mea kua puta te nama ki runga i te rimu, ka haere tonu ahau i te ara kia whakawhiti ahau i ngā rimu e {{word}}. Kātahi ka heke ahau ki te awa, kia kite ai ahau i te whakawhitinga awa.",
+        "next-stage-button": "Heke ki raro ki te whārua"
     },
     "main": {
         "browser-note": "Me whakamahi tētahi o ngā pūtirotiro nei: te Google Chrome, te Mozilla Firefox rānei.",

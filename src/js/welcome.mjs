@@ -5,6 +5,7 @@ import { playFX } from './audio.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
+import { refreshI18n } from './i18n.mjs';
 
 
 function start(next_level_id, stage_data, autostart=false) {
@@ -18,8 +19,9 @@ function start(next_level_id, stage_data, autostart=false) {
     $('#welcome-end').on('click', function () { end(next_level_id); });
 
     // Setup button
-    let button_text = stage_data[next_level_id].button_text;
-    document.querySelector('#welcome-end').textContent = button_text;
+    let button_text_key = stage_data[next_level_id].text_key;
+    document.querySelector('#welcome-end').dataset.i18n = button_text_key;
+    refreshI18n();
 
     // Implement browser checks
     let svg_elements = document.querySelectorAll('object.svg');

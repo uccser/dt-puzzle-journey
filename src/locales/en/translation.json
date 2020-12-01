@@ -6,6 +6,16 @@
         "narrative-text-4": "It's great to be home.",
         "next-stage-button": "Approach the pā"
     },
+    "landscape-view": {
+        "line-1": "After a long time away, I'll finally return home to my whānau.",
+        "line-2": "I've been travelling for days now, but the pā is just at the end of this valley.",
+        "line-3": "I'll need to cross the plains...",
+        "line-4": "...and a river...",
+        "line-5": "...but first I have to find the correct path through the forest.",
+        "line-6": "My whanau told me I will come across a secret message: Which rimu tree to look for to find the river crossing.",
+        "line-7": "Not far to go now...",
+        "next-stage-button": "Step into the forest"
+    },
     "fern-interactive": {
         "intro-line-1": "A group of fern leaves has been laid upon a large rock.",
         "intro-line-2": "This must be related to the secret message my whānau told me about to find the river crossing.",
@@ -15,17 +25,19 @@
         "task-1": "How do I make the number {{number}}?",
         "task-2": "Ahh, that worked. What about the number {{number}}?",
         "final-text": "I think it's time to head further down the path now.",
-        "next-message": "Continue down the path"
+        "next-stage-button": "Continue down the path"
     },
-    "landscape-view": {
-        "line-1": "After a long time away, I'll finally return home to my whānau.",
-        "line-2": "I've been travelling for days now, but the pā is just at the end of this valley.",
-        "line-3": "I'll need to cross the plains...",
-        "line-4": "...and a river...",
-        "line-5": "...but first I have to find the correct path through the forest.",
-        "line-6": "My whanau told me I will come across a secret message: Which rimu tree to look for to find the river crossing.",
-        "line-7": "Not far to go now...",
-        "next-message": "Step into the forest"
+    "fern-message": {
+        "previous-stage-button": "Go back up the path",
+        "check-button": "Check the letters",
+        "initial-text-1": "I've found the secret message hanging on a rimu trunk. Some of the dots have been rubbed off the leaves to make it harder to decipher.",
+        "initial-text-2": "I need to figure out what the word is, so I know which path to take down the valley to the river crossing.",
+        "initial-text-3": "I need to figure out the letters – represented by the ferns – using the symbols on the fallen log below. The resulting word should tell me which path to take.",
+        "hint-text": "If I don't understand how the code works I might need to head back up the path. Maybe the fern leaves and the number the ants formed can help me.",
+        "correct-text": "{{word}} = {{translation}}",
+        "incorrect-text": "Something doesn't seem right. I need to try again.",
+        "final-text": "Ah! Since the number has appeared on a rimu tree, I will continue down the track until I pass {{word}} rimu. I can head downhill to the river at that point, and I should find the river crossing.",
+        "next-stage-button": "Head down the valley"
     },
     "main": {
         "browser-note": "A Google Chrome or Mozilla Firefox browser is required.",

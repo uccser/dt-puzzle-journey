@@ -9,6 +9,7 @@ import {
     hideUiElements,
 } from './utilities.mjs';
 import { playMusic, stopMusic, playFX } from './audio.mjs';
+import { refreshI18n, i18next } from './i18n.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
@@ -152,10 +153,17 @@ function displayUi() {
             console.log('Displaying Fern Message UI.');
         }
         // Setup text for later
-        document.querySelector('#fern-message-word').textContent = message_word;
-        let word_translation = WORD_TRANSLATIONS[message_word]
-        document.querySelector('#fern-message-word-translation').textContent = word_translation;
-        document.querySelector('#fern-message-word-sentence').textContent = word_translation;
+        var word_translation = WORD_TRANSLATIONS[message_word];
+        if (i18next.language == 'en') {
+            var sentence_word = word_translation;
+        } else {
+            var sentence_word = message_word;
+        }
+        var success_text_elem = document.getElementById('fern-message-feedback-success-text');
+        success_text_elem.dataset.i18nOptions = `{ 'word': '${message_word}', 'translation': '${word_translation}' }`;
+        var final_text_elem = document.getElementById('fern-message-final-text');
+        final_text_elem.dataset.i18nOptions = `{ 'word': '${sentence_word}' }`;
+        refreshI18n();
 
         // Reveal UI elements
         var ui_elements = Array.from(document.querySelectorAll('#fern-message-narrative-text .initial-text'));

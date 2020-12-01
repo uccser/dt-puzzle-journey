@@ -37,7 +37,7 @@ body {
     }
     cursor: default;
     user-select: none;
-    $container-size: 98;  // % of lower screen dimension
+    $container-size: 93;  // % of lower screen dimension
     $container-ratio: 16 / 9;
     width: $container-size * 1vw;
     height: $container-size * 1vw / $container-ratio;
@@ -125,10 +125,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem;
     button {
         font-size: var(--font-size);
-        padding: 0.2rem 0.4rem;
+        padding: 0.3rem 0.6rem;
         $background-color: #576077;
         background-color: $background-color;
         &:hover {

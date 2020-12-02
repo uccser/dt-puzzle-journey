@@ -119,6 +119,14 @@ function setup() {
     drake.on('cancel', function (el, container, source) {
         playRopeSound(container);
     });
+    // Thanks to Constantin for the following: https://stackoverflow.com/a/59340712
+    drake.on('shadow', function (el, container, source) {
+        // check if the shadow copy is not already the last child of the container
+        if (el !== container.children[container.children.length - 1]) {
+            // otherwise: make it so
+            container.appendChild(el);
+        }
+    })
 
     // Setup buttons
     $('#stage-river-crossing #river-crossing-next-stage').on('click', end);

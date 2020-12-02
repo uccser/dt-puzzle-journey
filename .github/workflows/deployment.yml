@@ -15,13 +15,13 @@ jobs:
           persist-credentials: false
 
     - name: Install NPM dependencies
-      uses: bahmutov/npm-install@v1.1.0
+      uses: bahmutov/npm-install@v1.4.5
 
     - name: Production build
       run: npm run build
 
     - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.5.9
+      uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages

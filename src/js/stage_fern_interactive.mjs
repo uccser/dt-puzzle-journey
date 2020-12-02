@@ -3,9 +3,11 @@ import { DEBUG, BLINDFOLD_FADE_DURATION } from './constants.mjs';
 import { getSvg, changeStage, getRandomInt, showUiElements } from './utilities.mjs';
 import { isFMSetup } from './stage_fern_message.mjs';
 import { playFX, playMusic } from './audio.mjs';
+import { i18n } from './i18n.mjs';
 
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
+import { refreshI18n } from './i18n.mjs';
 
 var card_interactions = 0;
 var require_setup = true;
@@ -110,22 +112,28 @@ function runAntPuzzlesPart1() {
     if (ant_puzzle_data.current_goal == getDotCount()) {
         ant_puzzle_data.current_goal++;
     }
-    document.getElementById('ant-puzzle-1-goal').innerText = ant_puzzle_data.current_goal;
+    var task_element = document.getElementById('ant-task-1');
+    task_element.dataset.i18nOptions=`{ 'number': '${ant_puzzle_data.current_goal}' }`
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-1'));
+    refreshI18n();
     showUiElements(ui_elements);
 }
 
 
 function runAntPuzzlesPart2() {
+    var previous_goal = ant_puzzle_data.current_goal;
     ant_puzzle_data.current_goal = getRandomInt(0, 27);
-    if (ant_puzzle_data.current_goal & 2 == 0) {
+    // Force second puzzle to be for an odd number
+    if (ant_puzzle_data.current_goal % 2 == 0) {
         ant_puzzle_data.current_goal++;
     }
-    if (ant_puzzle_data.current_goal == getDotCount()) {
+    if (ant_puzzle_data.current_goal == previous_goal) {
         ant_puzzle_data.current_goal += 2;
     }
-    document.getElementById('ant-puzzle-2-goal').innerText = ant_puzzle_data.current_goal;
+    var task_element = document.getElementById('ant-task-2');
+    task_element.dataset.i18nOptions = `{ 'number': '${ant_puzzle_data.current_goal}' }`;
     var ui_elements = Array.from(document.querySelectorAll('#fern-interactive-ui-2 .ant-text-2'));
+    refreshI18n();
     showUiElements(ui_elements);
 }
 

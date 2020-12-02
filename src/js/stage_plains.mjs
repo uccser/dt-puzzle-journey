@@ -290,18 +290,6 @@ function setupAvatar() {
     avatar.id = 'grid-avatar';
     avatar_container.appendChild(avatar);
     setAvatarToStartPosition();
-
-    // See: https://github.com/uccser/dt-puzzle-journey/issues/19
-    // anime({
-    //     target: document.getElementById('grid-avatar-container'),
-    //     duration: 0,
-    //     translateX: `${grid_data.starting_location.x_coord * 100}%`,
-    // });
-    // anime({
-    //     target: document.getElementById('grid-avatar'),
-    //     duration: 0,
-    //     translateY: `${grid_data.starting_location.y_coord * 100}%`,
-    // });
 }
 
 

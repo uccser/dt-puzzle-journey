@@ -15,7 +15,7 @@ import dragula from 'dragula/dragula.js';
 
 var rope_data, hint_timeout;
 var require_setup = true;
-const HINT_DELAY = 20000;
+const HINT_DELAY = 60000;
 const EEL_SPEED = 35000;
 
 function start() {
@@ -119,6 +119,14 @@ function setup() {
     drake.on('cancel', function (el, container, source) {
         playRopeSound(container);
     });
+    // Thanks to Constantin for the following: https://stackoverflow.com/a/59340712
+    drake.on('shadow', function (el, container, source) {
+        // check if the shadow copy is not already the last child of the container
+        if (el !== container.children[container.children.length - 1]) {
+            // otherwise: make it so
+            container.appendChild(el);
+        }
+    })
 
     // Setup buttons
     $('#stage-river-crossing #river-crossing-next-stage').on('click', end);
@@ -213,27 +221,25 @@ function createRopeLengths() {
     // Length of one rope (multiple required for bridge).
     var combined_rope_length = 100;
 
-    // Create one rope of 4 pieces
-    let rope_count = 0;
+    // Create one rope of 3 pieces
     let rope_total_length = 0;
-    while (rope_count < 3) {
-        let rope_length = anime.random(20, 30);
+    while (rope_lengths.length < 2) {
+        let rope_length = anime.random(27, 38);
         rope_total_length += rope_length;
         rope_lengths.push(rope_length);
-        rope_count++;
-        if (rope_count == 1) {
+        if (rope_lengths.length == 1) {
             initial_rope_lengths.push(rope_length);
         }
     }
     let rope_remaining = combined_rope_length - rope_total_length;
     rope_lengths.push(rope_remaining);
 
-    // Create two ropes of 3 pieces
+    // Create two ropes of 3 pieces, where one piece is at least 50% the length
     for (let i = 0; i < 2; i++) {
-        let rope_a = anime.random(41, 66);
+        let rope_a = anime.random(51, 66);
         initial_rope_lengths.push(rope_a);
         let remaining = combined_rope_length - rope_a;
-        let rope_b = Math.floor(anime.random(remaining * 0.4, remaining * 0.6));
+        let rope_b = Math.floor(anime.random(remaining * 0.5, remaining * 0.6));
         let rope_c = combined_rope_length - rope_a - rope_b;
         rope_lengths.push(rope_a, rope_b, rope_c);
     }

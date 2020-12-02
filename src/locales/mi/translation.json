@@ -1,0 +1,114 @@
+{
+    "before-pa": {
+        "narrative-text-1": "Kua tae atu ahau i te tōnga o te rā.",
+        "narrative-text-2": "Kua kite ahau i tōku whānau.",
+        "narrative-text-3": "Te kakara pai o te kai.",
+        "narrative-text-4": "Inā te koa ki te hoki ki te kāinga.",
+        "next-stage-button": "Whakatata atu ki te pā"
+    },
+    "landscape-view": {
+        "line-1": "Taku roa ki wāhi kē, kua hoki rā anō ahau ki te kāinga, ki tōku whānau.",
+        "line-2": "Te maha o ngā rā o taku haerenga, nāwai rā, kei te pito o tēnei whārua te pā.",
+        "line-3": "Me whakawhiti ahau i ngā mānia...",
+        "line-4": "...me te awa...",
+        "line-5": "...engari, tuatahi, me kimi ahau i te ara tika kia puta i te ngāhere.",
+        "line-6": "Ko te kōrero o tōku whānau, ka kite ahau i te tohu muna: kei tēhea o ngā rākau rimu te whakawhitinga awa.",
+        "line-7": "Kāore i te roa ināianei...",
+        "next-stage-button": "Uru ki te ngahere"
+    },
+    "fern-interactive": {
+        "intro-line-1": "Kua takoto tētahi huinga rau huruwhenua ki runga i tētahi toka.",
+        "intro-line-2": "Te āhua nei ko te karere muna tēnei, i kōrerohia e tōku whānau, te tohu mō te whakawhitinga awa.",
+        "intro-line-3": "Me kimi māramatanga ahau ki te āhua motuhake o ēnei rau i te tuatahi, kātahi ka haere tonu atu.",
+        "instruction-text": "Pāwhiria ngā rau huruwhenua ki te tūhura i ngā āhuatanga.",
+        "ant-hint": "Kei te waihanga ngā pōpokorua i tētahi nama kei runga i te rākau nei, te āhua nei kei te hāngai ki ngā rau. Kei te tipu taku māramatanga ki te tikanga o aua nama.",
+        "task-1": "Me pēhea ahau te nama {{number}} e hanga?",
+        "task-2": "Ka pai tērā. Pēhea te nama {{number}}?",
+        "final-text": "Kua rite ināianei kia haere tonu atu i te ara.",
+        "next-stage-button": "Whāia tonutia te ara"
+    },
+    "fern-message": {
+        "previous-stage-button": "Me hoki anō mā te ara",
+        "check-button": "Āta tirotirohia ngā reta",
+        "initial-text-1": "Kua kite ahau i te karere muna, e iri ana i te tīwai rimu. Kua ūkuia ētahi o ngā ira i ngā rau, kua uaua ināianei te whakamatara he aha te tikanga.",
+        "initial-text-2": "Me kimi au i te tikanga o te kupu, kia mōhio ai au ko tēhea te ara tika whakararo ki te whārua, ki te whakawhitinga awa.",
+        "initial-text-3": "Ka kimi ahau i te tikanga o ngā reta – kua whakaaturia ki ngā rau huruwhenua – mā te whakamahi i ngā tohu kei runga i te poro rākau e takoto nei. Mā te kupu ka whākina mai au e mōhio ko tēhea te ara.",
+        "hint-text": "Ki te kore ahau e mārama ana ki tēnei waehere, tērā pea me hoki ahau i te ara. Mā ngā rau huruwhenua me ngā nama i hangaia e ngā popokorua pea au e āwhina.",
+        "correct-text": "{{word}}",
+        "incorrect-text": "Kāore anō kia tika. Ka whakamātau anō ahau.",
+        "final-text": "Ka pai! Nā te mea kua puta te nama ki runga i te rimu, ka haere tonu ahau i te ara kia whakawhiti ahau i ngā rimu e {{word}}. Kātahi ka heke ahau ki te awa, kia kite ai ahau i te whakawhitinga awa.",
+        "next-stage-button": "Heke ki raro ki te whārua"
+    },
+    "before-river": {
+        "initial-text-1": "Inā te tikanga! Kua rapu ahau i te tikanga o taua karere i waihotia e tōku whānau māku. Kua kite ahau i te ara muna, ā, kua tae ahau ki te awa.",
+        "initial-text-2": "Aue! Nā te marangai i tērā wiki, kua riro te arawhiti i te wai. Nā te tere o te wai kāore e taea te kau atu, me hanga ahau i tētahi arawhiti hou. Ki te hanga ahau i te arawhiti ka taea hoki e te iwi te whakawhiti.",
+        "initial-text-3": "Arā ētahi pōkai taura, engari he poto rawa te roa o tēnā, o tēnā mō te whānui o te awa. Me honohono ahau i ngā taura.",
+        "next-stage-button": "Tīmata ki te hanga i te arawhiti"
+    },
+    "river-crossing": {
+        "initial-text": "Me honohono ahau i enei pōkai taura. Ko ēhea o ēnei taura hei whakahono ki te tārai i ngā whakawhitinga e 3 e tika ana te roa?",
+        "instruction-text": "Tōia ngā pōkai taura ki te awa. Kia tūpato kei roa rawa, kei poto rawa rānei te taura. Tōia anō ki te whakahoki i ngā taura ki te taha awa mēnā kāore i te tika.",
+        "final-text": "I tārai ahau i ngā taura e toru e tika ana te roa mō te arawhiti. Kāore e roa ināianei, ka rongo ahau i te kakara o ngā ahikā o te kāinga.",
+        "hint-button": "Āwhina mai! Tīmatahia ngā arawhiti mōku...",
+        "next-stage-button": "Whakawhiti i te awa"
+    },
+    "before-plains": {
+        "initial-text-1": "Ka kite ahau i te pā kei tawhiti rā, engari me whakawhiti ahau i ngā mānia i te tuatahi.",
+        "initial-text-2": "He maha ngā tauārai. Ka kite hoki ahau i ngā kōhanga weka, me kore ahau te whakararu i ngā kōhanga hoki. Me pēhea taku kimi i te ara mōku?",
+        "next-stage-button": "Tīmatahia te hīkoi"
+    },
+    "plains": {
+        "initial-text": "I waiho tōku whānau i ngā tohu mōku, engari kua ngaro ētahi o ngā tohutohu i te marangai. Ka whakakapi mai he tohu anō i tēnei kōputu.",
+        "instruction-text": "Tōia he takahanga mai i te hōputu takahanga, ki te hanga i ngā tohutohu kia tae ki te ara o runga.",
+        "kea-text": "Aue! Kua tāhae te kea i ngā tohu huri whakatematau katoa! Me whakaoti i ngā tohutohu me te korenga huringa whakatematau. He nui te wāhi mō te maha o ngā tohutohu, ka kore pea ahau e whakamahi i te katoa.",
+        "hint-text": "Kāore i te whai wāhi mō te maha o ngā tohutohu. Me kimi tētahi rautaki kē ki te whakamahi i ngā tohutohu nei. Me whai au i te auahatanga, whakamahi ai au ēnei pere...",
+        "run-button": "Whakahaerehia ngā tohutohu",
+        "next-stage-button": "Hīkoi tonu i ngā mānia"
+    },
+    "complete": {
+        "final-text-1": "Ko te kairapu ko ia te kite",
+        "final-text-2": "Tino pai! Kua tae rā anō koe ki te mutunga, arā, kua oti ngā panga.",
+        "final-text-3": "Ēnei momo panga e toru i whakaoti ai koe i tō haerenga, he momo ariā nunui nō roto i te marautanga hou mō te Hangarau Matihiko.",
+        "final-text-4": "Panuku ki raro mō te akoranga anō.",
+        "forest-puzzle-heading": "He Whakamārama mō te Ngahere",
+        "forest-image": "/screenshot-mi-forest.png",
+        "forest-puzzle-text": "<p>Ka hāngai te panga mō ngā huruwhenua ki te ngako o te whakamahinga o te kupu \"matihiko\" i a tātou e kōrero ana mō ngā pūrere matihiko, ngā whakaahua matihiko, te hunga matihiko me ērā momo kōrero! I tēnei ngohe, ka whakaaturia te whakaahuahanga o ngā karere e tukua, e rokirokia rānei ki ngā uara e rua noa iho.</p><p>Kei tēnei panga, ko ngā uara, ko ngā taha e rua o te huruwhenua, te taha kākāriki me te taha hina, engari kei ngā pūrere matihiko ka kōrero tātou mō ngā uara 0 me 1, arā, ngā \"mati\" o te \"matihiko\". Ka kīia tēnei te \"whakaahuahanga matihiko\", ko te whakahuahanga o ngā kōrero (o ngā pikitia, ngā oro, ngā ataata, ngā momo katoa rānei). Ka kitea tēnei i ngā Whakatupuranga 3 ki te 5 o te tupuranga Whakaaro Rorohiko i te marautanga Hangarau Matihiko.</p>",
+        "forest-puzzle-resources-heading": "Kei te hiahia koe ki te toro atu anō mō ngā nama tāhūrua?",
+        "forest-puzzle-resources": "<li><a href='https://kiatakatu.iqualify.com/home' target='_blank'>Kia Takatū ā-Matihiko - Pīkau 11: Whakaaro Rorohiko 3e</a></li><li><a href='https://csfieldguide.org.nz/en/chapters/data-representation/numbers/' target='_blank'>Computer Science Field Guide - Binary Numbers (reo Pākehā)</a></li>",
+        "forest-puzzle-button": "Hononga ki te panga huruwhenua",
+        "river-puzzle-heading": "Te Whakawhitinga Awa",
+        "river-image": "/screenshot-mi-river.png",
+        "river-puzzle-text": "<p>I te panga whakawhitinga awa, i honohono ai koe i ngā pōkai taura, he momo rapanga nui tēnei mō ngā kaimātai rorohiko, nā te mea kāore anō rātou kia kimi i tētahi hātepe whāomo mō ngā rorohiko ki te whakaoti i ēnei momo rapanga! Mēnā he ruarua ngā taura, he ngāwari mā te rorohiko ki te whakamātau i ngā whakatakotoranga katoa e taea, engari mēnā he maha ngā taura, ka tipu taupūtanga te wā ki te whakamātau i ngā whakatakotoranga katoa - ahakoa te tere o te rorohiko ka eke i te mano tau pea ki te whakamātau i te katoa.</p><p>Ka kīia ēnei momo rapanga he rapanga \"bin packing\" ki te reo Pākehā, ka kitea hoki i te wā kei te uta i ngā rawa ki tētahi waka, i te wā rānei e tapatapahia i ngā poro rino, kia puta ai ngā roanga e hiahiatia ana. Tērā pea e pōhēhētia, ka taea e tētahi tangata te kimi i te hātepe tere ki te whakaoti i ēnei momo hōpanga, engari kāore anō kia puta tētahi, ahakoa te paraihe, kotahi miriona tāra te tārewa tonu.</p><p>He manomano ngā rapanga pēnei, ka kīia he 'whakaioio', he 'intractable' rānei - ka roa rawa te wā mā te rorohiko e kimi ana i te otinga. Ka hāngai tēnei ki te ariā o \"ngā tūmomo hātepe\" i Whakatupuranga 7 o te tupuranga Whakaaro Rorohiko o te marautanga Hangarau Matihiko - ko te tikanga, ka tūhuratia tēnei i te taumata 2 o te NCEA.</p>",
+        "river-puzzle-resources-heading": "Ki te ako tonu mō ngā bin packing:",
+        "river-puzzle-resources": "<li><a href='https://getready.iqualify.com/home' target='_blank'>Kia Takatū ā-Matihiko - Pīkau 17 (reo Pākehā)</a></li><li><a href='https://csfieldguide.org.nz/en/chapters/complexity-and-tractability/bin-packing-problem/' target='_blank'>Computer Science Field Guide - Bin packing problem (reo Pākehā)</a></li>",
+        "river-puzzle-button": "Hononga ki te panga whakawhitinga awa",
+        "plains-puzzle-heading": "Te Whakawhiti Mānia",
+        "plains-image": "/screenshot-mi-plains.png",
+        "plains-puzzle-text": "<p>I te panga whakamutunga, ka whakamahia ngā tohutohu māmā ki te neke ki mua/huri whakatemauī/whakatekatau rānei mā runga i te tukutuku. He tīmatanga māmā tēnei mō te whakaako i te waihanga papatono mō ngā rorohiko (ko te 'tuhiwaehere' tēnā). Ahakoa ehara te nekeneke i runga i ngā tukutuku i te reo tuhiwaehere tūturu, he horopaki tēnei, kia ako ai ngā ākonga i tētahi kohinga tohutohu hāngai ki tōna kaupapa, kia waia ai rātou ki te waihanga i ngā tohutohu e whaia rawatia, ā, ka taea hoki te whakamātau i aua tohutohu, kia mōhio ai, he tika, kāore rānei.</p><p>Ki te kore aua tohutohu e tika, me tipu te kaha o te ākonga ki te āta kimi i te pūtake o te raru (arā te hapa, te 'iro' rānei), ā, ki te whakatikatika i ngā tohutohu me te whakamātau anō. Ko tēnei kaupapa: kia \"wetewetea tētahi tūmahi rorohiko-kore ki ētahi tohutohu tika, tohutohu mārama\" me te \"whakatika (te patuiro)\", he kaupapa nō te Whakatupuranga 1 o te tupuranga Whakaaro Rorohiko o te marautanga Hangarau Matihiko.</p>",
+        "plains-puzzle-resources-heading": "Ki te ako tonu mō te tuhiwaehere me ngā karetao tamariki, tirohia:",
+        "plains-puzzle-resources": "<li><a href='https://kiatakatu.iqualify.com/home' target='_blank'>Kia Takatū ā-Matihiko - Ngā Pīkau Hangarau Matihiko 5 me 7</a></li><li><a href='https://csunplugged.org/mi/topics/kidbots/unit-plan/' target='_blank'>CS Unplugged - Ngā Karetao Tamariki</a></li>",
+        "plains-puzzle-button": "Hononga ki te panga mānia",
+        "thanks": "Kei te mihi ki a koe mō tō urunga ki tō tātou haerenga. Mēnā kua whakaoti koe i ngā panga, kua uru hoki koe ki ētahi o ngā kaupapa nui o te whakaaro rorohiko!",
+        "try-puzzle-again": "Whakamātauria anōtia te panga?"
+    },
+    "main": {
+        "browser-note": "Me whakamahi tētahi o ngā pūtirotiro nei: te Google Chrome, te Mozilla Firefox rānei.",
+        "browser-recommend": "Whakamātauria tētahi pūtirotiro kē, pērā ki te Google Chrome, te Firefox rānei kua whakahoungia.",
+        "credit": "I whakaputaina tēnei paetukutuku nā te pūtea a te <a href='https://www.education.govt.nz/' target='_blank'>Tāhuhu o te Mātauranga</a>, mō te National Digital Readiness Programme, <a href='https://kiatakatu.ac.nz/' target='_blank'>Kia Takatū ā-Matihiko</a>. Kua purutia, kua whakahaerehia e te <a href='https://www.canterbury.ac.nz/' target='_blank'>University of Canterbury</a>, <a href='https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/' target='_blank'>Computer Science Education Group</a>. E tukuna ai ngā ihirangi o te paetukutuku kei raro i te <a href='https://creativecommons.org/licenses/by-sa/4.0/' target='_blank'>Creative Commons BY-SA 4.0</a>, ā, ko te paetukutuku pāhekoheko nei kei raro i te <a href='https://tldrlegal.com/license/mit-license' target='_blank'>raihana MIT</a>. Ka kitea hoki ngā raihana o ngā putunga tuhiwaehere o te tangata kē kei roto i te putunga <a href='https://github.com/uccser/dt-puzzle-journey' target='_blank'>GitHub</a>. Ka noho te waitohu o Kia Takatū ā-Matihiko me ngā rauemi o te kaupapa nei kei raro i te <a href='https://www.iponz.govt.nz/about-ip/copyright/crown-copyright/' target='_blank'>manatārua a te Karauna</a>.",
+        "landscape": "Tēnā whakamahi i tāu pūrere kia nohopae.",
+        "length": "Kei te rohe o te 10 ki te 20 miniti te wā ki te whakaoti i tēnei kaupapa.",
+        "problem": "Aroha atu! Kua puta mai he raru.",
+        "setup": "Kei te whakariterite...",
+        "sound": "Me whakakā pea te oro",
+        "start-before-river": "Tīmatahia mai i te awa",
+        "start-fern-interactive": "Tīmatahia mai i ngā rau huruwhenua",
+        "start-fern-message": "Tīmatahia mai i te karere ā-rau huruwhenua",
+        "start-landscape-view": "Tīmatahia te haerenga",
+        "start-pa": "Tīmatahia mai i te pā",
+        "start-plains": "Tīmatahia mai i ngā mānia",
+        "start-river": "Tīmatahia mai i te whakawhitinga awa",
+        "title": "He Haerenga Panga HM",
+        "change-language": "Switch to English",
+        "volume": "Kahaoro"
+    }
+}

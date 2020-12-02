@@ -24,9 +24,11 @@
 import jQuery from 'jquery';
 window.$ = jQuery;
 import queryString from 'query-string';
+import { Howler } from 'howler';
 
 // Import modules
 import { DEBUG } from './constants.mjs';
+import { i18n, i18next, refreshI18n } from './i18n.mjs';
 import { markAssetAsReady, revealContentGuide } from './utilities.mjs';
 import { start as welcomeStart } from './welcome.mjs';
 import { start as stageLandscapeViewStart } from './stage_landscape_view.mjs';
@@ -40,6 +42,7 @@ import { start as stageBeforePaStart } from './stage_before_pa.mjs';
 import { start as stageOutsidePaStart } from './stage_outside_pa.mjs';
 
 console.log('DEBUG is set to ' + DEBUG + '.');
+refreshI18n();
 
 // Create global variable to track ready assets
 window.ready_assets = new Set();
@@ -47,57 +50,75 @@ window.unchecked_assets = new Set();
 
 const STAGES = {
     'landscape-view': {
-        button_text: 'Start the journey',
+        text_key: 'main.start-landscape-view',
         initial_function: stageLandscapeViewStart,
     },
     'fern-interactive': {
-        button_text: 'Start at the fern leaves',
+        text_key: 'main.start-fern-interactive',
         initial_function: stageFernInteractiveStart,
     },
     'fern-message': {
-        button_text: 'Start at message in ferns leaves',
+        text_key: 'main.start-fern-message',
         initial_function: stageFernMessageStart,
     },
     'before-river': {
-        button_text: 'Start at the river',
+        text_key: 'main.start-before-river',
         initial_function: stageBeforeRiverStart,
     },
     'river-crossing': {
-        button_text: 'Start at the river crossing',
+        text_key: 'main.start-river',
         initial_function: stageRiverCrossingStart,
     },
     'before-plains': {
-        button_text: 'Start at the plains',
+        text_key: 'main.start-plains',
         initial_function: stageBeforePlainsStart,
     },
     'plains-1': {
-        button_text: 'Start at the plains',
+        text_key: 'main.start-plains',
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 1},
     },
     'plains-2': {
-        button_text: 'Start on the plains',
+        text_key: 'main.start-plains',
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 2},
     },
     'plains-3': {
-        button_text: 'Start on the plains',
+        text_key: 'main.start-plains',
         initial_function: stagePlainsStart,
         additional_parameters: {substage: 3},
     },
     'before-pa': {
-        button_text: 'Start at the pā',
+        text_key: 'main.start-pa',
         initial_function: stageBeforePaStart,
     },
     'outside-pa': {
-        button_text: 'Start at the pā',
+        text_key: 'main.start-pa',
         initial_function: stageOutsidePaStart,
     },
 };
 var default_stage = 'landscape-view';
 var animation_container = document.getElementById('animation-container');
 
+
 $(document).ready(function () {
+    // Setup language switcher
+    $('#toggle-language').on('click', function () {
+        if (i18next.language == 'en') {
+            i18next.changeLanguage('mi');
+        } else {
+            i18next.changeLanguage('en');
+        }
+        refreshI18n();
+        if (DEBUG) {
+            console.log(`Language is now set to ${i18next.language}`);
+        }
+    });
+
+    $('#volume-slider').on('input change', function () {
+        updateVolume(this.value / 100);
+    });
+
     // Setup asset tracking for loader checks
     $('object.svg').each(function () {
         window.unchecked_assets.add(this.id);
@@ -127,6 +148,14 @@ $(document).ready(function () {
     updateFontSizeVariable();
     welcomeStart(stage_value, STAGES, autostart);
 });
+
+
+function updateVolume(value) {
+    Howler.volume(value);
+    if (DEBUG) {
+        console.log(`Volume is now set to ${value}`);
+    }
+}
 
 
 function updateFontSizeVariable() {

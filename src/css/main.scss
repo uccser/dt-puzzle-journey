@@ -28,6 +28,51 @@ body {
     padding: 0;
 }
 
+$navbar-color: #576077;
+$navbar-height: 2rem;
+#body-flex-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    #navbar {
+        flex-shrink: 0;
+        z-index: 50;
+        height: $navbar-height;
+        background-color: $navbar-color;
+
+        #navbar-contents {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem;
+            height: 100%;
+            font-size: 0.8rem;
+        }
+
+        #navbar-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        button {
+            padding: 0 0.3rem;
+            &:hover {
+                background-color: lighten($navbar-color, 8%);
+            }
+        }
+        #volume-control {
+            display: flex;
+            align-items: center;
+            input {
+                cursor: pointer;
+            }
+        }
+    }
+    #body-content {
+        overflow: auto;
+        flex-grow: 1;
+    }
+}
+
 #animation-container {
     h1 {
         font-size: calc(var(--font-size) * 4);
@@ -37,7 +82,7 @@ body {
     }
     cursor: default;
     user-select: none;
-    $container-size: 98;  // % of lower screen dimension
+    $container-size: 93;  // % of lower screen dimension
     $container-ratio: 16 / 9;
     width: $container-size * 1vw;
     height: $container-size * 1vw / $container-ratio;
@@ -47,7 +92,7 @@ body {
     overflow: hidden;
     position: relative;
     background: #222;
-    border: 2px solid #222;
+    border: 1px solid #222;
     box-sizing: border-box;
     font-size: var(--font-size);
 
@@ -64,10 +109,11 @@ body {
 
 .ui-text {
     display: inline-block;
-    padding: calc(var(--font-size) * 0.5) var(--font-size);
-    margin-bottom: calc(var(--font-size) * 0.5);
+    padding: calc(var(--font-size) * 0.3) calc(var(--font-size) * 0.6);
+    margin-bottom: calc(var(--font-size) * 0.3);
     border-radius: calc(var(--font-size) * 0.5);
     overflow-y: auto;
+    white-space: pre-wrap;
     @extend .hidden-ui;
 }
 

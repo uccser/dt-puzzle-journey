@@ -17,18 +17,33 @@
         "audio": "^1.2.0",
         "dragula": "^3.7.2",
         "howler": "^2.2.0",
+        "i18next": "^19.8.4",
+        "i18next-browser-languagedetector": "^6.0.1",
         "install": "^0.13.0",
         "jquery": "3.5.1",
+        "loc-i18next": "^0.1.4",
         "pathfinding": "^0.4.18",
         "query-string": "^6.13.1",
         "tailwindcss": "^1.8.10"
     },
     "devDependencies": {
+        "i18next-parser": "^3.3.0",
         "nunjucks": "^3.2.0",
         "parcel-bundler": "^1.12.4",
         "parcel-plugin-nuke-dist": "^1.0.1",
         "parcel-plugin-nunjucks": "^2.2.1",
+        "parcel-plugin-static-files-copy": "^2.5.0",
         "patch-package": "^6.2.2",
         "sass": "^1.26.10"
+    },
+    "staticFiles": {
+        "staticPath": [
+            "src/img/screenshot-en-forest.png",
+            "src/img/screenshot-en-river.png",
+            "src/img/screenshot-en-plains.png",
+            "src/img/screenshot-mi-forest.png",
+            "src/img/screenshot-mi-river.png",
+            "src/img/screenshot-mi-plains.png"
+        ]
     }
 }

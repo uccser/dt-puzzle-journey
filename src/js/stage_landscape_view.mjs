@@ -18,23 +18,10 @@ import { playMusic, playFX } from './audio.mjs';
 // Import third party libraries
 import anime from 'animejs/lib/anime.es.js';
 
-
-const TEXT_FADE_DURATION = 1000;
-const TEXT_GAP_DURATION = 1000;
-const TEXT_DURATION = 4000;
 const INITIAL_ZOOM = 18;
 const INITIAL_ZOOM_DELAY = 1000;
 const ZOOM_DURATION = 53000 - INITIAL_ZOOM_DELAY;
-var text_container = document.getElementById('landscape-ui-narrative-text');
-var text_lines = [
-    "After a long time away, I'll finally return home to my whānau.",
-    "I've been travelling for days now, but the pā is just at the end of this valley.",
-    "I'll need to cross the plains...",
-    "...and a river...",
-    "...but first I have to find the correct path through the forest.",
-    "My whānau told me I will come across a secret message: Which rimu tree to look for to find the river crossing.",
-    "Not far to go now...",
-];
+const TEXT_CONTAINER = document.getElementById('landscape-ui-narrative-text');
 
 
 function start() {
@@ -84,31 +71,26 @@ function animateLandscapeView() {
         delay: INITIAL_ZOOM_DELAY,
     });
 
+    var text_lines = Array.from(TEXT_CONTAINER.children);
     var line_allocated_time = ZOOM_DURATION / text_lines.length;
     var line_fade = line_allocated_time * 0.1;
-    var line_duration = line_allocated_time * 0.8;
-    revealLine(0, line_fade, line_duration);
+    var line_duration = line_allocated_time * 0.9;
+    revealLine(text_lines, line_fade, line_duration);
 }
 
 
-function revealLine(i, line_fade, line_duration) {
-    setText(text_lines[i]);
+function revealLine(text_lines, line_fade, line_duration) {
+    // Reveal line, get ready to reveal next
+    var line_element = text_lines.shift();
     showUiElements(
-        text_container,
+        line_element,
         line_fade,
         0,
         function () {
-            if (i < text_lines.length - 1) {
+            if (text_lines.length > 0) {
                 setTimeout( function () {
-                    hideUiElements(
-                        text_container,
-                        line_fade,
-                        0,
-                        function () {
-                            revealLine(i + 1, line_fade, line_duration);
-                        }
-                    );
-                }, line_duration);
+                    revealLine(text_lines, line_fade, line_duration);
+                    }, line_duration);
             } else {
                 setTimeout(function () {
                     var next_stage_button = document.getElementById('landscape-view-next-stage');
@@ -117,11 +99,6 @@ function revealLine(i, line_fade, line_duration) {
             }
         }
     );
-}
-
-
-function setText(string) {
-    text_container.innerText = string;
 }
 
 

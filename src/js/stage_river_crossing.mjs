@@ -213,27 +213,25 @@ function createRopeLengths() {
     // Length of one rope (multiple required for bridge).
     var combined_rope_length = 100;
 
-    // Create one rope of 4 pieces
-    let rope_count = 0;
+    // Create one rope of 3 pieces
     let rope_total_length = 0;
-    while (rope_count < 3) {
-        let rope_length = anime.random(20, 30);
+    while (rope_lengths.length < 2) {
+        let rope_length = anime.random(27, 38);
         rope_total_length += rope_length;
         rope_lengths.push(rope_length);
-        rope_count++;
-        if (rope_count == 1) {
+        if (rope_lengths.length == 1) {
             initial_rope_lengths.push(rope_length);
         }
     }
     let rope_remaining = combined_rope_length - rope_total_length;
     rope_lengths.push(rope_remaining);
 
-    // Create two ropes of 3 pieces
+    // Create two ropes of 3 pieces, where one piece is at least 50% the length
     for (let i = 0; i < 2; i++) {
-        let rope_a = anime.random(41, 66);
+        let rope_a = anime.random(51, 66);
         initial_rope_lengths.push(rope_a);
         let remaining = combined_rope_length - rope_a;
-        let rope_b = Math.floor(anime.random(remaining * 0.4, remaining * 0.6));
+        let rope_b = Math.floor(anime.random(remaining * 0.5, remaining * 0.6));
         let rope_c = combined_rope_length - rope_a - rope_b;
         rope_lengths.push(rope_a, rope_b, rope_c);
     }

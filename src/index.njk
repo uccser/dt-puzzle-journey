@@ -21,111 +21,117 @@
         <meta name="theme-color" content="#fafafa">
     </head>
     <body>
-        <div>
-            <div id="animation-container">
-                <div id="animation-blindfold"></div>
-                <div id="welcome-ui">
-                    <div id="header" class="grid-item">
-                        <h1 data-i18n="main.title"></h1>
-                        <p data-i18n="main.length"></p>
-                        <p data-i18n="main.browser-note"></p>
+        <div id="body-flex-container">
+            <div id="navbar">
+                <div id="navbar-contents" class="container mx-auto py-1">
+                    <div id="navbar-title" class="mr-auto" data-i18n="main.title"></div>
+                    <button id="toggle-language" class="mr-5 border rounded" data-i18n="main.change-language"></button>
+                    <div id="volume-control">
+                        <span class="pr-2" data-i18n="main.volume"></span>
+                        <input type="range" id="volume-slider" min="0" max="100" value="100">
                     </div>
-                    <div id="notice-1-icon">
-                        <img src="/img/landscape-icon.svg" id="landscape-icon" class="notice-icon">
-                    </div>
-                    <div id="notice-1" class="notice">
-                        <p data-i18n="main.landscape"></p>
-                    </div>
-                    <div id="notice-2-icon">
-                        <img src="/img/sound-icon.svg" id="sound-icon" class="notice-icon">
-                    </div>
-                    <div id="notice-2" class="notice">
-                        <p data-i18n="main.sound"></p>
-                    </div>
-                    <div id="footer" class="grid-item">
-                        <div id="setup-status" class="text-center">
-                            <p data-i18n="main.setup"></p>
-                            <div id="setup-status-checks"></div>
-                        </div>
-                        <button id="welcome-end" class="button d-none"></button>
-                        <div id="load-error" class="text-center d-none">
-                            <p><strong data-i18n="main.problem"></strong></p>
-                            <p data-i18n="main.browser-recommend"></p>
-                        </div>
-                    </div>
-                </div>
-                {% include "./stages/landscape-view.njk" %}
-                {% include "./stages/fern-interactive.njk" %}
-                {% include "./stages/fern-message.njk" %}
-                {% include "./stages/before-river.njk" %}
-                {% include "./stages/river-crossing.njk" %}
-                {% include "./stages/before-plains.njk" %}
-                {% include "./stages/plains.njk" %}
-                {% include "./stages/before-pa.njk" %}
-                {% include "./stages/outside-pa.njk" %}
-            </div>
-
-            <div id="controls" class="container mx-auto">
-                <button id="toggle-language" class="button" data-i18n="main.change-language"></button>
-                <div id="volume-control">
-                    <span class="pr-2" data-i18n="main.volume"></span>
-                    <input type="range" id="volume-slider" min="0" max="100" value="100">
                 </div>
             </div>
-        </div>
-
-        <div id="content-guide" class="hidden hidden-ui">
-            <div class="container mx-auto p-2">
-                <div class="flex">
-                    <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
-                        <h2 class="text-center" data-i18n="complete.forest-puzzle-heading"></h2>
-                        <img data-i18n="[src]complete.forest-image">
-                        <div data-i18n="[html]complete.forest-puzzle-text"></div>
-                        <h3 data-i18n="complete.forest-puzzle-resources-heading"></h3>
-                        <ul data-i18n="[html]complete.forest-puzzle-resources"></ul>
-                        <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
-                        <a href="/index.njk?stage=fern-interactive" class="button" target="_blank" data-i18n="complete.forest-puzzle-button"></a>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
-                        <h2 class="text-center" data-i18n="complete.river-puzzle-heading"></h2>
-                        <img data-i18n="[src]complete.river-image">
-                        <div data-i18n="[html]complete.river-puzzle-text"></div>
-                        <h3 data-i18n="complete.river-puzzle-resources-heading"></h3>
-                        <ul data-i18n="[html]complete.river-puzzle-resources"></ul>
-                        <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
-                        <a href="/index.njk?stage=river-crossing" class="button" target="_blank" data-i18n="complete.river-puzzle-button"></a>
-                    </div>
-                </div>
-                <div class="flex">
-                    <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
-                        <h2 class="text-center" data-i18n="complete.plains-puzzle-heading"></h2>
-                        <img data-i18n="[src]complete.plains-image">
-                        <div data-i18n="[html]complete.plains-puzzle-text"></div>
-                        <h3 data-i18n="complete.plains-puzzle-resources-heading"></h3>
-                        <ul data-i18n="[html]complete.plains-puzzle-resources"></ul>
-                        <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
-                        <a href="/index.njk?stage=plains-1" class="button" target="_blank" data-i18n="complete.plains-puzzle-button"></a>
-                    </div>
-                </div>
+            <div id="body-content">
                 <div>
-                    <p class="text-center" data-i18n="[html]complete.thanks">
-                    </p>
+                    <div id="animation-container">
+                        <div id="animation-blindfold"></div>
+                        <div id="welcome-ui">
+                            <div id="header" class="grid-item">
+                                <h1 data-i18n="main.title"></h1>
+                                <p data-i18n="main.length"></p>
+                                <p data-i18n="main.browser-note"></p>
+                            </div>
+                            <div id="notice-1-icon">
+                                <img src="/img/landscape-icon.svg" id="landscape-icon" class="notice-icon">
+                            </div>
+                            <div id="notice-1" class="notice">
+                                <p data-i18n="main.landscape"></p>
+                            </div>
+                            <div id="notice-2-icon">
+                                <img src="/img/sound-icon.svg" id="sound-icon" class="notice-icon">
+                            </div>
+                            <div id="notice-2" class="notice">
+                                <p data-i18n="main.sound"></p>
+                            </div>
+                            <div id="footer" class="grid-item">
+                                <div id="setup-status" class="text-center">
+                                    <p data-i18n="main.setup"></p>
+                                    <div id="setup-status-checks"></div>
+                                </div>
+                                <button id="welcome-end" class="button d-none"></button>
+                                <div id="load-error" class="text-center d-none">
+                                    <p><strong data-i18n="main.problem"></strong></p>
+                                    <p data-i18n="main.browser-recommend"></p>
+                                </div>
+                            </div>
+                        </div>
+                        {% include "./stages/landscape-view.njk" %}
+                        {% include "./stages/fern-interactive.njk" %}
+                        {% include "./stages/fern-message.njk" %}
+                        {% include "./stages/before-river.njk" %}
+                        {% include "./stages/river-crossing.njk" %}
+                        {% include "./stages/before-plains.njk" %}
+                        {% include "./stages/plains.njk" %}
+                        {% include "./stages/before-pa.njk" %}
+                        {% include "./stages/outside-pa.njk" %}
+                    </div>
+                </div>
+
+                <div id="content-guide" class="hidden hidden-ui">
+                    <div class="container mx-auto p-2">
+                        <div class="flex">
+                            <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
+                                <h2 class="text-center" data-i18n="complete.forest-puzzle-heading"></h2>
+                                <img data-i18n="[src]complete.forest-image">
+                                <div data-i18n="[html]complete.forest-puzzle-text"></div>
+                                <h3 data-i18n="complete.forest-puzzle-resources-heading"></h3>
+                                <ul data-i18n="[html]complete.forest-puzzle-resources"></ul>
+                                <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
+                                <a href="/index.njk?stage=fern-interactive" class="button" target="_blank" data-i18n="complete.forest-puzzle-button"></a>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
+                                <h2 class="text-center" data-i18n="complete.river-puzzle-heading"></h2>
+                                <img data-i18n="[src]complete.river-image">
+                                <div data-i18n="[html]complete.river-puzzle-text"></div>
+                                <h3 data-i18n="complete.river-puzzle-resources-heading"></h3>
+                                <ul data-i18n="[html]complete.river-puzzle-resources"></ul>
+                                <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
+                                <a href="/index.njk?stage=river-crossing" class="button" target="_blank" data-i18n="complete.river-puzzle-button"></a>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="puzzle-box mx-auto w-full sm:w-3/4 md:w-2/3">
+                                <h2 class="text-center" data-i18n="complete.plains-puzzle-heading"></h2>
+                                <img data-i18n="[src]complete.plains-image">
+                                <div data-i18n="[html]complete.plains-puzzle-text"></div>
+                                <h3 data-i18n="complete.plains-puzzle-resources-heading"></h3>
+                                <ul data-i18n="[html]complete.plains-puzzle-resources"></ul>
+                                <h3 class="my-4" data-i18n="complete.try-puzzle-again"></h3>
+                                <a href="/index.njk?stage=plains-1" class="button" target="_blank" data-i18n="complete.plains-puzzle-button"></a>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-center" data-i18n="[html]complete.thanks">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="credits" class="container mx-auto text-center">
+                    <div id="logos">
+                        <a href="https://kiatakatu.ac.nz/" target="_blank">
+                            <img src="/img/logos/ktam-logo-white.svg">
+                        </a>
+                        <a href="https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/" target="_blank">
+                            <img src="/img/logos/uccser-logo-white.png">
+                        </a>
+                    </div>
+                    <p data-i18n="[html]main.credit"></p>
                 </div>
             </div>
-        </div>
-
-        <div id="credits" class="container mx-auto text-center">
-            <div id="logos">
-                <a href="https://kiatakatu.ac.nz/" target="_blank">
-                    <img src="/img/logos/ktam-logo-white.svg">
-                </a>
-                <a href="https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/" target="_blank">
-                    <img src="/img/logos/uccser-logo-white.png">
-                </a>
-            </div>
-            <p data-i18n="[html]main.credit"></p>
         </div>
 
         <script src="/js/vendor/modernizr-3.11.2.min.js"></script>

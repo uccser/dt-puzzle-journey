@@ -28,6 +28,51 @@ body {
     padding: 0;
 }
 
+$navbar-color: #576077;
+$navbar-height: 2rem;
+#body-flex-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    #navbar {
+        flex-shrink: 0;
+        z-index: 50;
+        height: $navbar-height;
+        background-color: $navbar-color;
+
+        #navbar-contents {
+            display: flex;
+            align-items: center;
+            padding: 0.25rem;
+            height: 100%;
+            font-size: 0.8rem;
+        }
+
+        #navbar-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        button {
+            padding: 0 0.3rem;
+            &:hover {
+                background-color: lighten($navbar-color, 8%);
+            }
+        }
+        #volume-control {
+            display: flex;
+            align-items: center;
+            input {
+                cursor: pointer;
+            }
+        }
+    }
+    #body-content {
+        overflow: auto;
+        flex-grow: 1;
+    }
+}
+
 #animation-container {
     h1 {
         font-size: calc(var(--font-size) * 4);
@@ -47,7 +92,7 @@ body {
     overflow: hidden;
     position: relative;
     background: #222;
-    border: 2px solid #222;
+    border: 1px solid #222;
     box-sizing: border-box;
     font-size: var(--font-size);
 
@@ -113,37 +158,6 @@ body {
     }
     &.button-sm {
         font-size: calc(var(--font-size) * 0.8);
-    }
-}
-
-#controls {
-    opacity: 0.7;
-    transition: opacity .1s ease-in-out;
-    &:hover {
-        opacity: 1;
-    }
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem;
-    button {
-        font-size: var(--font-size);
-        padding: 0.3rem 0.6rem;
-        $background-color: #576077;
-        background-color: $background-color;
-        &:hover {
-            background-color: darken($background-color, 8%);
-        }
-    }
-    #volume-control {
-        display: flex;
-        align-items: center;
-        font-size: var(--font-size);
-        font-weight: bold;
-        input {
-            cursor: pointer;
-        }
     }
 }
 

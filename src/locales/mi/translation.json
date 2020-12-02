@@ -49,7 +49,7 @@
         "initial-text": "Me honohono ahau i enei pōkai taura. Ko ēhea o ēnei taura hei whakahono ki te tārai i ngā whakawhitinga e 3 e tika ana te roa?",
         "instruction-text": "Tōia ngā pōkai taura ki te awa. Kia tūpato kei roa rawa, kei poto rawa rānei te taura. Tōia anō ki te whakahoki i ngā taura ki te taha awa mēnā kāore i te tika.",
         "final-text": "I tārai ahau i ngā taura e toru e tika ana te roa mō te arawhiti. Kāore e roa ināianei, ka rongo ahau i te kakara o ngā ahikā o te kāinga.",
-        "hint-button": "Help! Start the bridges for me... (translation in QA)",
+        "hint-button": "Āwhina mai! Tīmatahia ngā arawhiti mōku...",
         "next-stage-button": "Whakawhiti i te awa"
     },
     "before-plains": {
@@ -99,7 +99,7 @@
         "length": "Kei te rohe o te 10 ki te 20 miniti te wā ki te whakaoti i tēnei kaupapa.",
         "problem": "Aroha atu! Kua puta mai he raru.",
         "setup": "Kei te whakariterite...",
-        "sound": "Me whakakā pea te puoro",
+        "sound": "Me whakakā pea te oro",
         "start-before-river": "Tīmatahia mai i te awa",
         "start-fern-interactive": "Tīmatahia mai i ngā rau huruwhenua",
         "start-fern-message": "Tīmatahia mai i te karere ā-rau huruwhenua",
@@ -109,6 +109,6 @@
         "start-river": "Tīmatahia mai i te whakawhitinga awa",
         "title": "He Haerenga Panga HM",
         "change-language": "Switch to English",
-        "volume": "Volume (translation in QA)"
+        "volume": "Kahaoro"
     }
 }

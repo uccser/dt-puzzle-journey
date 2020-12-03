@@ -104,10 +104,10 @@ var animation_container = document.getElementById('animation-container');
 $(document).ready(function () {
     // Setup language switcher
     $('#toggle-language').on('click', function () {
-        if (i18next.language == 'en') {
-            i18next.changeLanguage('mi');
-        } else {
+        if (i18next.language == 'mi') {
             i18next.changeLanguage('en');
+        } else {
+            i18next.changeLanguage('mi');
         }
         refreshI18n();
         if (DEBUG) {

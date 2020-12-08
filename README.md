@@ -21,7 +21,6 @@ It is hosted and maintained by the [University of Canterbury](https://www.canter
 
 The following features are planned to be added before the end of 2020:
 
-- Te Reo Māori version.
 - Installation guide.
 - Facilitators guide.
 - Behind the scenes information on creation process.
@@ -31,3 +30,4 @@ The following features are planned to be added before the end of 2020:
 This website content is available under [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and the interactive website is licensed under the [MIT license](https://tldrlegal.com/license/mit-license").
 Any third party libraries used have their licenses listed in this GitHub repository.
 The Kia Takatū ā-Matihiko logo is under [New Zealand Crown copyright](https://www.iponz.govt.nz/about-ip/copyright/crown-copyright/).
+Bird sounds used in the sound files are from the [Department of Conservation (New Zealand)](https://www.doc.govt.nz/nature/native-animals/birds/bird-songs-and-calls/0) and are under [New Zealand Crown copyright](https://www.iponz.govt.nz/about-ip/copyright/crown-copyright/), and are used with permission.

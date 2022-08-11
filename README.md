@@ -5,7 +5,6 @@ An interactive website for learning about the Digital Technologies curriculum co
 The website is created using HTML, JS, and CSS, and packaged together using Parcel.
 It is deployed to a GitHub Pages website using GitHub Actions.
 
-
 This website was produced through funding from the [Ministry of Education](https://www.education.govt.nz/) for the National Digital Readiness Programme, [Kia Takatū ā-Matihiko](https://kiatakatu.ac.nz/).
 It is hosted and maintained by the [University of Canterbury](https://www.canterbury.ac.nz/), [Computer Science Education Group](https://www.canterbury.ac.nz/engineering/schools/csse/research/cse/).
 
@@ -19,7 +18,7 @@ It is hosted and maintained by the [University of Canterbury](https://www.canter
 
 ## Planned additions
 
-The following features are planned to be added before the end of 2020:
+The following features are planned to be added:
 
 - Installation guide.
 - Facilitators guide.
